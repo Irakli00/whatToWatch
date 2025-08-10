@@ -1,5 +1,7 @@
+import Header from "./ui/Header";
+
 function App() {
-  return <h1 className="text-red-500">hello</h1>;
+  return <Header></Header>;
 }
 
 export default App;
