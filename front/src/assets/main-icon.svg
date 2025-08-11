@@ -1,0 +1,110 @@
+      <svg
+        width='800'
+        height='800'
+        viewBox="0 0 120 120"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {/* <!-- TV Antennas --> */}
+        <rect
+          x="45"
+          y="15"
+          width="6"
+          height="25"
+          rx="3"
+          ry="3"
+          fill="#219ebc"
+          transform="rotate(-25 48 27.5)"
+        />
+
+        <path
+          d="M 72 15 L 78 22 L 72 30 L 78 40"
+          fill="none"
+          stroke="#219ebc"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          transform="rotate(55 75 27.5)"
+        />
+
+        {/* <!-- TV Body --> */}
+        <rect
+          x="15"
+          y="35"
+          width="90"
+          height="65"
+          rx="12"
+          ry="12"
+          fill="#219ebc"
+        />
+
+        {/* <!-- TV Screen --> */}
+        <rect
+          x="25"
+          y="45"
+          width="70"
+          height="40"
+          rx="6"
+          ry="6"
+          fill="#fff"
+        />
+
+        {/* <!-- Question Mark --> */}
+        <g transform="translate(62, 68)">
+          {/* <!-- Question mark curve --> */}
+          <path
+            d="M -7 -9 Q -7 -14 -2.5 -14 Q 2 -14 2 -9 Q 2 -4 -2.5 -2 L -2.5 1"
+            fill="none"
+            stroke="#ffb703"
+            strokeWidth="4.5"
+            strokeLinecap="round"
+            transform="rotate(65 -1 10)"
+          />
+          <path
+            d="M -7 -9 Q -7 -14 -2.5 -14 Q 2 -14 2 -9 Q 2 -4 -2.5 -2 L -2.5 1"
+            fill="none"
+            stroke="#ffb703"
+            strokeWidth="4.5"
+            strokeLinecap="round"
+            transform="rotate(-65 -3.8 11)"
+          />
+          <path
+            d="M -7 -9 Q -7 -14 -2.5 -14 Q 2 -14 2 -9 Q 2 -4 -2.5 -2 L -2.5 1"
+            fill="none"
+            stroke="#ffb703"
+            strokeWidth="4.5"
+            strokeLinecap="round"
+          />
+          {/* <!-- Question mark dot --> */}
+          <circle
+            cx="-2.5"
+            cy="7"
+            r="2.5"
+            fill= "#ffb703"
+          />
+        </g>
+
+        {/* <!-- Control buttons --> */}
+        <circle cx="82" cy="92" r="4" fill= "#fff" />
+        <circle cx="94" cy="92" r="4" fill= "#fff" />
+
+        {/* <!-- TV Feet --> */}
+        <rect
+          x="25"
+          y="97"
+          width="15"
+          height="7"
+          rx="4"
+          ry="4"
+          fill="#219ebc"
+        />
+
+        <rect
+          x="80"
+          y="97"
+          width="15"
+          height="7"
+          rx="4"
+          ry="4"
+          fill="#219ebc"
+        />
+      </svg>
