@@ -1,12 +1,21 @@
+import Carousel from "../ui/Carousel";
+
 function HeroPage() {
   return (
     <main>
-      <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, nobis
-        quas ducimus minima culpa molestias impedit quaerat. Illo praesentium
-        veritatis nesciunt, cupiditate ea, autem dolore officia voluptas nisi
-        explicabo repellat.
-      </h1>
+      <section>
+        <Carousel></Carousel>
+      </section>
+      <section>
+        <h1>Can't decide what to watch tonight?</h1>
+
+        <p>
+          Answer a few quick questions and get personalized recommendations for
+          movies, anime, TV shows, and more tailored just for you.
+        </p>
+
+        <button>Start Quiz</button>
+      </section>
     </main>
   );
 }
