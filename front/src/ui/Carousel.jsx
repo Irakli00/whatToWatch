@@ -1,9 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import MediaCard from "./MediaCard";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+
+import MediaCard from "./MediaCard";
 import { getTrending } from "../services/getTrending";
+import Spinner from "./Spinner";
 
 function Carousel() {
   // const movies = [
@@ -63,7 +65,6 @@ function Carousel() {
   // ];
 
   // eslint-disable-next-line no-unused-vars
-
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
@@ -71,8 +72,7 @@ function Carousel() {
     queryFn: getTrending,
   });
 
-  if (isLoading) return <p>NOT YET</p>;
-  console.log(data);
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <Swiper
@@ -81,8 +81,8 @@ function Carousel() {
       modules={[Autoplay]}
       autoplay={{
         delay: 0,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
+        disableOnInteraction: true,
+        pauseOnMouseEnter: false,
       }}
       loop={true}
       speed={5000}
