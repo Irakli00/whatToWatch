@@ -8,12 +8,7 @@ function MovieSelection() {
     useContext(AppContext);
   const key = movieQuestions[questionNum].key;
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
 
   const onSubmit = () => {
     setQuestionNum((p) => (p + 1 < movieQuestions.length ? (p += 1) : p));
@@ -21,28 +16,41 @@ function MovieSelection() {
 
   const onSelect = (selectedOption) => {
     setValue(key, selectedOption);
-
     setClientPreferences((p) => ({ ...p, [key]: selectedOption }));
   };
 
-  const [option1, option2] = movieQuestions[questionNum].options;
+  const label = movieQuestions[questionNum].question;
+  const options = movieQuestions[questionNum].options;
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="selectedOption">
-          {movieQuestions[questionNum].question}
+    <section className="container ">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col mt-[20dvh] items-center gap-8 p-10 bg-white rounded-2xl shadow-lg "
+      >
+        <label
+          htmlFor="selectedOption"
+          className="text-3xl font-bold text-gray-900 text-center"
+        >
+          {label}
         </label>
-        <button type="submit" onClick={() => onSelect(option1)}>
-          {option1}
-        </button>
-        <button type="submit" onClick={() => onSelect(option2)}>
-          {option2}
-        </button>
+
+        <div className="flex flex-row gap-5 w-full">
+          {options.map((el, i) => (
+            <button
+              key={i}
+              type="submit"
+              onClick={() => onSelect(el.value)}
+              className="w-full px-8 py-5 text-2xl font-semibold bg-blue-500 text-white rounded-xl shadow-md hover:bg-blue-600 transition transform hover:scale-105"
+            >
+              {el.text}
+            </button>
+          ))}
+        </div>
+
         <input type="hidden" {...register(key)} />
-        {errors.selectedOption && <span>{errors.selectedOption.message}</span>}
       </form>
-    </>
+    </section>
   );
 }
 
