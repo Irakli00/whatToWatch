@@ -37,7 +37,7 @@ function MediaCard({ movie }) {
           <FaRegStar />
           <span className="pt-0.5">{formatRating(movie.vote_average)}</span>
         </p>
-        <div className="overflow-scroll h-full">
+        <div className="overflow-scroll pt-1 border-t-1 border-t-[var(--dark-blue)] h-full  rounded-b-[5px] ">
           <p className="select-none text-[14px] opacity-75">{movie.overview}</p>
         </div>
       </div>

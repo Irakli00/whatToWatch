@@ -17,10 +17,10 @@ function Header() {
         </NavLink>
 
         <div className="flex items-center gap-4.5 text-white ">
-          <NavLink className="header-link" to="/movies">
+          <NavLink className="header-link movies-link" to="/movies">
             Movies
           </NavLink>
-          <NavLink className="header-link" to="/anime">
+          <NavLink className="header-link animes-link" to="/anime">
             Anime
           </NavLink>
         </div>

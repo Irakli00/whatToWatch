@@ -6,11 +6,15 @@
   --default-blue: #219ebc;
   --dark-blue: #023047;
   --bright-yellow: rgb(255, 210, 48);
+  --bright-yellow-hover: rgb(255, 200, 0);
   --light-orange: #ffb703;
   --orange: #fb8500;
   --main-red: #ec0800;
+  --main-red-hover: #c40700;
 }
-
+body {
+  background-color: #e3f6ff;
+}
 /* HTML5 display-role reset for older browsers */
 
 body {
@@ -60,8 +64,14 @@ button {
   max-width: 90%;
 }
 
-.active:not(.index-link) {
-  background-color: var(--orange);
+.active.movies-link,
+.header-link.movies-link:hover {
+  background-color: var(--bright-yellow);
+  color: var(--dark-blue);
+}
+.active.animes-link,
+.animes-link:hover {
+  background-color: var(--main-red);
 }
 
 .header-link {
@@ -70,11 +80,6 @@ button {
   font-weight: 700;
 
   transition: all 0.2s ease-in;
-}
-
-.header-link:hover {
-  background-color: #fff;
-  color: var(--orange);
 }
 
 /* ---------------------- */

@@ -1,6 +1,7 @@
 import { IoIosTrendingUp } from "react-icons/io";
 
 import Carousel from "../ui/Carousel";
+import HeroLink from "../ui/HeroLink";
 
 function HeroPage() {
   return (
@@ -24,7 +25,14 @@ function HeroPage() {
           movies, anime, TV shows, and more tailored just for you.
         </p>
 
-        <button>Start Quiz</button>
+        <div className="flex justify-center items-center gap-28">
+          <HeroLink to="/movies" type="movie">
+            Choose a Movie
+          </HeroLink>
+          <HeroLink to="/anime" type="anime">
+            Choose an Anime
+          </HeroLink>
+        </div>
       </section>
     </main>
   );
