@@ -10,12 +10,8 @@
   --light-orange: #ffb703;
   --orange: #fb8500;
   --main-red: #ec0800;
-  --main-red-hover: #c40700;
+  --main-red-hover: #da0902;
 }
-body {
-  background-color: #e3f6ff;
-}
-/* HTML5 display-role reset for older browsers */
 
 body {
   line-height: 1;

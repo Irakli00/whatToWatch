@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import AppLayout from "./ui/AppLayout";
 import HeroPage from "./pages/HeroPage";
+import MovieSelection from "./pages/MovieSelection";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
     element: <AppLayout></AppLayout>,
     children: [
       { index: true, element: <HeroPage /> },
-      { path: "/movies", element: "" },
+      { path: "/movies", element: <MovieSelection></MovieSelection> },
       { path: "/anime", element: "" },
     ],
   },

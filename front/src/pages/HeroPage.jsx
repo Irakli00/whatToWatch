@@ -5,7 +5,7 @@ import HeroLink from "../ui/HeroLink";
 
 function HeroPage() {
   return (
-    <main className="bg-gray-100">
+    <>
       <section className="bg-[var(--light-blue)]  min-h-[310px] flex justify-center ">
         <div className="container py-2.5 bg-gradient-to-r from-[var(--light-blue)] via-[#22e5ff] to-[var(--light-blue)]">
           <div className="flex gap-1.5 items-center">
@@ -34,7 +34,7 @@ function HeroPage() {
           </HeroLink>
         </div>
       </section>
-    </main>
+    </>
   );
 }
 
