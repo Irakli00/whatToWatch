@@ -77,12 +77,12 @@ function Carousel() {
   return (
     <Swiper
       spaceBetween={50}
-      slidesPerView={5}
+      slidesPerView={4}
       modules={[Autoplay]}
       autoplay={{
         delay: 0,
         disableOnInteraction: true,
-        pauseOnMouseEnter: false,
+        pauseOnMouseEnter: true,
       }}
       loop={true}
       speed={5000}
