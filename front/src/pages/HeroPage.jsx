@@ -4,8 +4,8 @@ import Carousel from "../ui/Carousel";
 
 function HeroPage() {
   return (
-    <main>
-      <section className="bg-[var(--light-blue)] py-1">
+    <main className="bg-gray-100">
+      <section className="bg-[var(--light-blue)] py-1 min-h-[310px] flex justify-center ">
         <div className="container">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
@@ -14,10 +14,12 @@ function HeroPage() {
           <Carousel></Carousel>
         </div>
       </section>
-      <section>
-        <h1>Can't decide what to watch tonight?</h1>
+      <section className="container pt-5 text-center text-[var(--dark-blue)]">
+        <h1 className="text-6xl font-bold">
+          Can't decide what to watch tonight?
+        </h1>
 
-        <p>
+        <p className="text-2xl mt-4.5">
           Answer a few quick questions and get personalized recommendations for
           movies, anime, TV shows, and more tailored just for you.
         </p>
