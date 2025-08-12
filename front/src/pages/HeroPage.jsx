@@ -6,8 +6,8 @@ import HeroLink from "../ui/HeroLink";
 function HeroPage() {
   return (
     <main className="bg-gray-100">
-      <section className="bg-[var(--light-blue)] py-1 min-h-[310px] flex justify-center ">
-        <div className="container">
+      <section className="bg-[var(--light-blue)]  min-h-[310px] flex justify-center ">
+        <div className="container py-2.5 bg-gradient-to-r from-[var(--light-blue)] via-[#22e5ff] to-[var(--light-blue)]">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
             <h1 className="text-2xl">Trending right now:</h1>
