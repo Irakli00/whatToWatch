@@ -7,7 +7,13 @@ function Options() {
   const { movieQuestions, questionNum, setClientPreferences } =
     useContext(AppContext);
 
-  const options = movieQuestions[questionNum].options;
+  const questionsToAsk = useContext(AppContext)["movieQuestions"];
+  const options = movieQuestions[questionNum].questions.options;
+  const currentQustion = questionsToAsk[questionNum].questions;
+
+  console.log(currentQustion);
+
+  console.log(currentQustion.followUps);
 
   const onSelect = (selectedOption) => {
     const key = movieQuestions[questionNum].key;
