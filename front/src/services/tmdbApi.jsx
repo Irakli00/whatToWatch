@@ -20,7 +20,7 @@ async function getTrending() {
 }
 async function getRecomendations({
   mediaType,
-  genres = "",
+  genres = [],
   language = "en-US",
   region = "",
   sort = "popularity.desc",
@@ -46,12 +46,15 @@ async function getRecomendations({
   if (releaseDateTo) params.append("primary_release_date.lte", releaseDateTo);
   if (rating) params.append("vote_average.gte", rating);
   if (genres) params.append("with_genres", genres);
-  if (!genres && mediaType === "animation")
-    params.append("with_genres", [...genres, 16]); //edge case
+  if (!genres && mediaType === "animation") params.append("with_genres", [16]); //edge case
+  // if (!genres && mediaType === "animation")
+  //   params.append("with_genres", [...genres, 16]); //edge case
   if (minRuntime) params.append("with_runtime.gte", minRuntime);
   if (maxRuntime) params.append("with_runtime.lte", maxRuntime);
   if (originLang) params.append("with_original_language", originLang);
   if (originCountry) params.append("with_origin_country", originCountry);
+
+  console.log(params);
 
   const res = await fetch(
     `https://api.themoviedb.org/3/discover/movie?${params}`,

@@ -4,7 +4,6 @@ const AppContext = createContext();
 
 function AppProvider({ children }) {
   const [questionNum, setQuestionNum] = useState(0);
-
   const movieQuestions = [
     {
       id: "media-type",
@@ -12,106 +11,95 @@ function AppProvider({ children }) {
       questions: {
         questionText: "What type of media do you prefer?",
         options: [
-          {
-            text: "Animation",
-            value: "animation",
-            followUps: [
-              {
-                id: "movie-release-date",
-                key: "movieReleaseDate",
-                questions: {
-                  questionText: "Released when?",
-                  options: [
-                    {
-                      text: "Something newer",
-                      value: "release_date.gte-2010-01-01",
-                    },
-                    {
-                      text: "Something older",
-                      value: "release_date.lte-2010-01-01",
-                    },
-                    { text: "Doesn't matter", value: null },
-                  ],
-                },
-              },
-              {
-                id: "movie-genre",
-                key: "movieGenre",
-                questions: {
-                  questionText: "222",
-                  options: [
-                    { text: "2222222", value: "2222222" },
-                    { text: "3333333", value: "3333333" },
-                    { text: "4444444", value: "4444444" },
-                  ],
-                },
-              },
-            ],
-          },
+          { text: "Animation", value: "animation" },
           {
             text: "Movie",
-            value: "animation",
-            // No follow-ups for animation
+            value: "movie",
+            followUps: [],
           },
         ],
       },
     },
     {
-      id: "movie-release-date",
-      key: "movieReleaseDate",
+      id: "genres",
+      key: "genres",
       questions: {
-        questionText: "Released when?",
+        questionText: "Preferred genres?",
         options: [
-          {
-            text: "Something newer",
-            value: "release_date.gte-2010-01-01",
-          },
-          {
-            text: "Something older",
-            value: "release_date.lte-2010-01-01",
-          },
+          { text: "Action", value: "28" },
+          { text: "Comedy", value: "35" },
+          { text: "Drama", value: "18" },
           { text: "Doesn't matter", value: null },
         ],
       },
     },
     {
-      id: "viewing-time",
-      key: "viewingTime",
+      id: "rating",
+      key: "rating",
       questions: {
-        questionText: "When do you usually watch?",
+        questionText: "Minimum rating?",
         options: [
-          {
-            text: "Evening",
-            value: "evening",
-            followUps: [
-              {
-                id: "evening-duration",
-                key: "eveningDuration",
-                questions: {
-                  questionText: "How long do you watch in the evening?",
-                  options: [
-                    { text: "1 hour", value: "1h" },
-                    { text: "2-3 hours", value: "2-3h" },
-                    { text: "Binge watch", value: "binge" },
-                  ],
-                },
-              },
-            ],
-          },
-          { text: "Morning", value: "morning" },
-          { text: "Afternoon", value: "afternoon" },
+          { text: "7+", value: "7" },
+          { text: "5+", value: "5" },
+          { text: "Doesn't matter", value: null },
         ],
       },
     },
     {
-      id: "budget",
-      key: "budget",
+      id: "runtime",
+      key: "runtime",
       questions: {
-        questionText: "What's your streaming budget?",
+        questionText: "Preferred runtime?",
         options: [
-          { text: "Free only", value: "free" },
-          { text: "Under $15/month", value: "budget" },
-          { text: "Premium ($15+)", value: "premium" },
+          { text: "Short (<90 min)", value: { min: "", max: 90 } },
+          {
+            text: "Medium (90–150 min)",
+            value: { min: 90, max: 150 },
+          },
+          { text: "Long (>150 min)", value: { min: 150, max: "" } },
+          { text: "Doesn't matter", value: { min: "", max: "" } },
+        ],
+      },
+    },
+    {
+      id: "language",
+      key: "language",
+      questions: {
+        questionText: "Original language?",
+        options: [
+          { text: "English", value: "en-US" },
+          { text: "French", value: "fr-FR" },
+          { text: "Any language", value: null },
+        ],
+      },
+    },
+    {
+      id: "region",
+      key: "region",
+      questions: {
+        questionText: "Country of release?",
+        options: [
+          { text: "US", value: "US" },
+          { text: "UK", value: "GB" },
+          { text: "Any country", value: null },
+        ],
+      },
+    },
+    {
+      id: "release-date",
+      key: "releaseDate",
+      questions: {
+        questionText: "When was it released?",
+        options: [
+          {
+            text: "After 2010",
+            value: "release_date.gte-2010-01-01",
+          },
+          {
+            text: "Before 2010",
+            value: "release_date.lte-2010-01-01",
+          },
+          { text: "Doesn't matter", value: null },
         ],
       },
     },
