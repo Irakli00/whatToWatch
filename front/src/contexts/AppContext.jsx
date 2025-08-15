@@ -13,18 +13,24 @@ function AppProvider({ children }) {
         questionText: "What type of media do you prefer?",
         options: [
           {
-            text: "Movie",
-            value: "movie",
+            text: "Animation",
+            value: "animation",
             followUps: [
               {
-                id: "movie-genre",
-                key: "movieGenre",
+                id: "movie-release-date",
+                key: "movieReleaseDate",
                 questions: {
-                  questionText: "What exactly?",
+                  questionText: "Released when?",
                   options: [
-                    { text: "Action", value: "action" },
-                    { text: "Comedy", value: "comedy" },
-                    { text: "Drama", value: "drama" },
+                    {
+                      text: "Something newer",
+                      value: "release_date.gte-2010-01-01",
+                    },
+                    {
+                      text: "Something older",
+                      value: "release_date.lte-2010-01-01",
+                    },
+                    { text: "Doesn't matter", value: null },
                   ],
                 },
               },
@@ -43,28 +49,28 @@ function AppProvider({ children }) {
             ],
           },
           {
-            text: "TV Show",
-            value: "show",
-            followUps: [
-              {
-                id: "show-type",
-                key: "showType",
-                questions: {
-                  questionText: "What type of TV show?",
-                  options: [
-                    { text: "Series", value: "series" },
-                    { text: "Mini-series", value: "mini-series" },
-                    { text: "Documentary", value: "documentary" },
-                  ],
-                },
-              },
-            ],
-          },
-          {
-            text: "Animation",
+            text: "Movie",
             value: "animation",
             // No follow-ups for animation
           },
+        ],
+      },
+    },
+    {
+      id: "movie-release-date",
+      key: "movieReleaseDate",
+      questions: {
+        questionText: "Released when?",
+        options: [
+          {
+            text: "Something newer",
+            value: "release_date.gte-2010-01-01",
+          },
+          {
+            text: "Something older",
+            value: "release_date.lte-2010-01-01",
+          },
+          { text: "Doesn't matter", value: null },
         ],
       },
     },
@@ -111,9 +117,10 @@ function AppProvider({ children }) {
     },
   ];
 
-  const [clientPreferences, setClientPreferences] = useState({
+  const [clientMoviePreferences, setClientMoviePreferences] = useState({
     mediaType: null,
-    genre: null,
+    movieReleaseDate: null,
+    genres: null,
     year: null,
   });
 
@@ -121,8 +128,8 @@ function AppProvider({ children }) {
     <AppContext.Provider
       value={{
         movieQuestions,
-        clientPreferences,
-        setClientPreferences,
+        clientMoviePreferences,
+        setClientMoviePreferences,
         questionNum,
         setQuestionNum,
       }}

@@ -1,4 +1,4 @@
-function parseGenres(genres) {
+function parseGenres(genreIds) {
   const TMDB_GENRES = {
     28: "Action",
     12: "Adventure",
@@ -21,7 +21,7 @@ function parseGenres(genres) {
     37: "Western",
   };
 
-  return genres.map((genreId) => TMDB_GENRES[genreId]);
+  return genreIds.map((genreId) => TMDB_GENRES[genreId]);
 }
 
 export { parseGenres };

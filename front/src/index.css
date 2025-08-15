@@ -70,6 +70,12 @@ button {
   background-color: var(--main-red);
 }
 
+.active.TV-link,
+.TV-link:hover {
+  background-color: #8ecae6;
+  color: var(--dark-blue);
+}
+
 .header-link {
   padding: 12px;
   border-radius: 6px;

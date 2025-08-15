@@ -14,6 +14,7 @@ const router = createBrowserRouter([
       { index: true, element: <HeroPage /> },
       { path: "/movies", element: <MovieSelection></MovieSelection> },
       { path: "/anime", element: "" },
+      { path: "/TV", element: "" },
     ],
   },
 ]);

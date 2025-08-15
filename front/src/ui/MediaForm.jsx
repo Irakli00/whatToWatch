@@ -2,13 +2,18 @@ import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { useForm } from "react-hook-form";
 
+import { getRecomendations } from "../services/tmdbApi";
+
 function MediaForm({ questionsType = "movieQuestions" }) {
-  const { questionNum, setQuestionNum, setClientPreferences } =
-    useContext(AppContext);
+  const {
+    questionNum,
+    setQuestionNum,
+    setClientMoviePreferences,
+    clientMoviePreferences,
+  } = useContext(AppContext);
   const [qToAsk, setQToAsk] = useState(
     useContext(AppContext)[questionsType] // dynamically get questions
   );
-  const [followUpNum, setFollowUpNum] = useState(-1);
 
   const key = qToAsk[questionNum].key;
   const currentQ = qToAsk[questionNum].questions;
@@ -16,25 +21,29 @@ function MediaForm({ questionsType = "movieQuestions" }) {
   const options = currentQ.options;
   const { register, handleSubmit } = useForm();
 
-  function onSubmit() {
-    // setValue(key, selectedOption);
+  async function onSubmit() {
+    if (questionNum >= qToAsk.length - 1) {
+      await getRecomendations(clientMoviePreferences).then((res) =>
+        console.log(res)
+      );
+    }
     return;
   }
-  function onSelect(selectedOption, optionIndex) {
-    setClientPreferences((p) => ({ ...p, [key]: selectedOption }));
 
+  function onSelect(selectedOption, optionIndex) {
+    if (questionsType === "movieQuestions") {
+      setClientMoviePreferences((p) => ({ ...p, [key]: selectedOption }));
+    }
     const selectedOptionObj = currentQ.options[optionIndex];
 
-    setQuestionNum((p) => (p < qToAsk.length - 1 ? p + 1 : p));
-
+    setQuestionNum((p) => (p + 1 !== qToAsk.length ? (p += 1) : p));
     if (selectedOptionObj.followUps) {
       setQToAsk((p) => [
-        ...p.slice(0, questionNum + 1), // Everything before insertion point
-        ...selectedOptionObj.followUps, // Insert follow-ups here
-        ...p.slice(questionNum + 1), // Everything after insertion point
+        ...p.slice(0, questionNum + 1),
+        ...selectedOptionObj.followUps,
+        ...p.slice(questionNum + 1),
       ]);
     }
-    console.log(qToAsk, questionNum);
   }
 
   return (
@@ -52,8 +61,13 @@ function MediaForm({ questionsType = "movieQuestions" }) {
         {options.map((el, i) => (
           <button
             key={i}
-            type="submit"
-            onClick={() => onSelect(el.value, i)}
+            type={questionNum + 1 === qToAsk.length ? "submit" : "button"}
+            onClick={(e) => {
+              if (questionNum + 1 !== qToAsk.length) {
+                e.preventDefault(); // preventing for non-final questions
+              }
+              onSelect(el.value, i);
+            }}
             className="w-full px-8 py-5 text-2xl font-semibold bg-blue-500 text-white rounded-xl shadow-md hover:bg-blue-600 transition transform hover:scale-105"
           >
             {el.text}

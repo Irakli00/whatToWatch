@@ -4,7 +4,7 @@ import "swiper/css";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import MediaCard from "./MediaCard";
-import { getTrending } from "../services/getTrending";
+import { getTrending } from "../services/tmdbApi";
 import Spinner from "./Spinner";
 
 function Carousel() {

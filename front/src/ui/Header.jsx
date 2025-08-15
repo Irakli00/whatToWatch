@@ -23,6 +23,9 @@ function Header() {
           <NavLink className="header-link animes-link" to="/anime">
             Anime
           </NavLink>
+          <NavLink className="header-link TV-link" to="/TV">
+            TV Shows
+          </NavLink>
         </div>
       </div>
     </header>
