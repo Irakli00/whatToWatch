@@ -20,7 +20,7 @@ async function getTrending() {
 }
 async function getRecomendations({
   mediaType,
-  genres = [],
+  genres = "",
   language = "en-US",
   region = "",
   sort = "popularity.desc",
@@ -32,6 +32,7 @@ async function getRecomendations({
   originLang = "",
   originCountry = "",
 }) {
+  console.log(mediaType);
   const params = new URLSearchParams({
     language,
     region,
@@ -39,6 +40,7 @@ async function getRecomendations({
     page: 1,
     include_adult: false,
     include_video: false,
+    with_genres: "",
   });
 
   if (releaseDateFrom)
@@ -46,7 +48,7 @@ async function getRecomendations({
   if (releaseDateTo) params.append("primary_release_date.lte", releaseDateTo);
   if (rating) params.append("vote_average.gte", rating);
   if (genres) params.append("with_genres", genres);
-  if (!genres && mediaType === "animation") params.append("with_genres", [16]); //edge case
+  if (mediaType === "animation") params.append("with_genres", 16); //edge case
   // if (!genres && mediaType === "animation")
   //   params.append("with_genres", [...genres, 16]); //edge case
   if (minRuntime) params.append("with_runtime.gte", minRuntime);

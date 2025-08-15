@@ -1,16 +1,14 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { useForm } from "react-hook-form";
-
-import { getRecomendations } from "../services/tmdbApi";
+import { useNavigate } from "react-router-dom";
 
 function MediaForm({ questionsType = "movieQuestions" }) {
-  const {
-    questionNum,
-    setQuestionNum,
-    setClientMoviePreferences,
-    clientMoviePreferences,
-  } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const { questionNum, setQuestionNum, setClientMoviePreferences } =
+    useContext(AppContext);
+
   const [qToAsk, setQToAsk] = useState(
     useContext(AppContext)[questionsType] // dynamically get questions
   );
@@ -22,11 +20,8 @@ function MediaForm({ questionsType = "movieQuestions" }) {
   const { register, handleSubmit } = useForm();
 
   async function onSubmit() {
-    if (questionNum >= qToAsk.length - 1) {
-      await getRecomendations(clientMoviePreferences).then((res) =>
-        console.log(res)
-      );
-    }
+    navigate("/recomendations");
+
     return;
   }
 

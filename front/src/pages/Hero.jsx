@@ -3,7 +3,7 @@ import { IoIosTrendingUp } from "react-icons/io";
 import Carousel from "../ui/Carousel";
 import HeroLink from "../ui/HeroLink";
 
-function HeroPage() {
+function Hero() {
   return (
     <>
       <section className="bg-[var(--light-blue)]  min-h-[310px] flex justify-center ">
@@ -12,6 +12,7 @@ function HeroPage() {
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
             <h1 className="text-2xl">Trending right now:</h1>
           </div>
+
           <Carousel></Carousel>
         </div>
       </section>
@@ -38,4 +39,4 @@ function HeroPage() {
   );
 }
 
-export default HeroPage;
+export default Hero;
