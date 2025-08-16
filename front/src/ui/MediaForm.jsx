@@ -1,13 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../contexts/AppContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { QuestionsContext } from "../contexts/QuestionsContext";
 
-function MediaForm({ questionsType = "movieQuestions" }) {
-  const navigate = useNavigate();
-
+function MediaForm() {
+  const questionsType = useContext(QuestionsContext);
   const { questionNum, setQuestionNum, setClientMoviePreferences } =
     useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const [qToAsk, setQToAsk] = useState(
     useContext(AppContext)[questionsType] // dynamically get questions
@@ -19,10 +21,12 @@ function MediaForm({ questionsType = "movieQuestions" }) {
   const options = currentQ.options;
   const { register, handleSubmit } = useForm();
 
+  useEffect(() => {
+    setQuestionNum(0);
+  }, [setQuestionNum]);
+
   async function onSubmit() {
     navigate("/recomendations");
-
-    return;
   }
 
   function onSelect(selectedOption, optionIndex) {

@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import AppLayout from "./ui/AppLayout";
 import Hero from "./pages/Hero";
-import MovieSelection from "./pages/MovieSelection";
+import MediaSelection from "./pages/MediaSelection";
 import Recomendations from "./pages/Recomendations";
 
 const router = createBrowserRouter([
@@ -15,9 +15,16 @@ const router = createBrowserRouter([
       { index: true, element: <Hero /> },
       {
         path: "/movies",
-        element: <MovieSelection></MovieSelection>,
+        element: (
+          <MediaSelection questionsType="movieQuestions"></MediaSelection>
+        ),
       },
-      { path: "/anime", element: "" },
+      {
+        path: "/anime",
+        element: (
+          <MediaSelection questionsType="animeQuestions"></MediaSelection>
+        ),
+      },
       { path: "/TV", element: "" },
       {
         path: "/recomendations",
@@ -30,7 +37,8 @@ const router = createBrowserRouter([
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000,
+      // staleTime: 60 * 1000,
+      staleTime: 10,
     },
   },
 });

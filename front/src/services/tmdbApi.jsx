@@ -31,17 +31,10 @@ async function getRecomendations({
 }) {
   const { min: minRuntime, max: maxRuntime } = runtime;
   const today = new Date().toISOString().split("T")[0];
-  console.log(releaseDate);
-
-  // Handle animation genre
   const finalGenres = mediaType === "animation" ? [...genres, 16] : genres;
-
   const baseLang = language.split("-")[0];
 
   const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_runtime.gte=${minRuntime}&with_runtime.lte=${maxRuntime}&with_original_language=${baseLang}&with_origin_country=${region}`;
-
-  // primary_release_date.gte=2010-01-01&primary_release_date.lte=2025-08-16"
-  console.log(url);
 
   const res = await fetch(url, {
     method: "GET",

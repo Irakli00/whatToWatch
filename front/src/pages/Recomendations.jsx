@@ -14,17 +14,29 @@ function Recomendations() {
 
   const { data, isLoading } = useQuery({
     queryKey: ["recomendations"],
+    enabled: !!clientMoviePreferences,
+    timeout: 2000,
+    retry: 0,
     queryFn: () => getRecomendations(clientMoviePreferences),
   });
 
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <ul>
-      {data.results.map((el) => (
-        <MediaCard key={el.id} movie={el}></MediaCard>
-      ))}
-    </ul>
+    <main>
+      {data ? (
+        <ul>
+          {data.results.map((el) => (
+            <MediaCard key={el.id} movie={el}></MediaCard>
+          ))}
+        </ul>
+      ) : (
+        <article>
+          {/* default behavior */}
+          <h1>failed to fetch or nothing found idunno</h1>
+        </article>
+      )}
+    </main>
   );
 }
 
