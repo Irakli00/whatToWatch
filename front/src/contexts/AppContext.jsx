@@ -93,7 +93,7 @@ function AppProvider({ children }) {
         options: [
           {
             text: "After 2010",
-            value: "release_date.gte=2010-01-01",
+            value: `primary_release_date.gte=2010-01-01&primary_release_date.lte=${new Date().toISOString().split("T")[0]}`,
           },
           {
             text: "Before 2010",
