@@ -26,9 +26,9 @@ function AppProvider({ children }) {
       questions: {
         questionText: "Preferred genres?",
         options: [
-          { text: "Action", value: "28" },
-          { text: "Comedy", value: "35" },
-          { text: "Drama", value: "18" },
+          { text: "Action", value: ["28"] },
+          { text: "Comedy", value: ["35"] },
+          { text: "Drama", value: ["18"] },
           { text: "Doesn't matter", value: null },
         ],
       },
@@ -51,13 +51,13 @@ function AppProvider({ children }) {
       questions: {
         questionText: "Preferred runtime?",
         options: [
-          { text: "Short (<90 min)", value: { min: "", max: 90 } },
+          { text: "Short (<90 min)", value: { min: 1, max: 90 } },
           {
             text: "Medium (90–150 min)",
             value: { min: 90, max: 150 },
           },
-          { text: "Long (>150 min)", value: { min: 150, max: "" } },
-          { text: "Doesn't matter", value: { min: "", max: "" } },
+          { text: "Long (>150 min)", value: { min: 150, max: 999 } },
+          { text: "Doesn't matter", value: { min: 1, max: 999 } },
         ],
       },
     },
@@ -93,11 +93,11 @@ function AppProvider({ children }) {
         options: [
           {
             text: "After 2010",
-            value: "release_date.gte-2010-01-01",
+            value: "release_date.gte=2010-01-01",
           },
           {
             text: "Before 2010",
-            value: "release_date.lte-2010-01-01",
+            value: "release_date.lte=2010-01-01",
           },
           { text: "Doesn't matter", value: null },
         ],
