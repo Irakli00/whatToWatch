@@ -28,7 +28,7 @@ function MediaForm({ questionsType }) {
   const contextValue = useContext(QuestionsContext);
   useEffect(() => {
     setQToAsk(contextValue[questionsType] || []);
-  }, [questionsType, contextValue]);
+  }, [questionsType]);
 
   async function onSubmit() {
     navigate("/recomendations");
@@ -44,7 +44,8 @@ function MediaForm({ questionsType }) {
     const selectedOptionObj = currentQ.options[optionIndex];
 
     setQuestionNum((p) => (p + 1 !== qToAsk.length ? (p += 1) : p));
-    if (selectedOptionObj.followUps) {
+
+    if (selectedOptionObj.followUps.length) {
       setQToAsk((p) => [
         ...p.slice(0, questionNum + 1),
         ...selectedOptionObj.followUps,
