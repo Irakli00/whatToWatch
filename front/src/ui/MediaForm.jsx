@@ -4,15 +4,15 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { QuestionsContext } from "../contexts/QuestionsContext";
 
-function MediaForm() {
-  const questionsType = useContext(QuestionsContext);
-  const { questionNum, setQuestionNum, setClientMoviePreferences } =
+function MediaForm({ questionsType }) {
+  const { questionNum, setQuestionNum } = useContext(QuestionsContext);
+  const { setClientMoviePreferences, setClientAnimePreferences } =
     useContext(AppContext);
 
   const navigate = useNavigate();
 
   const [qToAsk, setQToAsk] = useState(
-    useContext(AppContext)[questionsType] // dynamically get questions
+    useContext(QuestionsContext)[questionsType] // dynamically get questions
   );
 
   const key = qToAsk[questionNum].key;
@@ -23,7 +23,12 @@ function MediaForm() {
 
   useEffect(() => {
     setQuestionNum(0);
-  }, [setQuestionNum]);
+  }, [questionsType, setQuestionNum]); //q type detector
+
+  const contextValue = useContext(QuestionsContext);
+  useEffect(() => {
+    setQToAsk(contextValue[questionsType] || []);
+  }, [questionsType, contextValue]);
 
   async function onSubmit() {
     navigate("/recomendations");
@@ -33,17 +38,13 @@ function MediaForm() {
     if (questionsType === "movieQuestions") {
       setClientMoviePreferences((p) => ({ ...p, [key]: selectedOption }));
     }
+    if (questionsType === "animeQuestions") {
+      setClientAnimePreferences((p) => ({ ...p, [key]: selectedOption }));
+    }
     const selectedOptionObj = currentQ.options[optionIndex];
 
     setQuestionNum((p) => (p + 1 !== qToAsk.length ? (p += 1) : p));
-    console.log(...selectedOptionObj.followUps, currentQ);
     if (selectedOptionObj.followUps) {
-      console.log([
-        ...qToAsk.slice(0, questionNum + 1),
-        ...selectedOptionObj.followUps,
-        ...qToAsk.slice(questionNum + 1),
-      ]);
-
       setQToAsk((p) => [
         ...p.slice(0, questionNum + 1),
         ...selectedOptionObj.followUps,

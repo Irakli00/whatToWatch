@@ -4,8 +4,8 @@ import MediaForm from "../ui/MediaForm";
 function MediaSelection({ questionsType }) {
   return (
     <section className="container ">
-      <QuestionsProvider value={questionsType}>
-        <MediaForm></MediaForm>
+      <QuestionsProvider>
+        <MediaForm questionsType={questionsType}></MediaForm>
       </QuestionsProvider>
     </section>
   );
