@@ -36,7 +36,14 @@ function MediaForm() {
     const selectedOptionObj = currentQ.options[optionIndex];
 
     setQuestionNum((p) => (p + 1 !== qToAsk.length ? (p += 1) : p));
+    console.log(...selectedOptionObj.followUps, currentQ);
     if (selectedOptionObj.followUps) {
+      console.log([
+        ...qToAsk.slice(0, questionNum + 1),
+        ...selectedOptionObj.followUps,
+        ...qToAsk.slice(questionNum + 1),
+      ]);
+
       setQToAsk((p) => [
         ...p.slice(0, questionNum + 1),
         ...selectedOptionObj.followUps,

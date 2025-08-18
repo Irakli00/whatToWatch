@@ -4,6 +4,7 @@ const AppContext = createContext();
 
 function AppProvider({ children }) {
   const [questionNum, setQuestionNum] = useState(0);
+
   const movieQuestions = [
     {
       id: "media-type",
@@ -112,11 +113,25 @@ function AppProvider({ children }) {
       questions: {
         questionText: "What type of media do you prefer?",
         options: [
-          { text: "Animation", value: "animation" },
+          { text: "Anime", value: "anime" },
           {
-            text: "Movie",
-            value: "movie",
-            followUps: [],
+            text: "Manga",
+            value: "manga",
+            followUps: [
+              {
+                key: "mediaType",
+                questions: {
+                  questionText: "111111111111",
+                  options: [
+                    { text: "Anime", value: "anime" },
+                    {
+                      text: "Manga",
+                      value: "manga",
+                    },
+                  ],
+                },
+              },
+            ],
           },
         ],
       },
