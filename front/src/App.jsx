@@ -5,7 +5,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AppLayout from "./ui/AppLayout";
 import Hero from "./pages/Hero";
 import MediaSelection from "./pages/MediaSelection";
-import Recomendations from "./pages/Recomendations";
+import MovieRecomendations from "./pages/MovieRecomendations";
+import AnimeRecomendations from "./pages/AnimeRecomendations";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
       },
       { path: "/TV", element: "" },
       {
-        path: "/recomendations",
-        element: <Recomendations></Recomendations>,
+        path: "/recomendations/anime",
+        element: <AnimeRecomendations></AnimeRecomendations>,
+      },
+      {
+        path: "/recomendations/movie",
+        element: <MovieRecomendations></MovieRecomendations>,
       },
     ],
   },

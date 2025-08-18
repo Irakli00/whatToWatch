@@ -1,23 +1,23 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { getRecomendations } from "../services/tmdbApi";
-import Spinner from "../ui/Spinner";
-import MediaCard from "../ui/MediaCard";
+import { getMovieRecomendations } from "../services/tmdbApi.js";
+import Spinner from "../ui/Spinner.jsx";
+import MovieCard from "../ui/MovieCard.jsx";
 import { useContext } from "react";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext } from "../contexts/AppContext.jsx";
 
-function Recomendations() {
+function MovieRecomendations() {
   const { clientMoviePreferences } = useContext(AppContext);
 
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["recomendations"],
+    queryKey: ["movieRecomendations"],
     enabled: !!clientMoviePreferences,
     timeout: 2000,
     retry: 0,
-    queryFn: () => getRecomendations(clientMoviePreferences),
+    queryFn: () => getMovieRecomendations(clientMoviePreferences),
   });
 
   if (isLoading) return <Spinner></Spinner>;
@@ -27,12 +27,11 @@ function Recomendations() {
       {data ? (
         <ul>
           {data.results.map((el) => (
-            <MediaCard key={el.id} movie={el}></MediaCard>
+            <MovieCard key={el.id} movie={el}></MovieCard>
           ))}
         </ul>
       ) : (
         <article>
-          {/* default behavior */}
           <h1>failed to fetch or nothing found idunno</h1>
         </article>
       )}
@@ -40,4 +39,4 @@ function Recomendations() {
   );
 }
 
-export default Recomendations;
+export default MovieRecomendations;

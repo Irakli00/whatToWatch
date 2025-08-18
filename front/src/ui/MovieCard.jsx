@@ -5,7 +5,7 @@ import { parseGenres } from "../helpers/tmdb.js";
 import { formatDate } from "../helpers/formaters.js";
 import { formatRating } from "../helpers/formaters.js";
 
-function MediaCard({ movie }) {
+function MovieCard({ movie }) {
   const genreStrings = parseGenres(movie.genre_ids);
 
   return (
@@ -45,4 +45,4 @@ function MediaCard({ movie }) {
   );
 }
 
-export default MediaCard;
+export default MovieCard;

@@ -31,7 +31,9 @@ function MediaForm({ questionsType }) {
   }, [questionsType]);
 
   async function onSubmit() {
-    navigate("/recomendations");
+    navigate(
+      `/recomendations/${questionsType === "movieQuestions" ? "movie" : "anime"}` //good so far
+    );
   }
 
   function onSelect(selectedOption, optionIndex) {

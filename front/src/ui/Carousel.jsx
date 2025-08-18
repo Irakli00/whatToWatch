@@ -3,7 +3,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import MediaCard from "./MediaCard";
+import MovieCard from "./MovieCard";
 import { getTrending } from "../services/tmdbApi";
 import Spinner from "./Spinner";
 
@@ -31,10 +31,10 @@ function Carousel() {
       loop={true}
       speed={5000}
     >
-      {data.results.map((movie) => {
+      {data?.results?.map((movie) => {
         return (
           <SwiperSlide key={movie.id}>
-            <MediaCard movie={movie}></MediaCard>
+            <MovieCard movie={movie}></MovieCard>
           </SwiperSlide>
         );
       })}
