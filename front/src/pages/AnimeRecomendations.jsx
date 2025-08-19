@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useContext } from "react";
 
+import { AppContext } from "../contexts/AppContext.jsx";
 import { getAnimeRecomendations } from "../services/kistuApi.js";
 import Spinner from "../ui/Spinner.jsx";
-import MovieCard from "../ui/MovieCard.jsx";
-import { useContext } from "react";
-import { AppContext } from "../contexts/AppContext.jsx";
+import AnimeCard from "../ui/AnimeCard.jsx";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -26,7 +26,7 @@ function AnimeRecomendations() {
     <main>
       <ul>
         {data.data.map((el) => (
-          <p key={el.id}>{el.attributes.slug}</p>
+          <AnimeCard anime={el} key={el.id}></AnimeCard>
         ))}
       </ul>
     </main>

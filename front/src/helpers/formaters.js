@@ -19,3 +19,9 @@ function formatRating(num) {
 }
 
 export { formatRating };
+
+function parseGenres(genreIds, genresMap) {
+  return genreIds.map((genreId) => genresMap[genreId]);
+}
+
+export { parseGenres };

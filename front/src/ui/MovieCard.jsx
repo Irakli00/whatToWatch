@@ -1,12 +1,12 @@
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
 
-import { parseGenres } from "../helpers/tmdb.js";
-import { formatDate } from "../helpers/formaters.js";
+import { parseGenres, formatDate } from "../helpers/formaters.js";
+import { TMDB_GENRES } from "../helpers/tmdb.js";
 import { formatRating } from "../helpers/formaters.js";
 
 function MovieCard({ movie }) {
-  const genreStrings = parseGenres(movie.genre_ids);
+  const genreStrings = parseGenres(movie.genre_ids, TMDB_GENRES);
 
   return (
     <article className="flex gap-1.5 cursor-pointer rounded-[6px] h-[270px] p-2.5 transition duration-200 ease-in-out hover:bg-[var(--bright-yellow)]">

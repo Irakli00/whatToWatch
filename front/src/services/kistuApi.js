@@ -1,13 +1,12 @@
 // const KITSU_KEY = import.meta.env.VITE_KISTU_KEY;
 
 async function getAnimeRecomendations({ mediaType }) {
-  const url = `https://kitsu.io/api/edge/anime`;
-  console.log(url);
+  const url = `https://kitsu.io/api/edge/${mediaType || "manga"}`;
 
   const res = await fetch(url, {
     method: "GET",
     headers: {
-      accept: "application/vnd.api+json", // correct for Kitsu
+      accept: "application/vnd.api+json",
     },
   });
 
@@ -18,3 +17,13 @@ async function getAnimeRecomendations({ mediaType }) {
   return res.json();
 }
 export { getAnimeRecomendations };
+
+async function getAnimeGenres(animeId, mediaType) {
+  const url = `https://kitsu.io/api/edge/${mediaType}/${animeId}/relationships/genres`;
+  const res = await fetch(url);
+  const json = await res.json();
+
+  return json.data;
+}
+
+export { getAnimeGenres };

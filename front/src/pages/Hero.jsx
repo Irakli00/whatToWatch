@@ -13,7 +13,7 @@ function Hero() {
             <h1 className="text-2xl">Trending right now:</h1>
           </div>
 
-          <Carousel></Carousel>
+          <Carousel type={"movie"}></Carousel>
         </div>
       </section>
       <section className="container pt-5 text-center text-[var(--dark-blue)]">
