@@ -9,7 +9,7 @@ function MovieCard({ movie }) {
   const genreStrings = parseGenres(movie.genre_ids, TMDB_GENRES);
 
   return (
-    <article className="flex gap-1.5 cursor-pointer rounded-[6px] h-[270px] p-2.5 transition duration-200 ease-in-out hover:bg-[var(--bright-yellow)]">
+    <article className="card card--movie">
       <div className="h-full">
         <img
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

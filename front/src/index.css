@@ -84,6 +84,24 @@ button {
   transition: all 0.2s ease-in;
 }
 
+.card {
+  display: flex;
+  gap: 0.375rem; /* gap-1.5 */
+  cursor: pointer;
+  border-radius: 6px; /* rounded-[6px] */
+  height: 270px; /* h-[270px] */
+  padding: 0.625rem; /* p-2.5 */
+  transition: all 0.2s ease-in-out; /* transition duration-200 ease-in-out */
+}
+
+.card.card--movie:hover {
+  background-color: var(--light-orange);
+  color: var(--dark-blue);
+}
+.card.card--anime:hover {
+  background-color: var(--main-red); /* hover:bg-[var(--main-red)] */
+  color: #fff;
+}
 /* ---------------------- */
 
 embla {
