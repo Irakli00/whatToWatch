@@ -1,12 +1,16 @@
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
 import { getAnimeGenres } from "../services/kistuApi";
+import { useQuery } from "@tanstack/react-query";
+import { useContext } from "react";
 
 import { parseGenres } from "../helpers/formaters";
 import { KITSU_GENRES } from "../helpers/kitsu";
-import { useQuery } from "@tanstack/react-query";
+import { AppContext } from "../contexts/AppContext";
 
 function AnimeCard({ anime }) {
+  const { clientAnimePreferences } = useContext(AppContext);
+
   const {
     type,
     id,
@@ -24,7 +28,10 @@ function AnimeCard({ anime }) {
   } = useQuery({
     queryKey: ["animeGenres", id],
     queryFn: async () => {
-      const json = await getAnimeGenres(id, "manga");
+      const json = await getAnimeGenres(
+        id,
+        clientAnimePreferences.mediaType || "anime"
+      );
 
       const genreIds = json.map((el) => el.id);
 
