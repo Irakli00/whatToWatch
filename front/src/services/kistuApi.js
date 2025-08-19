@@ -9,7 +9,7 @@ async function getAnimeRecomendations({
   subtype,
 }) {
   //season filter is not allowed in manga apparently
-  const url = `https://kitsu.io/api/edge/${mediaType || "anime"}?filter[categories]=${genres || ""}&filter[year]=${releaseDate || "2000.."}${mediaType !== "manga" ? `&filter[season]=${season}` : ""}&filter[status]=${status}&filter[subtype]=${subtype || ""}`;
+  const url = `https://kitsu.io/api/edge/${mediaType || "anime"}?filter[categories]=${genres || [1, 2]}&filter[year]=${releaseDate || "2000.."}${mediaType !== "manga" ? `&filter[season]=${season || "summer"}` : ""}&filter[status]=${status || "finished"}&filter[subtype]=${subtype || "TV"}`;
 
   console.log(url);
   //filter[ageRating]=PG&sort=-averageRating&page[limit]=20&page[offset]=0&fields[anime]=id,canonicalTitle,synopsis,averageRating,startDate,endDate,episodeCount,subtype,status,posterImage&include=categories,mappings,reviews`;

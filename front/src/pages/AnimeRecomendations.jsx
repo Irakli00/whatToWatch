@@ -15,7 +15,6 @@ function AnimeRecomendations() {
   const { data, isLoading } = useQuery({
     queryKey: ["animeRecomendations"],
     enabled: !!clientAnimePreferences,
-    timeout: 2000,
     retry: 0,
     queryFn: () => getAnimeRecomendations(clientAnimePreferences),
   });

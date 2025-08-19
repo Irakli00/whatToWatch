@@ -15,7 +15,6 @@ function MovieRecomendations() {
   const { data, isLoading } = useQuery({
     queryKey: ["movieRecomendations"],
     enabled: !!clientMoviePreferences,
-    timeout: 2000,
     retry: 0,
     queryFn: () => getMovieRecomendations(clientMoviePreferences),
   });

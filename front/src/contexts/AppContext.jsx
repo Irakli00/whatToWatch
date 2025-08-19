@@ -12,9 +12,7 @@ function AppProvider({ children }) {
 
   const [clientAnimePreferences, setClientAnimePreferences] = useState({
     mediaType: null,
-    movieReleaseDate: null,
     genres: null,
-    year: null,
   });
 
   return (
