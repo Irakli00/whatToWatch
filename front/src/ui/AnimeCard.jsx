@@ -52,12 +52,14 @@ function AnimeCard({ anime }) {
           className="max-w-[180px] h-full rounded-[7px]"
         />
       </div>
+
       <div className="flex flex-col gap-[7px]">
         <h2 className="text-2xl leading-[0.9]">
           <strong>{title}</strong>
         </h2>
 
-        <h1>{type.toUpperCase()} </h1>
+        <h1>{type.toUpperCase()}</h1>
+
         <ul className="flex flex-wrap gap-1 leading-3">
           {genreStrings.map((g, i) => (
             <li key={i}>
@@ -65,17 +67,18 @@ function AnimeCard({ anime }) {
             </li>
           ))}
         </ul>
+
         <p className="flex items-center gap-0.5 text-center">
           <IoCalendarClearOutline />
-          {/* <span className="pt-0.5">{formatDate(anime.release_date)}</span> */}
           <span className="pt-0.5">{"2020"}</span>
         </p>
+
         <p className="flex items-center gap-0.5 text-center">
           <FaRegStar />
           <span className="pt-0.5">{"2020"}</span>
-          {/* <span className="pt-0.5">{formatRating(anime.vote_average)}</span> */}
         </p>
-        <div className="overflow-scroll pt-1 border-t-1 border-t-[var(--dark-blue)] h-full  rounded-b-[5px] ">
+
+        <div className="overflow-scroll pt-1 border-t border-dark-blue h-full rounded-b-[5px]">
           <p className="select-none text-[14px] opacity-75">{overview}</p>
         </div>
       </div>

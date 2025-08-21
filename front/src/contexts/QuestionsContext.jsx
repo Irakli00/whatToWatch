@@ -86,8 +86,8 @@ const movieQuestions = [
     .addOption("Animation", "animation")
     .addOption("Movie", "movie", [
       new MediaQuestion("media-type-followup", "mediaType", "111111111111111")
-        .addOption("1111111", "animation")
-        .addOption("1111111", "movie"),
+        .addOption("a", "animation")
+        .addOption("m", "movie"),
     ]),
 
   new MediaQuestion("genres", "genres", "Preferred genres?")

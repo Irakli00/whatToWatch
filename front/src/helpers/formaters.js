@@ -25,3 +25,16 @@ function parseGenres(genreIds, genresMap) {
 }
 
 export { parseGenres };
+
+function formatNumber(num) {
+  const properNumber = +new String(num).split(".").join("");
+  if (properNumber >= 1000000) {
+    return (properNumber / 1000000).toFixed(1).replace(".", ",") + "M";
+  } else if (properNumber >= 1000) {
+    return (properNumber / 1000).toFixed(1).replace(".", ",") + "k";
+  } else {
+    return properNumber.toString();
+  }
+}
+
+export { formatNumber };

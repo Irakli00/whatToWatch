@@ -1,106 +1,95 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 @import "tailwindcss";
 
-:root {
-  --light-blue: #8ecae6;
-  --default-blue: #219ebc;
-  --dark-blue: #023047;
-  --bright-yellow: rgb(255, 210, 48);
-  --bright-yellow-hover: rgb(255, 200, 0);
-  --light-orange: #ffb703;
-  --orange: #fb8500;
-  --main-red: #ec0800;
-  --main-red-hover: #da0902;
+/* 🔹 Design tokens (Tailwind v4 style) */
+@theme {
+  --color-light-blue: #8ecae6;
+  --color-default-blue: #219ebc;
+  --color-dark-blue: #023047;
+  --color-bright-yellow: rgb(255, 210, 48);
+  --color-bright-yellow-hover: rgb(255, 200, 0);
+  --color-light-orange: #ffb703;
+  --color-orange: #fb8500;
+  --color-main-red: #ec0800;
+  --color-main-red-hover: #da0902;
+
+  --font-sans: "Rubik", sans-serif;
 }
 
-body {
-  line-height: 1;
-  font-family: "Rubik", sans-serif;
+@layer base {
+  body {
+    @apply leading-none font-sans;
+  }
+
+  #root {
+    @apply min-h-dvh flex flex-col;
+  }
+
+  main {
+    @apply flex-1;
+  }
+
+  ol,
+  ul {
+    @apply list-none;
+  }
+
+  blockquote,
+  q {
+    quotes: none;
+  }
+
+  blockquote::before,
+  blockquote::after,
+  q::before,
+  q::after {
+    content: none;
+  }
+
+  table {
+    @apply border-collapse;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  .container {
+    @apply mx-auto max-w-[90%];
+  }
 }
 
-#root {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
+@layer components {
+  .header-link {
+    @apply p-3 rounded-md font-bold transition-all duration-200 ease-in;
+  }
 
-main {
-  flex: 1;
-}
+  .active.movies-link,
+  .header-link.movies-link:hover {
+    @apply bg-bright-yellow text-dark-blue;
+  }
 
-ol,
-ul {
-  list-style: none;
-}
+  .active.animes-link,
+  .animes-link:hover {
+    @apply bg-main-red text-white;
+  }
 
-blockquote,
-q {
-  quotes: none;
-}
+  .active.TV-link,
+  .TV-link:hover {
+    @apply bg-light-blue text-dark-blue;
+  }
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-  content: "";
-  content: none;
-}
+  .card {
+    @apply flex gap-1.5 cursor-pointer rounded-[6px] h-[270px] p-2.5 transition-all duration-200 ease-in-out relative;
+  }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+  .card.card--movie:hover {
+    @apply bg-light-orange text-dark-blue;
+  }
 
-button {
-  cursor: pointer;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 90%;
-}
-
-.active.movies-link,
-.header-link.movies-link:hover {
-  background-color: var(--bright-yellow);
-  color: var(--dark-blue);
-}
-.active.animes-link,
-.animes-link:hover {
-  background-color: var(--main-red);
-}
-
-.active.TV-link,
-.TV-link:hover {
-  background-color: #8ecae6;
-  color: var(--dark-blue);
-}
-
-.header-link {
-  padding: 12px;
-  border-radius: 6px;
-  font-weight: 700;
-
-  transition: all 0.2s ease-in;
-}
-
-.card {
-  display: flex;
-  gap: 0.375rem; /* gap-1.5 */
-  cursor: pointer;
-  border-radius: 6px; /* rounded-[6px] */
-  height: 270px; /* h-[270px] */
-  padding: 0.625rem; /* p-2.5 */
-  transition: all 0.2s ease-in-out; /* transition duration-200 ease-in-out */
-}
-
-.card.card--movie:hover {
-  background-color: var(--light-orange);
-  color: var(--dark-blue);
-}
-.card.card--anime:hover {
-  background-color: var(--main-red); /* hover:bg-[var(--main-red)] */
-  color: #fff;
+  .card.card--anime:hover {
+    @apply bg-main-red text-white;
+  }
 }
 /* ---------------------- */
 
@@ -241,6 +230,7 @@ embla {
 .embla__progress--hidden .embla__progress__bar {
   animation-play-state: paused;
 }
+
 @keyframes autoplay-progress {
   0% {
     transform: translate3d(0, 0, 0);

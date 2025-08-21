@@ -59,31 +59,34 @@ function MediaForm({ questionsType }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col mt-[20dvh] items-center gap-8 p-10 bg-white rounded-2xl shadow-lg"
+      className="flex flex-col mt-[20dvh] items-center gap-10 p-12 bg-white rounded-3xl shadow-xl  mx-auto"
     >
+      {/* Question Label */}
       <label
         htmlFor="selectedOption"
-        className="text-3xl font-bold text-gray-900 text-center"
+        className="text-4xl font-extrabold text-gray-900 text-center"
       >
         {label}
       </label>
-      <div className="flex flex-row gap-5 w-full">
+
+      <div className="flex flex-col md:flex-row gap-6 w-full">
         {options.map((el, i) => (
           <button
             key={i}
             type={questionNum + 1 === qToAsk.length ? "submit" : "button"}
             onClick={(e) => {
               if (questionNum + 1 !== qToAsk.length) {
-                e.preventDefault(); // preventing for non-final questions
+                e.preventDefault();
               }
               onSelect(el.value, i);
             }}
-            className="w-full px-8 py-5 text-2xl font-semibold bg-blue-500 text-white rounded-xl shadow-md hover:bg-blue-600 transition transform hover:scale-105"
+            className="flex-1 px-10 py-6 text-2xl md:text-2xl font-semibold bg-light-blue text-dark-blue rounded-2xl shadow-lg hover:bg-default-blue hover:text-white transition duration-300 ease-in-out transform hover:scale-105"
           >
             {el.text}
           </button>
         ))}
       </div>
+
       <input type="hidden" {...register(key)} />
     </form>
   );

@@ -6,17 +6,18 @@ import HeroLink from "../ui/HeroLink";
 function Hero() {
   return (
     <>
-      <section className="bg-[var(--light-blue)]  min-h-[310px] flex justify-center ">
-        <div className="container py-2.5 bg-gradient-to-r from-[var(--light-blue)] via-[#22e5ff] to-[var(--light-blue)]">
+      <section className="bg-light-blue min-h-[310px] flex justify-center">
+        <div className="container py-2.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
             <h1 className="text-2xl">Trending right now:</h1>
           </div>
 
-          <Carousel type={"movie"}></Carousel>
+          <Carousel type="movie" />
         </div>
       </section>
-      <section className="container pt-5 text-center text-[var(--dark-blue)]">
+
+      <section className="container pt-5 text-center text-dark-blue">
         <h1 className="text-6xl font-bold">
           Can't decide what to watch tonight?
         </h1>
