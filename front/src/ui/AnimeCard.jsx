@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 
 import { parseGenres } from "../helpers/formaters";
-import { KITSU_GENRES } from "../helpers/kitsu";
+import { KITSU_GENRES } from "../services/kistuApi";
 import { AppContext } from "../contexts/AppContext";
 
 function AnimeCard({ anime }) {

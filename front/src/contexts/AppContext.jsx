@@ -5,9 +5,12 @@ const AppContext = createContext();
 function AppProvider({ children }) {
   const [clientMoviePreferences, setClientMoviePreferences] = useState({
     mediaType: null,
-    movieReleaseDate: null,
     genres: null,
-    year: null,
+    language: null,
+    rating: 0,
+    region: null,
+    releaseDate: null,
+    runtime: null,
   });
 
   const [clientAnimePreferences, setClientAnimePreferences] = useState({

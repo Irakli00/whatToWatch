@@ -19,6 +19,7 @@ function MediaForm({ questionsType }) {
   const currentQ = qToAsk[questionNum].questions;
   const label = currentQ.questionText;
   const options = currentQ.options;
+
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {

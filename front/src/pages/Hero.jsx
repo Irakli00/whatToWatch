@@ -6,7 +6,7 @@ import HeroLink from "../ui/HeroLink";
 function Hero() {
   return (
     <>
-      <section className="bg-light-blue min-h-[310px] flex justify-center">
+      <section className="bg-light-blue min-h-[322px] flex justify-center">
         <div className="container py-2.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />

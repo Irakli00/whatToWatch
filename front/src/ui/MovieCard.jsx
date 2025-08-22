@@ -3,9 +3,9 @@ import { GoEye } from "react-icons/go";
 
 import { FaRegStar } from "react-icons/fa";
 
-import { parseGenres, formatDate, formatNumber } from "../helpers/formaters.js";
+import { parseGenres, formatDate } from "../helpers/formaters.js";
 
-import { TMDB_GENRES } from "../helpers/tmdb.js";
+import { TMDB_GENRES } from "../services/tmdbApi.js";
 import { formatRating } from "../helpers/formaters.js";
 
 function MovieCard({ movie }) {
@@ -21,20 +21,16 @@ function MovieCard({ movie }) {
         />
       </div>
 
-      <div className="flex flex-col gap-[7px]">
-        <h2 className="text-2xl leading-[0.9]">
+      <div className="flex flex-col gap-[5px]">
+        <h2 className="text-2xl leading-[0.9] text-balance">
           <strong>{movie.title}</strong>
         </h2>
 
         <p className="absolute text-center left-4 w-[25px] h-[25px] mix-blend-hard-light bg-amber-50 p-1 text-[14px] rounded-b-lg">
           {new String(movie.original_language).toUpperCase()}
         </p>
-        <div className="flex gap-1">
-          <GoEye></GoEye>
-          <p>{formatNumber(movie.popularity)}</p>
-        </div>
 
-        <ul className="flex flex-wrap gap-1 leading-3">
+        <ul className="flex mt-[4px] flex-wrap gap-1 leading-3 text-[14px]">
           {genreStrings.map((g, i) => (
             <li key={i}>
               <i>{g}</i>

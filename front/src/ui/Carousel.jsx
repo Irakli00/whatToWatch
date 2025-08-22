@@ -20,7 +20,7 @@ function Carousel({ type }) {
 
   return (
     <Swiper
-      spaceBetween={50}
+      spaceBetween={20}
       slidesPerView={4}
       modules={[Autoplay]}
       autoplay={{

@@ -120,18 +120,83 @@ const movieQuestions = [
   new MediaQuestion("release-date", "releaseDate", "When was it released?")
     .addOption(
       "After 2000",
-      `primary_release_date.gte=2000-01-01&primary_release_date.lte=${new Date().toISOString().split("T")[0]}`
+      `primary_release_date.gte=2000-01-01`
+      // `primary_release_date.gte=2000-01-01&primary_release_date.lte=${new Date().toISOString().split("T")[0]}`
     )
     .addOption("Before 2000", "release_date.lte=2000-01-01")
     .addOption("Doesn't matter", null),
 ];
+
+const movieFilterOptions = {
+  mediaType: [
+    { value: "animation", key: "Animation" },
+    { value: "movie", key: "Movie" },
+  ],
+  genres: [
+    { value: 28, key: "Action" },
+    { value: 12, key: "Adventure" },
+    { value: 16, key: "Animation" },
+    { value: 35, key: "Comedy" },
+    { value: 80, key: "Crime" },
+    { value: 99, key: "Documentary" },
+    { value: 18, key: "Drama" },
+    { value: 10751, key: "Family" },
+    { value: 14, key: "Fantasy" },
+    { value: 36, key: "History" },
+    { value: 27, key: "Horror" },
+    { value: 10402, key: "Music" },
+    { value: 9648, key: "Mystery" },
+    { value: 10749, key: "Romance" },
+    { value: 878, key: "Science Fiction" },
+    { value: 10770, key: "TV Movie" },
+    { value: 53, key: "Thriller" },
+    { value: 10752, key: "War" },
+    { value: 37, key: "Western" },
+  ],
+  language: [
+    { value: "en", key: "English" },
+    { value: "es", key: "Spanish" },
+    { value: "fr", key: "French" },
+    { value: "de", key: "German" },
+    { value: "it", key: "Italian" },
+    { value: "ja", key: "Japanese" },
+    { value: "ko", key: "Korean" },
+    { value: "zh", key: "Chinese" },
+    { value: "pt", key: "Portuguese" },
+    { value: "ru", key: "Russian" },
+    { value: "hi", key: "Hindi" },
+  ],
+  rating: [
+    { value: "7", key: "7+" },
+    { value: "5", key: "5+" },
+  ],
+  region: [
+    { value: "US", key: "US" },
+    { value: "UK", key: "GB" },
+  ],
+  releaseDate: [
+    { value: "primary_release_date.gte=2000-01-01", key: "After 2000" },
+    { value: "release_date.lte=2000-01-01", key: "After 2000" },
+  ],
+};
+// runtime: [
+//   { value: { min: 1, max: 90 }, key: "Short (<90 min)" },
+//   { value: { min: 90, max: 150 }, key: "Medium (90–150 min)" },
+//   { value: { min: 150, max: 999 }, key: "Long (>150 min)" },
+// ],
 
 export function QuestionsProvider({ children }) {
   const [questionNum, setQuestionNum] = useState(0);
 
   return (
     <QuestionsContext.Provider
-      value={{ animeQuestions, movieQuestions, questionNum, setQuestionNum }}
+      value={{
+        animeQuestions,
+        movieQuestions,
+        movieFilterOptions,
+        questionNum,
+        setQuestionNum,
+      }}
     >
       {children}
     </QuestionsContext.Provider>

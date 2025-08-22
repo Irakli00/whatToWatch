@@ -5,6 +5,7 @@ import Spinner from "../ui/Spinner.jsx";
 import MovieCard from "../ui/MovieCard.jsx";
 import { useContext } from "react";
 import { AppContext } from "../contexts/AppContext.jsx";
+import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
 
 function MovieRecomendations() {
   const { clientMoviePreferences } = useContext(AppContext);
@@ -22,9 +23,15 @@ function MovieRecomendations() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <main>
+    <section className="container mt-3">
+      <aside>
+        <RecomendationsFilter
+          preferences={clientMoviePreferences}
+        ></RecomendationsFilter>
+      </aside>
+
       {data ? (
-        <ul>
+        <ul className="grid grid-cols-3 gap-x-10 gap-y-4">
           {data.results.map((el) => (
             <MovieCard key={el.id} movie={el}></MovieCard>
           ))}
@@ -34,7 +41,7 @@ function MovieRecomendations() {
           <h1>failed to fetch or nothing found idunno</h1>
         </article>
       )}
-    </main>
+    </section>
   );
 }
 

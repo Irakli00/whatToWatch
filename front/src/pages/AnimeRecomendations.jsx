@@ -12,7 +12,7 @@ function AnimeRecomendations() {
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data: animes, isLoading } = useQuery({
     queryKey: ["animeRecomendations"],
     enabled: !!clientAnimePreferences,
     retry: 0,
@@ -24,7 +24,7 @@ function AnimeRecomendations() {
   return (
     <main>
       <ul>
-        {data.data.map((el) => (
+        {animes.data.map((el) => (
           <AnimeCard anime={el} key={el.id}></AnimeCard>
         ))}
       </ul>

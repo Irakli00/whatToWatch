@@ -26,8 +26,9 @@ function parseGenres(genreIds, genresMap) {
 
 export { parseGenres };
 
-function formatNumber(num) {
-  const properNumber = +new String(num).split(".").join("");
+function formatPopularityNumber(num) {
+  const properNumber = +new String(num).split(".").join(""); //num is a float wtf?
+
   if (properNumber >= 1000000) {
     return (properNumber / 1000000).toFixed(1).replace(".", ",") + "M";
   } else if (properNumber >= 1000) {
@@ -37,4 +38,4 @@ function formatNumber(num) {
   }
 }
 
-export { formatNumber };
+export { formatPopularityNumber };
