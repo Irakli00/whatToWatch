@@ -176,7 +176,7 @@ const movieFilterOptions = {
   ],
   releaseDate: [
     { value: "primary_release_date.gte=2000-01-01", key: "After 2000" },
-    { value: "release_date.lte=2000-01-01", key: "After 2000" },
+    { value: "release_date.lte=2000-01-01", key: "Before 2000" },
   ],
 };
 // runtime: [
