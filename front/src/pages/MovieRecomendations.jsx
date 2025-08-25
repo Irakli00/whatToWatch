@@ -7,10 +7,6 @@ import { useContext } from "react";
 import { AppContext } from "../contexts/AppContext.jsx";
 import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
 import {
   DraggableCardBody,
   DraggableCardContainer,
@@ -38,20 +34,50 @@ function MovieRecomendations() {
           {/* <DraggableCardContainer
           className={"container mt-12 flex flex-wrap justify-around gap-2"}
         > */}
-          {data.results.slice(0, 10).map((movie, i) => (
-            <DraggableCardBody
-              key={movie.id}
-              className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
-            >
-              <MovieCard
+          {data.results.map((movie, i) => {
+            if (i === 0)
+              return (
+                <>
+                  <DraggableCardBody
+                    type={"move"}
+                    key={i}
+                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                  >
+                    <button>NEW PAGE</button>
+                  </DraggableCardBody>
+
+                  <DraggableCardBody
+                    type={"movie"}
+                    key={movie.id}
+                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                  >
+                    <MovieCard
+                      key={movie.id}
+                      movie={movie}
+                      height="full"
+                      // coverImgMaxW={"300px"}
+                      coverImgMinW={"full"}
+                    />
+                  </DraggableCardBody>
+                </>
+              );
+
+            return (
+              <DraggableCardBody
+                type={"movie"}
                 key={movie.id}
-                movie={movie}
-                height="full"
-                // coverImgMaxW={"300px"}
-                coverImgMinW={"full"}
-              />
-            </DraggableCardBody>
-          ))}
+                className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+              >
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  height="full"
+                  // coverImgMaxW={"300px"}
+                  coverImgMinW={"full"}
+                />
+              </DraggableCardBody>
+            );
+          })}
         </DraggableCardContainer>
       ) : (
         <article>

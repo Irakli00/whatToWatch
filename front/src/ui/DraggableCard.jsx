@@ -11,7 +11,7 @@ import {
   useAnimationControls,
 } from "motion/react";
 
-export const DraggableCardBody = ({ className, children }) => {
+export const DraggableCardBody = ({ className, children, type }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const cardRef = useRef(null);
@@ -157,7 +157,7 @@ export const DraggableCardBody = ({ className, children }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative flex items-center justify-center min-h-96 w-[30%] overflow-hidden rounded-md bg-light-orange shadow-2xl transform-3d dark:color-orange",
+        `relative flex items-center justify-center min-h-96 w-[30%] overflow-hidden rounded-md ${type === "movie" ? "bg-light-orange" : "bg-red-500"} shadow-2xl transform-3d dark:color-orange`,
         className
       )}
     >

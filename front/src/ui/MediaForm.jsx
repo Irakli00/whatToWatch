@@ -15,21 +15,35 @@ function MediaForm({ questionsType }) {
     useContext(QuestionsContext)[questionsType] // dynamically get questions
   );
 
-  const key = qToAsk[questionNum].key;
-  const currentQ = qToAsk[questionNum].questions;
+  useEffect(() => {
+    setQuestionNum(0);
+  }, [questionsType, setQuestionNum]); //q type detector
+
+  useEffect(() => {
+    setQToAsk(contextValue[questionsType]);
+  }, [questionsType]);
+
+  // console.log(
+  //   "----------------",
+  //   questionsType,
+  //   useContext(QuestionsContext)[questionsType],
+  //   questionNum,
+  //   qToAsk,
+  //   qToAsk[questionNum],
+  //   // qToAsk[questionNum].key,
+  //   "----------------"
+  //question num fails to reset to 0 so || are added in key and currenctQ (idunno it works)
+  // );
+
+  const key = qToAsk[questionNum]?.key || qToAsk[0].key;
+  // const currentQ = qToAsk[questionNum].questions;
+  const currentQ = qToAsk?.[questionNum]?.questions || qToAsk[0].questions;
   const label = currentQ.questionText;
   const options = currentQ.options;
 
   const { register, handleSubmit } = useForm();
 
-  useEffect(() => {
-    setQuestionNum(0);
-  }, [questionsType, setQuestionNum]); //q type detector
-
   const contextValue = useContext(QuestionsContext);
-  useEffect(() => {
-    setQToAsk(contextValue[questionsType] || []);
-  }, [questionsType]);
 
   async function onSubmit() {
     navigate(

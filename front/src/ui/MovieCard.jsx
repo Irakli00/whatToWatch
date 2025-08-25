@@ -19,7 +19,7 @@ function MovieCard({
 
   return (
     <article
-      className={`card min-h-96 flex items-center card--movie h-${height} ${className ? className : ""}`}
+      className={`card card--movie h-[${height}] ${className ? className : ""}`}
     >
       <div className="h-full">
         <img

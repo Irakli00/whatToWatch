@@ -5,6 +5,10 @@ import { AppContext } from "../contexts/AppContext.jsx";
 import { getAnimeRecomendations } from "../services/kistuApi.js";
 import Spinner from "../ui/Spinner.jsx";
 import AnimeCard from "../ui/AnimeCard.jsx";
+import {
+  DraggableCardContainer,
+  DraggableCardBody,
+} from "../ui/DraggableCard.jsx";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -22,13 +26,51 @@ function AnimeRecomendations() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <main>
-      <ul>
-        {animes.data.map((el) => (
-          <AnimeCard anime={el} key={el.id}></AnimeCard>
-        ))}
-      </ul>
-    </main>
+    <section>
+      <DraggableCardContainer className={"relative min-h-[600px]"}>
+        {animes.data.map((anime, i) => {
+          if (i === 0)
+            return (
+              <>
+                <DraggableCardBody
+                  key={i}
+                  className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                >
+                  <button>NEW PAGE</button>
+                </DraggableCardBody>
+
+                <DraggableCardBody
+                  key={`k-${i}`}
+                  className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                >
+                  <AnimeCard
+                    key={`k-${anime.id}`}
+                    anime={anime}
+                    height="full"
+                    // coverImgMaxW={"300px"}
+                    coverImgMinW={"full"}
+                  />
+                </DraggableCardBody>
+              </>
+            );
+
+          return (
+            <DraggableCardBody
+              key={`k-${anime.id}`}
+              className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+            >
+              <AnimeCard
+                key={anime.id}
+                anime={anime}
+                height="full"
+                // coverImgMaxW={"300px"}
+                coverImgMinW={"full"}
+              />
+            </DraggableCardBody>
+          );
+        })}
+      </DraggableCardContainer>
+    </section>
   );
 }
 
