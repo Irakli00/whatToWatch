@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 
 import { AppContext } from "../contexts/AppContext";
 import { QuestionsContext } from "../contexts/QuestionsContext";
+import { useQueryClient } from "@tanstack/react-query";
 
-function RecomendationsFilter({ preferences }) {
+function RecomendationsFilter({ preferences, isLoading }) {
   const { movieFilterOptions } = useContext(QuestionsContext);
   const { setClientMoviePreferences, clientMoviePreferences } =
     useContext(AppContext);
@@ -13,9 +14,9 @@ function RecomendationsFilter({ preferences }) {
 
   const { register, handleSubmit } = useForm();
 
-  function onSubmit(data) {
-    console.log(data);
+  // const queryClient = useQueryClient();
 
+  async function onSubmit(data) {
     const changedPreferences = {
       mediaType: [],
       genres: [],
@@ -47,12 +48,15 @@ function RecomendationsFilter({ preferences }) {
       }
     });
     setClientMoviePreferences(changedPreferences);
+
+    // queryClient.invalidateQueries(["movieRecomendations"]);
   }
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-wrap gap-6 p-6 bg-gray-50 rounded-lg"
+      className="flex flex-wrap gap-6 p-6 bg-gray-50 rounded-lg justify-center"
     >
       {keys.map((key) => {
         if (key === "releaseDate") return;

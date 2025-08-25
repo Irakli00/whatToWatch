@@ -19,7 +19,8 @@ function MovieRecomendations() {
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["movieRecomendations"],
+    queryKey: ["movieRecomendations", clientMoviePreferences],
+
     enabled: !!clientMoviePreferences,
     retry: 0,
     queryFn: () => getMovieRecomendations(clientMoviePreferences),
@@ -88,6 +89,7 @@ function MovieRecomendations() {
       <aside>
         <RecomendationsFilter
           preferences={clientMoviePreferences}
+          isLoading={isLoading}
         ></RecomendationsFilter>
       </aside>
     </section>
