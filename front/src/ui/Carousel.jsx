@@ -7,7 +7,7 @@ import MovieCard from "./MovieCard";
 import { getTrending } from "../services/tmdbApi";
 import Spinner from "./Spinner";
 
-function Carousel({ type }) {
+function Carousel() {
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
@@ -34,11 +34,7 @@ function Carousel({ type }) {
       {data?.results?.map((movie) => {
         return (
           <SwiperSlide key={movie.id}>
-            {type === "movie" ? (
-              <MovieCard movie={movie}></MovieCard>
-            ) : (
-              <p>anime</p>
-            )}
+            <MovieCard movie={movie}></MovieCard>
           </SwiperSlide>
         );
       })}

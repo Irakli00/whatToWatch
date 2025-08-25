@@ -8,16 +8,24 @@ import { parseGenres, formatDate } from "../helpers/formaters.js";
 import { TMDB_GENRES } from "../services/tmdbApi.js";
 import { formatRating } from "../helpers/formaters.js";
 
-function MovieCard({ movie }) {
+function MovieCard({
+  movie,
+  height = "270px",
+  coverImgMaxW = "180px",
+  coverImgMinW = "180px",
+  className,
+}) {
   const genreStrings = parseGenres(movie.genre_ids, TMDB_GENRES);
 
   return (
-    <article className="card card--movie">
+    <article
+      className={`card min-h-96 flex items-center card--movie h-${height} ${className ? className : ""}`}
+    >
       <div className="h-full">
         <img
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           alt={movie.title}
-          className="max-w-[180px] h-full rounded-[7px]"
+          className={`max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full rounded-[7px] select-none `}
         />
       </div>
 

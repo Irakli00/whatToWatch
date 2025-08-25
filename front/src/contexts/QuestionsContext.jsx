@@ -101,11 +101,11 @@ const movieQuestions = [
     .addOption("5+", "5")
     .addOption("Doesn't matter", null),
 
-  new MediaQuestion("runtime", "runtime", "Preferred runtime?")
-    .addOption("Short (<90 min)", { min: 1, max: 90 })
-    .addOption("Medium (90–150 min)", { min: 90, max: 150 })
-    .addOption("Long (>150 min)", { min: 150, max: 999 })
-    .addOption("Doesn't matter", { min: 1, max: 999 }),
+  // new MediaQuestion("runtime", "runtime", "Preferred runtime?")
+  //   .addOption("Short (<90 min)", { min: 1, max: 90 })
+  //   .addOption("Medium (90–150 min)", { min: 90, max: 150 })
+  //   .addOption("Long (>150 min)", { min: 150, max: 999 })
+  //   .addOption("Doesn't matter", { min: 1, max: 999 }),
 
   new MediaQuestion("language", "language", "Original language?")
     .addOption("English", "en-US")

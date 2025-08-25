@@ -10,7 +10,6 @@ function AppProvider({ children }) {
     rating: 0,
     region: null,
     releaseDate: null,
-    runtime: null,
   });
 
   const [clientAnimePreferences, setClientAnimePreferences] = useState({

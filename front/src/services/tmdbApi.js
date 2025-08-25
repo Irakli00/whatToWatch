@@ -50,15 +50,19 @@ async function getMovieRecomendations({
   sort = "popularity.desc",
   releaseDate,
   rating,
-  runtime,
+  // runtime,
 }) {
-  const { min: minRuntime, max: maxRuntime } = runtime;
+  // const { min: minRuntime, max: maxRuntime } = runtime;
   const today = new Date().toISOString().split("T")[0];
   const finalGenres = mediaType === "animation" ? [...genres, 16] : genres;
   const baseLang = language.split("-")[0];
 
   //no error and null data handling
-  const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_runtime.gte=${minRuntime}&with_runtime.lte=${maxRuntime}&with_original_language=${baseLang}&with_origin_country=${region}${mediaType !== "animation" ? "&without_genres=16" : ""}`;
+  const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_original_language=${baseLang}&with_origin_country=${region}${mediaType !== "animation" ? "&without_genres=16" : ""}`;
+
+  console.log(url);
+
+  // const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_runtime.gte=${minRuntime}&with_runtime.lte=${maxRuntime}&with_original_language=${baseLang}&with_origin_country=${region}${mediaType !== "animation" ? "&without_genres=16" : ""}`;
 
   const res = await fetch(url, {
     method: "GET",
