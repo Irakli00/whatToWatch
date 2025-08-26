@@ -3,18 +3,14 @@ import { useForm } from "react-hook-form";
 
 import { AppContext } from "../contexts/AppContext";
 import { QuestionsContext } from "../contexts/QuestionsContext";
-import { useQueryClient } from "@tanstack/react-query";
 
 function RecomendationsFilter({ preferences, isLoading }) {
   const { movieFilterOptions } = useContext(QuestionsContext);
-  const { setClientMoviePreferences, clientMoviePreferences } =
-    useContext(AppContext);
+  const { setClientMoviePreferences } = useContext(AppContext);
 
   const keys = Object.keys(preferences);
 
   const { register, handleSubmit } = useForm();
-
-  // const queryClient = useQueryClient();
 
   async function onSubmit(data) {
     const changedPreferences = {
@@ -48,8 +44,6 @@ function RecomendationsFilter({ preferences, isLoading }) {
       }
     });
     setClientMoviePreferences(changedPreferences);
-
-    // queryClient.invalidateQueries(["movieRecomendations"]);
   }
   if (isLoading) return <Spinner></Spinner>;
 

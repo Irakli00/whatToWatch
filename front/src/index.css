@@ -80,7 +80,7 @@
   }
 
   .card {
-    @apply flex gap-1.5 cursor-pointer h-[270px] rounded-[6px]  p-2.5 transition-all duration-200 ease-in-out relative;
+    @apply flex gap-1.5 cursor-pointer h-[270px] rounded-[6px]  transition-all duration-200 ease-in-out relative;
   }
 
   .card.card--movie:hover {

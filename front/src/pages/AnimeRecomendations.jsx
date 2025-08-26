@@ -17,7 +17,7 @@ function AnimeRecomendations() {
   const queryClient = useQueryClient();
 
   const { data: animes, isLoading } = useQuery({
-    queryKey: ["animeRecomendations"],
+    queryKey: ["animeRecomendations", clientAnimePreferences],
     enabled: !!clientAnimePreferences,
     retry: 0,
     queryFn: () => getAnimeRecomendations(clientAnimePreferences),
@@ -32,12 +32,12 @@ function AnimeRecomendations() {
           if (i === 0)
             return (
               <>
-                <DraggableCardBody
-                  key={i}
+                <button
+                  draggable="false"
                   className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                 >
-                  <button>NEW PAGE</button>
-                </DraggableCardBody>
+                  NEW PAGE
+                </button>
 
                 <DraggableCardBody
                   key={`k-${i}`}

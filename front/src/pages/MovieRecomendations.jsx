@@ -39,13 +39,12 @@ function MovieRecomendations() {
             if (i === 0)
               return (
                 <>
-                  <DraggableCardBody
-                    type={"move"}
+                  <button
                     key={i}
                     className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                   >
-                    <button>NEW PAGE</button>
-                  </DraggableCardBody>
+                    NEW PAGE
+                  </button>
 
                   <DraggableCardBody
                     type={"movie"}
@@ -53,11 +52,10 @@ function MovieRecomendations() {
                     className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                   >
                     <MovieCard
+                      padding="20px"
                       key={movie.id}
                       movie={movie}
-                      height="full"
                       // coverImgMaxW={"300px"}
-                      coverImgMinW={"full"}
                     />
                   </DraggableCardBody>
                 </>
@@ -70,11 +68,10 @@ function MovieRecomendations() {
                 className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
               >
                 <MovieCard
+                  padding="20px"
                   key={movie.id}
                   movie={movie}
-                  height="full"
                   // coverImgMaxW={"300px"}
-                  coverImgMinW={"full"}
                 />
               </DraggableCardBody>
             );

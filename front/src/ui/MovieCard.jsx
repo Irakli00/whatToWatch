@@ -13,16 +13,19 @@ function MovieCard({
   height = "270px",
   coverImgMaxW = "180px",
   coverImgMinW = "180px",
+  padding = "10px",
   className,
 }) {
   const genreStrings = parseGenres(movie.genre_ids, TMDB_GENRES);
 
   return (
     <article
-      className={`card card--movie h-[${height}] ${className ? className : ""}`}
+      style={{ height, padding }}
+      className={`card card--movie ${className ? className : ""}`}
     >
       <div className="h-full">
         <img
+          draggable="false"
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           alt={movie.title}
           className={`max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full rounded-[7px] select-none `}

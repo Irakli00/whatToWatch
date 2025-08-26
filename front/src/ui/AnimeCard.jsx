@@ -8,7 +8,7 @@ import { parseGenres } from "../helpers/formaters";
 import { KITSU_GENRES } from "../services/kistuApi";
 import { AppContext } from "../contexts/AppContext";
 
-function AnimeCard({ anime }) {
+function AnimeCard({ anime, height, padding = "10px" }) {
   const { clientAnimePreferences } = useContext(AppContext);
 
   const {
@@ -44,9 +44,10 @@ function AnimeCard({ anime }) {
   if (error) return <p>Error loading genres</p>;
 
   return (
-    <article className="card card--anime">
+    <article style={{ height, padding }} className="card card--anime">
       <div className="h-full">
         <img
+          draggable="false"
           src={largeImg}
           alt={title}
           className="max-w-[180px] h-full rounded-[7px]"
