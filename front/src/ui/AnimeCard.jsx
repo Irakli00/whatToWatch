@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { parseGenres } from "../helpers/formaters";
 import { KITSU_GENRES } from "../services/kistuApi";
 import { AppContext } from "../contexts/AppContext";
+import { Link } from "react-router";
 
 function AnimeCard({ anime, height = "100%", padding = "10px" }) {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -15,7 +16,7 @@ function AnimeCard({ anime, height = "100%", padding = "10px" }) {
     type,
     id,
     attributes: {
-      slug: title,
+      titles,
       synopsis: overview,
       posterImage: { large: largeImg },
     },
@@ -49,14 +50,14 @@ function AnimeCard({ anime, height = "100%", padding = "10px" }) {
         <img
           draggable="false"
           src={largeImg}
-          alt={title}
+          alt={titles.en}
           className="max-w-[180px] h-full rounded-[7px]"
         />
       </div>
 
       <div className="flex flex-col gap-[7px]">
         <h2 className="text-2xl leading-[0.9]">
-          <strong>{title}</strong>
+          <strong>{titles.en || titles.en_jp}</strong>
         </h2>
 
         <h1>{type.toUpperCase()}</h1>
@@ -71,12 +72,12 @@ function AnimeCard({ anime, height = "100%", padding = "10px" }) {
 
         <p className="flex items-center gap-0.5 text-center">
           <IoCalendarClearOutline />
-          <span className="pt-0.5">{"2020"}</span>
+          <span className="pt-0.5">{"anime.startDate"}</span>
         </p>
 
         <p className="flex items-center gap-0.5 text-center">
           <FaRegStar />
-          <span className="pt-0.5">{"2020"}</span>
+          <span className="pt-0.5">{"rating"}</span>
         </p>
 
         <div className="overflow-scroll pt-1 border-t border-dark-blue h-full rounded-b-[5px]">

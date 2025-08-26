@@ -28,10 +28,10 @@ function Hero() {
         </p>
 
         <div className="flex justify-center items-center gap-28">
-          <HeroLink to="/movies" type="movie">
+          <HeroLink to="/selectmovies" type="movie">
             Choose a Movie
           </HeroLink>
-          <HeroLink to="/anime" type="anime">
+          <HeroLink to="/selectAnimes" type="anime">
             Choose an Anime
           </HeroLink>
         </div>

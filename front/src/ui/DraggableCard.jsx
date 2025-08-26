@@ -11,8 +11,9 @@ import {
   useVelocity,
   useAnimationControls,
 } from "motion/react";
+import { Link } from "react-router";
 
-export const DraggableCardBody = ({ className, children, type }) => {
+export const DraggableCardBody = ({ className, children, type, paramId }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const cardRef = useRef(null);
@@ -162,7 +163,17 @@ export const DraggableCardBody = ({ className, children, type }) => {
         className
       )}
     >
-      {children}
+      <Link
+        to={type === "movie" ? `/movie/${paramId}` : `/anime/${paramId}`}
+        draggable={false}
+        onClick={(e) => {
+          if (document.body.style.cursor === "grabbing") {
+            e.preventDefault();
+          }
+        }}
+      >
+        {children}
+      </Link>
       <motion.div
         style={{
           opacity: glareOpacity,

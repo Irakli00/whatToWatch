@@ -47,6 +47,7 @@ function MovieRecomendations() {
                   </button>
 
                   <DraggableCardBody
+                    paramId={movie.id}
                     type={"movie"}
                     key={`k-${movie.id}`}
                     className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
@@ -63,6 +64,7 @@ function MovieRecomendations() {
 
             return (
               <DraggableCardBody
+                paramId={movie.id}
                 type={"movie"}
                 key={`kk-${movie.id}`}
                 className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}

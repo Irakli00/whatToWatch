@@ -77,7 +77,7 @@ export { getTrending, getMovieRecomendations };
 
 // async function getTrending() {
 //   const res = await fetch(
-//     `https://private-anon-1929c54ba4-trakt.apiary-mock.com/movies/popular` //mock api
+//     `https://private-anon-1929c54ba4-trakt.apiary-mock.com/selectmovies/popular` //mock api
 //   );
 
 //   if (!res.ok) throw new Error("Network response was not ok");

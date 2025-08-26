@@ -95,9 +95,17 @@ async function getAnimeRecomendations({
     throw new Error(`Kitsu API error: ${res.status} ${res.statusText}`);
   }
 
-  return res.json();
+  return await res.json();
 }
 export { getAnimeRecomendations };
+
+async function getAnimeDetails(mediaType, id) {
+  const res = await fetch(`https://kitsu.io/api/edge/${mediaType}/${id}`);
+
+  return await res.json();
+}
+
+export { getAnimeDetails };
 
 async function getAnimeGenres(animeId, mediaType) {
   const url = `https://kitsu.io/api/edge/${mediaType}/${animeId}/relationships/genres`;

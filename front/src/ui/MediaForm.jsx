@@ -47,7 +47,7 @@ function MediaForm({ questionsType }) {
 
   async function onSubmit() {
     navigate(
-      `/recomendations/${questionsType === "movieQuestions" ? "movie" : "anime"}` //good so far
+      `/recomendations/${questionsType === "movieQuestions" ? "movies" : "animes"}` //good so far
     );
   }
 

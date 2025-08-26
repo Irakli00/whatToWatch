@@ -7,6 +7,7 @@ import Hero from "./pages/Hero";
 import MediaSelection from "./pages/MediaSelection";
 import MovieRecomendations from "./pages/MovieRecomendations";
 import AnimeRecomendations from "./pages/AnimeRecomendations";
+import AnimeDetails from "./pages/AnimeDetails";
 
 const router = createBrowserRouter([
   {
@@ -15,25 +16,28 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Hero /> },
       {
-        path: "/movies",
+        path: "/selectMovies",
         element: (
           <MediaSelection questionsType="movieQuestions"></MediaSelection>
         ),
       },
       {
-        path: "/anime",
+        path: "/selectAnimes",
         element: (
           <MediaSelection questionsType="animeQuestions"></MediaSelection>
         ),
-        children: [{ path: "/anime/<:id>" }],
       },
-      { path: "/TV", element: "" },
       {
-        path: "/recomendations/anime",
+        path: "/anime/:id",
+        element: <AnimeDetails></AnimeDetails>,
+      },
+      { path: "/TVs", element: "" },
+      {
+        path: "/recomendations/animes",
         element: <AnimeRecomendations></AnimeRecomendations>,
       },
       {
-        path: "/recomendations/movie",
+        path: "/recomendations/movies",
         element: <MovieRecomendations></MovieRecomendations>,
       },
     ],
