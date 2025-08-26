@@ -25,6 +25,7 @@ const router = createBrowserRouter([
         element: (
           <MediaSelection questionsType="animeQuestions"></MediaSelection>
         ),
+        children: [{ path: "/anime/<:id>" }],
       },
       { path: "/TV", element: "" },
       {

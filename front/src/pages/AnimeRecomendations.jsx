@@ -9,6 +9,7 @@ import {
   DraggableCardContainer,
   DraggableCardBody,
 } from "../ui/DraggableCard.jsx";
+import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -27,7 +28,7 @@ function AnimeRecomendations() {
 
   return (
     <section>
-      <DraggableCardContainer className={"relative min-h-[600px]"}>
+      <DraggableCardContainer key={"key"} className={"relative min-h-[600px]"}>
         {animes.data.map((anime, i) => {
           if (i === 0)
             return (
@@ -44,7 +45,7 @@ function AnimeRecomendations() {
                   className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                 >
                   <AnimeCard
-                    key={`k-${anime.id}`}
+                    key={`kiii-${anime.id}`}
                     anime={anime}
                     height="full"
                     // coverImgMaxW={"300px"}
@@ -70,6 +71,15 @@ function AnimeRecomendations() {
           );
         })}
       </DraggableCardContainer>
+
+      <aside>
+        <RecomendationsFilter
+          key={"adkjksldj"}
+          type="anime"
+          preferences={clientAnimePreferences}
+          isLoading={isLoading}
+        ></RecomendationsFilter>
+      </aside>
     </section>
   );
 }
