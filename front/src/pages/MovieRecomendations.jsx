@@ -31,7 +31,7 @@ function MovieRecomendations() {
   return (
     <section>
       {data.results ? (
-        <DraggableCardContainer className={"relative min-h-[600px]"}>
+        <DraggableCardContainer key={`d`} className={"relative min-h-[600px]"}>
           {/* <DraggableCardContainer
           className={"container mt-12 flex flex-wrap justify-around gap-2"}
         > */}
@@ -41,19 +41,19 @@ function MovieRecomendations() {
                 <>
                   <button
                     key={i}
-                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                    className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                   >
                     NEW PAGE
                   </button>
 
                   <DraggableCardBody
                     type={"movie"}
-                    key={movie.id}
-                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                    key={`k-${movie.id}`}
+                    className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                   >
                     <MovieCard
                       padding="20px"
-                      key={movie.id}
+                      key={`key-${movie.id}`}
                       movie={movie}
                       // coverImgMaxW={"300px"}
                     />
@@ -64,12 +64,12 @@ function MovieRecomendations() {
             return (
               <DraggableCardBody
                 type={"movie"}
-                key={movie.id}
+                key={`kk-${movie.id}`}
                 className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
               >
                 <MovieCard
                   padding="20px"
-                  key={movie.id}
+                  key={`i-${movie.id}`}
                   movie={movie}
                   // coverImgMaxW={"300px"}
                 />

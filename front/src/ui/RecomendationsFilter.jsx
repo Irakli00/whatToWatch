@@ -31,10 +31,12 @@ function RecomendationsFilter({ preferences, isLoading }) {
       }
     });
 
-    //flatten if single option
+    //flatten if single option (i really dont like this whole sequence)
     Object.entries(data).map((el) => {
       const [key, value] = el;
       const formattedKey = key.split("_")[0];
+
+      if (formattedKey === "genres") return;
 
       if (value) {
         changedPreferences[formattedKey] =

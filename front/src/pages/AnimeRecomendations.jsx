@@ -56,7 +56,7 @@ function AnimeRecomendations() {
 
           return (
             <DraggableCardBody
-              key={`k-${anime.id}`}
+              key={`kk-${anime.id}`}
               className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
             >
               <AnimeCard

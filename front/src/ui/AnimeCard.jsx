@@ -8,7 +8,7 @@ import { parseGenres } from "../helpers/formaters";
 import { KITSU_GENRES } from "../services/kistuApi";
 import { AppContext } from "../contexts/AppContext";
 
-function AnimeCard({ anime, height, padding = "10px" }) {
+function AnimeCard({ anime, height = "100%", padding = "10px" }) {
   const { clientAnimePreferences } = useContext(AppContext);
 
   const {
