@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { getAnimeDetails } from "../services/kistuApi";
 import { AppContext } from "../contexts/AppContext";
 import Spinner from "../ui/Spinner";
-import { formatRating } from "../helpers/formaters";
+import { formatRating, parseGenres } from "../helpers/formaters";
 
 function AnimeDetails() {
   const { id } = useParams();
@@ -15,6 +15,11 @@ function AnimeDetails() {
     queryKey: ["anime", id],
     queryFn: () => getAnimeDetails(clientAnimePreferences.mediaType, id),
   });
+
+  const genresData = useQuery({
+    queryKey: ["animeGenres", id],
+    queryFn: () => "",
+  }).data;
 
   if (isLoading) return <Spinner></Spinner>;
 
@@ -40,9 +45,11 @@ function AnimeDetails() {
       episodeCount,
       episodeLength,
       showType,
-      relationShips,
     },
+    relationships: { genres },
   } = data.data;
+
+  // console.log(genres);
 
   return (
     <main className="overflow-hidden bg-white-red-tint ">
@@ -51,23 +58,30 @@ function AnimeDetails() {
           {/* <div className="h-[240px] overflow-clip bg-dark-blue"> */}
           <img
             className="w-full mask-x-from-91% "
-            src={coverImage.large}
+            src={coverImage?.original}
             alt={`${titles.en} cover`}
           />
         </div>
         <div className="container">
           <article className="mt-12">
-            <div className="flex">
+            <div className="flex gap-3.5">
               <img
-                className="max-h-96"
+                className="max-h-96 rounded-md"
                 src={posterImage.large}
                 alt={`${titles.en} poster`}
               />
-              <article>
-                <h1 className="text-5xl">
-                  {titles.en || titles.en_jp} ({titles.ja_jp})
+              <article className="flex flex-col gap-7">
+                <h1 className="text-5xl text-balance">
+                  {titles.en || titles.en_jp}
+                  {/* ({titles.ja_jp}) */}
                 </h1>
-                <p>{synopsis}</p>
+                {/* <p className="w-[75%] leading-6">{synopsis}</p> */}
+                <ul>
+                  {genresData.map((genre) => (
+                    <li>{genre}</li>
+                  ))}
+                </ul>
+                <p className="w-[75%] leading-6 text-balance">{description}</p>
               </article>
             </div>
           </article>

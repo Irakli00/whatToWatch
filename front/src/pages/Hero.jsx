@@ -10,7 +10,7 @@ function Hero() {
         <div className="container py-4.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
-            <h1 className="text-2xl">Trending right now:</h1>
+            <h1 className="text-2xl">Trending movies right now:</h1>
           </div>
 
           <Carousel />

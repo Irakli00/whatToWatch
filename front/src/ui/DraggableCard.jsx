@@ -30,7 +30,7 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
   const velocityY = useVelocity(mouseY);
 
   const springConfig = {
-    stiffness: 100,
+    stiffness: 300,
     damping: 20,
     mass: 0.5,
   };
@@ -59,7 +59,7 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
     const updateConstraints = () => {
       if (typeof window !== "undefined") {
         setConstraints({
-          top: -window.innerHeight / 2,
+          top: -window.innerHeight / 3,
           left: -window.innerWidth / 2,
           right: window.innerWidth / 2,
           bottom: window.innerHeight / 2,
@@ -139,7 +139,7 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
         });
 
         animate(info.point.y, info.point.y + currentVelocityY * 0.3, {
-          duration: 0.8,
+          duration: 0.2,
           ease: [0.2, 0, 0, 1],
           bounce,
           type: "spring",
@@ -186,7 +186,7 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
 
 export const DraggableCardContainer = ({ className, children }) => {
   return (
-    // <div className={cn("[perspective:3000px]", className)}>{children}</div>
-    <div className={cn(className)}>{children}</div>
+    <div className={cn("[perspective:3000px]", className)}>{children}</div>
+    // <div className={cn(className)}>{children}</div>
   );
 };
