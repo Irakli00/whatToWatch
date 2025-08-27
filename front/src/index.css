@@ -6,12 +6,13 @@
   --color-light-blue: #8ecae6;
   --color-default-blue: #219ebc;
   --color-dark-blue: #023047;
+  --color-bright-as-fuck-yellow: rgb(275, 290, 18);
   --color-bright-yellow: rgb(255, 210, 48);
-  --color-bright-yellow-hover: rgb(255, 200, 0);
+  --color-bright-yellow-tint: rgb(255, 200, 0);
   --color-light-orange: #ffb703;
   --color-orange: #fb8500;
   --color-main-red: #ec0800;
-  --color-main-red-hover: #da0902;
+  --color-main-red-tint: #da1711;
 
   --font-sans: "Rubik", sans-serif;
 }

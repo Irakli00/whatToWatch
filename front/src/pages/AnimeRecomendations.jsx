@@ -27,62 +27,67 @@ function AnimeRecomendations() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <section>
-      <DraggableCardContainer key={"key"} className={"relative min-h-[600px]"}>
-        {animes.data.map((anime, i) => {
-          if (i === 0)
+    <main className="overflow-hidden bg-main-red-tint text-white">
+      <section>
+        <DraggableCardContainer
+          key={"key"}
+          className={"relative min-h-[600px]"}
+        >
+          {animes.data.map((anime, i) => {
+            if (i === 0)
+              return (
+                <>
+                  <button
+                    draggable="false"
+                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                  >
+                    NEW PAGE
+                  </button>
+
+                  <DraggableCardBody
+                    key={`k-${i}`}
+                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                    paramId={anime.id}
+                  >
+                    <AnimeCard
+                      key={`kiii-${anime.id}`}
+                      anime={anime}
+                      height="full"
+                      // coverImgMaxW={"300px"}
+                      coverImgMinW={"full"}
+                    />
+                  </DraggableCardBody>
+                </>
+              );
+
             return (
-              <>
-                <button
-                  draggable="false"
-                  className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
-                >
-                  NEW PAGE
-                </button>
-
-                <DraggableCardBody
-                  key={`k-${i}`}
-                  className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
-                  paramId={anime.id}
-                >
-                  <AnimeCard
-                    key={`kiii-${anime.id}`}
-                    anime={anime}
-                    height="full"
-                    // coverImgMaxW={"300px"}
-                    coverImgMinW={"full"}
-                  />
-                </DraggableCardBody>
-              </>
+              <DraggableCardBody
+                paramId={anime.id}
+                key={`kk-${anime.id}`}
+                className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+              >
+                <AnimeCard
+                  key={anime.id}
+                  anime={anime}
+                  height="full"
+                  // coverImgMaxW={"300px"}
+                  coverImgMinW={"full"}
+                />
+              </DraggableCardBody>
             );
+          })}
+        </DraggableCardContainer>
 
-          return (
-            <DraggableCardBody
-              paramId={anime.id}
-              key={`kk-${anime.id}`}
-              className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
-            >
-              <AnimeCard
-                key={anime.id}
-                anime={anime}
-                height="full"
-                // coverImgMaxW={"300px"}
-                coverImgMinW={"full"}
-              />
-            </DraggableCardBody>
-          );
-        })}
-      </DraggableCardContainer>
-
-      <aside>
-        <RecomendationsFilter
-          key={"adkjksldj"}
-          type="anime"
-          preferences={clientAnimePreferences}
-          isLoading={isLoading}
-        ></RecomendationsFilter>
-      </aside>
-    </section>
+        <aside>
+          <RecomendationsFilter
+            key={"adkjksldj"}
+            type="anime"
+            preferences={clientAnimePreferences}
+            isLoading={isLoading}
+          ></RecomendationsFilter>
+        </aside>
+      </section>
+    </main>
   );
 }
 

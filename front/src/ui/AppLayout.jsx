@@ -7,9 +7,7 @@ function AppLayout() {
   return (
     <>
       <Header></Header>
-      <main className="overflow-hidden bg-gray-100">
-        <Outlet></Outlet>
-      </main>
+      <Outlet></Outlet>
       <Footer></Footer>
     </>
   );

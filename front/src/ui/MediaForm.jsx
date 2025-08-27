@@ -74,7 +74,7 @@ function MediaForm({ questionsType }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col mt-[20dvh] items-center gap-10 p-12 bg-white rounded-3xl shadow-xl  mx-auto"
+      className={`flex flex-col mt-[20dvh] items-center gap-10 p-12  rounded-3xl shadow-xl  mx-auto ${questionsType === "movieQuestions" ? "bg-bright-yellow-tint" : "bg-main-red "}`}
     >
       {/* Question Label */}
       <label

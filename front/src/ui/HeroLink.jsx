@@ -3,8 +3,8 @@ import { Link } from "react-router";
 function HeroLink({ to, children, type = "movie" }) {
   const typeClasses =
     type === "movie"
-      ? "bg-bright-yellow text-dark-blue hover:bg-bright-yellow-hover hover:shadow-lg"
-      : "bg-main-red text-white hover:bg-main-red-hover hover:shadow-lg";
+      ? "bg-bright-yellow text-dark-blue hover:bg-bright-yellow-tint hover:shadow-lg"
+      : "bg-main-red text-white hover:bg-main-red-tint hover:shadow-lg";
 
   return (
     <Link

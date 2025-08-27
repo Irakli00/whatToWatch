@@ -45,69 +45,70 @@ function AnimeDetails() {
   } = data.data;
 
   return (
-    <section>
-      <div>
-        <img
-          className="h-full w-full"
-          src={coverImage.large}
-          alt={`${titles.en} cover`}
-        />
-      </div>
-      <div className="container">
-        <article className="flex">
+    <main className="overflow-hidden bg-main-red-tint text-white">
+      <section>
+        <div className="h-[240px] overflow-clip bg-dark-blue">
           <img
-            className="max-h-96"
-            src={posterImage.large}
-            alt={`${titles.en} poster`}
+            className=" w-full mask-x-from-90% "
+            src={coverImage.large}
+            alt={`${titles.en} cover`}
           />
-          <h1>
-            {titles.en || titles.en_jp} ||| {canonicalTitle}
-          </h1>
-
-          <article>
-            <h3>Synopsis</h3>
-            <p>{synopsis}</p>
+        </div>
+        <div className="container">
+          <article className="mt-12">
+            <div className="flex">
+              <img
+                className="max-h-96"
+                src={posterImage.large}
+                alt={`${titles.en} poster`}
+              />
+              <article>
+                <h1 className="text-5xl">
+                  {titles.en || titles.en_jp} ({titles.ja_jp})
+                </h1>
+                <p>{synopsis}</p>
+              </article>
+            </div>
           </article>
-        </article>
-        <h3>Details</h3>
+          <h3>Details</h3>
 
-        <p>
-          <strong>Average Rating:</strong> {formatRating(averageRating)}
-        </p>
-        <p>
-          <strong>Start Date:</strong> {startDate}
-        </p>
-        <p>
-          <strong>End Date:</strong> {endDate || "Ongoing"}
-        </p>
-        <p>
-          <strong>Next Release:</strong> {nextRelease || "N/A"}
-        </p>
-        <p>
-          <strong>Popularity Rank:</strong> {popularityRank}
-        </p>
-        <p>
-          <strong>Age Rating:</strong> {ageRating}
-        </p>
-        <p>
-          <strong>Age Rating Guide:</strong> {ageRatingGuide}
-        </p>
-        <p>
-          <strong>Subtype:</strong> {subtype}
-        </p>
-        <p>
-          <strong>Status:</strong> {status}
-        </p>
-        <p>
-          <strong>Episode Count:</strong> {episodeCount}
-        </p>
-        <p>
-          <strong>Episode Length:</strong> {episodeLength} minutes
-        </p>
-        <p>
-          <strong>Show Type:</strong> {showType}
-        </p>
-
+          <p>
+            <strong>Average Rating:</strong> {formatRating(averageRating)}
+          </p>
+          <p>
+            <strong>Start Date:</strong> {startDate}
+          </p>
+          <p>
+            <strong>End Date:</strong> {endDate || "Ongoing"}
+          </p>
+          <p>
+            <strong>Next Release:</strong> {nextRelease || "N/A"}
+          </p>
+          <p>
+            <strong>Popularity Rank:</strong> {popularityRank}
+          </p>
+          <p>
+            <strong>Age Rating:</strong> {ageRating}
+          </p>
+          <p>
+            <strong>Age Rating Guide:</strong> {ageRatingGuide}
+          </p>
+          <p>
+            <strong>Subtype:</strong> {subtype}
+          </p>
+          <p>
+            <strong>Status:</strong> {status}
+          </p>
+          <p>
+            <strong>Episode Count:</strong> {episodeCount}
+          </p>
+          <p>
+            <strong>Episode Length:</strong> {episodeLength} minutes
+          </p>
+          <p>
+            <strong>Show Type:</strong> {showType}
+          </p>
+          {/* 
         <h3>Titles</h3>
         <p>
           <strong>English:</strong> {titles.en}
@@ -117,18 +118,19 @@ function AnimeDetails() {
         </p>
         <p>
           <strong>Japanese:</strong> {titles.ja_jp}
-        </p>
+        </p> */}
 
-        <h3>Rating Frequencies</h3>
-        <div>
-          {Object.entries(ratingFrequencies).map(([rating, count]) => (
-            <p key={rating}>
-              <strong>{rating / 2} stars:</strong> {count} votes
-            </p>
-          ))}
+          <h3>Rating Frequencies</h3>
+          <div>
+            {Object.entries(ratingFrequencies).map(([rating, count]) => (
+              <p key={rating}>
+                <strong>{rating / 2} stars:</strong> {count} votes
+              </p>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
 

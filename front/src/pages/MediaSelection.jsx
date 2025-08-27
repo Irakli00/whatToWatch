@@ -3,11 +3,13 @@ import MediaForm from "../ui/MediaForm";
 
 function MediaSelection({ questionsType }) {
   return (
-    <section className="container ">
-      {/* <QuestionsProvider> */}
-      <MediaForm questionsType={questionsType}></MediaForm>
-      {/* </QuestionsProvider> */}
-    </section>
+    <main className={`overflow-hidden `}>
+      <section className="container ">
+        {/* <QuestionsProvider> */}
+        <MediaForm questionsType={questionsType}></MediaForm>
+        {/* </QuestionsProvider> */}
+      </section>
+    </main>
   );
 }
 
