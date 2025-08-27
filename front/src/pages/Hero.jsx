@@ -6,8 +6,8 @@ import HeroLink from "../ui/HeroLink";
 function Hero() {
   return (
     <main className="overflow-hidden bg-gray-200">
-      <section className="bg-light-blue min-h-[322px] flex justify-center">
-        <div className="container py-2.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
+      <section className="bg-light-blue min-h-[338px] flex justify-center">
+        <div className="container py-4.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
             <h1 className="text-2xl">Trending right now:</h1>
@@ -28,7 +28,7 @@ function Hero() {
         </p>
 
         <div className="flex justify-center items-center gap-28">
-          <HeroLink to="/selectmovies" type="movie">
+          <HeroLink to="/selectMovies" type="movie">
             Choose a Movie
           </HeroLink>
           <HeroLink to="/selectAnimes" type="anime">

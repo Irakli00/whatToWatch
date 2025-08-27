@@ -15,13 +15,13 @@ function Header() {
 
         <div className="flex items-center gap-4.5 text-white">
           <NavLink
-            to="/selectmovies"
+            to="/selectMovies"
             className={({ isActive }) =>
               `header-link 
            ${isActive ? "bg-bright-yellow text-dark-blue" : "hover:bg-bright-yellow hover:text-dark-blue"}`
             }
           >
-            Movies
+            Select a Movie
           </NavLink>
 
           <NavLink
@@ -31,7 +31,7 @@ function Header() {
            ${isActive ? "bg-main-red text-white" : "hover:bg-main-red hover:text-white"}`
             }
           >
-            Anime
+            Seclect an Anime
           </NavLink>
 
           <NavLink
@@ -41,7 +41,7 @@ function Header() {
            ${isActive ? "bg-light-blue text-dark-blue" : "hover:bg-light-blue hover:text-dark-blue"}`
             }
           >
-            TV Shows
+            Select a TV Show
           </NavLink>
         </div>
       </div>

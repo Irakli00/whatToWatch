@@ -19,26 +19,29 @@ function Carousel() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={4}
-      modules={[Autoplay]}
-      autoplay={{
-        delay: 0,
-        disableOnInteraction: true,
-        pauseOnMouseEnter: true,
-      }}
-      loop={true}
-      speed={5000}
-    >
-      {data?.results?.map((movie) => {
-        return (
-          <SwiperSlide key={movie.id}>
-            <MovieCard movie={movie}></MovieCard>
-          </SwiperSlide>
-        );
-      })}
-    </Swiper>
+    <div className="overflow-x-hidden overflow-y-visible h-[120%]">
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={10}
+        centeredSlides={true}
+        modules={[Autoplay]}
+        autoplay={{
+          delay: 0,
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true,
+        }}
+        loop={true}
+        speed={5000}
+      >
+        {data.map((movie) => {
+          return (
+            <SwiperSlide key={movie.id}>
+              <MovieCard type="simple" movie={movie}></MovieCard>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </div>
   );
 }
 

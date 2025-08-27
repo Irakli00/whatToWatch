@@ -57,6 +57,7 @@ function MovieRecomendations() {
                       className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                     >
                       <MovieCard
+                        type="extended"
                         padding="20px"
                         key={`key-${movie.id}`}
                         movie={movie}
@@ -74,6 +75,7 @@ function MovieRecomendations() {
                   className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                 >
                   <MovieCard
+                    type="extended"
                     padding="20px"
                     key={`i-${movie.id}`}
                     movie={movie}

@@ -13,10 +13,15 @@
   --color-orange: #fb8500;
   --color-main-red: #ec0800;
   --color-main-red-tint: #da1711;
+  /* --color-white-red-tint: rgba(255, 0, 0, 0.212); */
+  --color-white-red-tint: rgb(255, 217, 217);
 
   --font-sans: "Rubik", sans-serif;
 }
 
+/* main {
+  background-color: rgb(255, 217, 217);
+} */
 @layer base {
   body {
     @apply leading-none font-sans;
@@ -81,15 +86,28 @@
   }
 
   .card {
-    @apply flex gap-1.5 cursor-pointer h-[270px] rounded-[6px]  transition-all duration-200 ease-in-out relative;
+    @apply overflow-y-visible flex gap-1.5 cursor-pointer h-[270px] rounded-[6px]  transition-all duration-200 ease-in-out relative;
   }
+  /* .card:hover {
+    scale: 1.1;
+    z-index: 999;
+    transform: translateY(15px);
+    } */
 
+  .card.card--movie--simple:hover {
+    scale: 1.02;
+    z-index: 999;
+    transform: translateY(10px);
+  }
   .card.card--movie:hover {
     @apply bg-light-orange text-dark-blue;
   }
 
   .card.card--anime:hover {
     @apply bg-main-red text-white;
+  }
+  .swiper {
+    height: 100%;
   }
 }
 /* ---------------------- */

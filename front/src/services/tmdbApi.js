@@ -26,20 +26,30 @@ const TMDB_GENRES = {
 export { TMDB_GENRES };
 
 async function getTrending() {
-  const res = fetch(
-    "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
-    {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${TMDB_KEY}`,
-      },
-    }
-  )
-    .then((res) => res.json())
-    .catch((err) => console.error(err));
+  const responses = await Promise.all([
+    fetch(
+      "https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=1",
+      {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${TMDB_KEY}`,
+        },
+      }
+    ),
+    fetch(
+      "https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=2",
+      {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${TMDB_KEY}`,
+        },
+      }
+    ),
+  ]);
 
-  return res;
+  const trendingMovies = await Promise.all(responses.map((r) => r.json()));
+
+  return trendingMovies.flatMap((el) => el.results);
 }
 
 async function getMovieRecomendations({
@@ -77,7 +87,7 @@ export { getTrending, getMovieRecomendations };
 
 // async function getTrending() {
 //   const res = await fetch(
-//     `https://private-anon-1929c54ba4-trakt.apiary-mock.com/selectmovies/popular` //mock api
+//     `https://private-anon-1929c54ba4-trakt.apiary-mock.com/selectMovies/popular` //mock api
 //   );
 
 //   if (!res.ok) throw new Error("Network response was not ok");

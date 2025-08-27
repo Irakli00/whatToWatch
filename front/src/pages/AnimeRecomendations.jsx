@@ -39,14 +39,14 @@ function AnimeRecomendations() {
                 <>
                   <button
                     draggable="false"
-                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                    className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                   >
                     NEW PAGE
                   </button>
 
                   <DraggableCardBody
                     key={`k-${i}`}
-                    className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                    className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                     paramId={anime.id}
                   >
                     <AnimeCard
@@ -64,7 +64,7 @@ function AnimeRecomendations() {
               <DraggableCardBody
                 paramId={anime.id}
                 key={`kk-${anime.id}`}
-                className={`absolute z-[${999 - i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
               >
                 <AnimeCard
                   key={anime.id}

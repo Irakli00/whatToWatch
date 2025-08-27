@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { parseGenres } from "../helpers/formaters";
 import { KITSU_GENRES } from "../services/kistuApi";
 import { AppContext } from "../contexts/AppContext";
-import { Link } from "react-router";
 
 function AnimeCard({ anime, height = "100%", padding = "10px" }) {
   const { clientAnimePreferences } = useContext(AppContext);
