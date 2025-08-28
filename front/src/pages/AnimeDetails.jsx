@@ -49,8 +49,6 @@ function AnimeDetails() {
     relationships: { genres },
   } = data.data;
 
-  // console.log(genres);
-
   return (
     <main className="overflow-hidden bg-white-red-tint ">
       <section>
@@ -58,7 +56,7 @@ function AnimeDetails() {
           {/* <div className="h-[240px] overflow-clip bg-dark-blue"> */}
           <img
             className="w-full mask-x-from-91% "
-            src={coverImage?.original}
+            src={coverImage?.large}
             alt={`${titles.en} cover`}
           />
         </div>

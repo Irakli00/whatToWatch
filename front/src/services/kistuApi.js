@@ -84,18 +84,16 @@ async function getAnimeRecomendations({
 
   // https://kitsu.io/api/edge/${mediaType || "anime"}?filter[text]=your-search-term&filter[categories]=action,adventure&filter[year]=2023&filter[season]=spring&filter[streamers]=crunchyroll,funimation&filter[status]=current&filter[subtype]=TV&filter[ageRating]=PG&sort=-averageRating&page[limit]=20&page[offset]=0&fields[anime]=id,canonicalTitle,synopsis,averageRating,startDate,endDate,episodeCount,subtype,status,posterImage&include=categories,mappings,reviews`;
 
-  const res = await fetch(url, {
+  const animeData = await fetch(url, {
     method: "GET",
     headers: {
       accept: "application/vnd.api+json",
     },
-  });
+  })
+    .then((res) => res.json())
+    .then((data) => data);
 
-  if (!res.ok) {
-    throw new Error(`Kitsu API error: ${res.status} ${res.statusText}`);
-  }
-
-  return await res.json();
+  return animeData.data;
 }
 export { getAnimeRecomendations };
 

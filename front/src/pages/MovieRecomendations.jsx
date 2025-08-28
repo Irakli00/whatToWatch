@@ -11,6 +11,7 @@ import {
   DraggableCardBody,
   DraggableCardContainer,
 } from "../ui/DraggableCard.jsx";
+import Page from "../ui/Page.jsx";
 
 function MovieRecomendations() {
   const { clientMoviePreferences } = useContext(AppContext);
@@ -18,7 +19,7 @@ function MovieRecomendations() {
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data: movieData, isLoading } = useQuery({
     queryKey: ["movieRecomendations", clientMoviePreferences],
 
     enabled: !!clientMoviePreferences,
@@ -29,9 +30,9 @@ function MovieRecomendations() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <main className="overflow-hidden bg-bright-yellow-tint">
+    <Page className="overflow-hidden bg-bright-yellow-tint">
       <section>
-        {data.results ? (
+        {movieData ? (
           <DraggableCardContainer
             key={`d`}
             className={"relative min-h-[600px]"}
@@ -39,7 +40,7 @@ function MovieRecomendations() {
             {/* <DraggableCardContainer
           className={"container mt-12 flex flex-wrap justify-around gap-2"}
         > */}
-            {data.results.map((movie, i) => {
+            {movieData.map((movie, i) => {
               if (i === 0)
                 return (
                   <>
@@ -98,7 +99,7 @@ function MovieRecomendations() {
           ></RecomendationsFilter>
         </aside>
       </section>
-    </main>
+    </Page>
   );
 }
 

@@ -39,7 +39,7 @@ function MovieCard({
                 <strong>{movie.title}</strong>
               </h2>
 
-              <p className="absolute text-center left-4 w-[25px] h-[25px] mix-blend-hard-light bg-amber-50 p-1 text-[14px] rounded-b-lg">
+              <p className="absolute text-center left-8 w-[25px] h-[25px] mix-blend-hard-light bg-amber-50 p-1 text-[14px] rounded-b-lg">
                 {new String(movie.original_language).toUpperCase()}
               </p>
 

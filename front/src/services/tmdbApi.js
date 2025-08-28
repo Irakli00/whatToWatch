@@ -72,15 +72,19 @@ async function getMovieRecomendations({
 
   // const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_runtime.gte=${minRuntime}&with_runtime.lte=${maxRuntime}&with_original_language=${baseLang}&with_origin_country=${region}${mediaType !== "animation" ? "&without_genres=16" : ""}`;
 
-  const res = await fetch(url, {
+  const movieRecomendations = await fetch(url, {
     method: "GET",
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${TMDB_KEY}`,
     },
-  });
+  })
+    .then((res) => res.json())
+    .then((data) => data.results);
 
-  return res.json();
+  console.log(movieRecomendations);
+
+  return movieRecomendations;
 }
 
 export { getTrending, getMovieRecomendations };

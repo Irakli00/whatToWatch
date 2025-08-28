@@ -2,10 +2,12 @@ import { IoIosTrendingUp } from "react-icons/io";
 
 import Carousel from "../ui/Carousel";
 import HeroLink from "../ui/HeroLink";
+import Page from "../ui/Page";
 
 function Hero() {
   return (
-    <main className="overflow-hidden bg-gray-200">
+    <Page className={"overflow-hidden bg-gray-200"}>
+      {/* <main className="overflow-hidden bg-gray-200"> */}
       <section className="bg-light-blue min-h-[338px] flex justify-center">
         <div className="container py-4.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
           <div className="flex gap-1.5 items-center">
@@ -36,7 +38,8 @@ function Hero() {
           </HeroLink>
         </div>
       </section>
-    </main>
+      {/* </main> */}
+    </Page>
   );
 }
 

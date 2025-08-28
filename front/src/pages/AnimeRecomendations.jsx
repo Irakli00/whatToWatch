@@ -10,6 +10,7 @@ import {
   DraggableCardBody,
 } from "../ui/DraggableCard.jsx";
 import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
+import Page from "../ui/Page.jsx";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -17,7 +18,7 @@ function AnimeRecomendations() {
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
-  const { data: animes, isLoading } = useQuery({
+  const { data: animesData, isLoading } = useQuery({
     queryKey: ["animeRecomendations", clientAnimePreferences],
     enabled: !!clientAnimePreferences,
     retry: 0,
@@ -27,13 +28,13 @@ function AnimeRecomendations() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <main className="overflow-hidden bg-main-red-tint text-white">
+    <Page className="overflow-hidden bg-main-red-tint text-white">
       <section>
         <DraggableCardContainer
           key={"key"}
           className={"relative min-h-[600px]"}
         >
-          {animes.data.map((anime, i) => {
+          {animesData.map((anime, i) => {
             if (i === 0)
               return (
                 <>
@@ -87,7 +88,7 @@ function AnimeRecomendations() {
           ></RecomendationsFilter>
         </aside>
       </section>
-    </main>
+    </Page>
   );
 }
 
