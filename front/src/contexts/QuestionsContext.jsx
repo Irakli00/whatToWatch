@@ -27,12 +27,12 @@ const animeQuestions = [
             .addOption("Music Videos", "music"),
         ]),
 
-      new MediaQuestion("season", "season", "Any prefered season")
+      new MediaQuestion("season", "season", "Any concrete release season?")
         .addOption("Spring", "spring")
         .addOption("Summer", "summer")
         .addOption("Autumn", "autumn")
         .addOption("Winter", "winter")
-        .addOption("No preferences", null),
+        .addOption("No", null),
     ])
     .addOption("Manga", "manga", [
       new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
@@ -64,17 +64,17 @@ const animeQuestions = [
     .addOption("Doesn't matter", null),
 
   new MediaQuestion("release-date", "releaseDate", "When was it released?")
-    .addOption("After 2000", "2000..")
     .addOption("Before 2000", "..2000")
+    .addOption("After 2000", "2000..", [
+      new MediaQuestion("status", "status", "Any Status?")
+        .addOption("Ongoing", "current")
+        .addOption("Finished", "finished")
+        .addOption("To Be Announced", "tba")
+        .addOption("Not Yet Released", "unreleased")
+        .addOption("Scheduled for Future", "upcoming")
+        .addOption("Surprise Me", null),
+    ])
     .addOption("Doesn't matter", null),
-
-  new MediaQuestion("status", "status", "Any Status?")
-    .addOption("Ongoing", "current")
-    .addOption("Finished", "finished")
-    .addOption("To Be Announced", "tba")
-    .addOption("Not Yet Released", "unreleased")
-    .addOption("Scheduled for Future", "upcoming")
-    .addOption("Surprise Me", null),
 ];
 
 const movieQuestions = [

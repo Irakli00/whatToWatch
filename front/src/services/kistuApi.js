@@ -115,3 +115,31 @@ async function getAnimeGenres(animeId, mediaType) {
 }
 
 export { getAnimeGenres };
+
+// 1. JSON:API Query Parameters
+
+// While these are not specific "filters" by attribute, they control what and how data is fetched:
+
+// fields[anime]=… – Sparse fieldsets: request only specific attributes or relationships in the response
+
+// include=… – Includes related resources: e.g. characters, staff.person, etc. Multiple can be specified with comma-separated or nested dot syntax
+
+// page[limit]=… and page[offset]=… – Pagination controls for limiting and offsetting results
+
+// sort=… – Sorting: specify one or more attributes to sort by (prefix with - for descending)
+
+// 2. Resource-Specific Filters (filter[...])
+
+// The filter[...] parameter accepts certain attributes specific to anime. Supported ones include:
+// filter[id] – Filter by anime ID
+// filter[text] – Full-text search (e.g., title, characters, cast)
+// filter[season] – Filter by release season (e.g. winter, spring)
+// filter[seasonYear] – Filter by release year
+// filter[ageRating] – Filter by age rating(s) like R, PG, etc. (available via client libraries like kitsu.py)
+// filter[categories] – Filter by category tags such as action, fantasy, etc.
+// filter[after_year] / filter[before_year] – Bound release years (as available in kitsu.py)
+
+// Other filters commonly used include:
+
+// filter[subtype] – e.g., tv, movie, special, ova (widely used though not directly cited above).
+// filter[status] – e.g., current, finished, upcoming, tba (also widely used in examples).

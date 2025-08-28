@@ -19,21 +19,27 @@ function MediaForm({ questionsType }) {
     setQuestionNum(0);
   }, [questionsType, setQuestionNum]); //q type detector
 
+  const contextValue = useContext(QuestionsContext);
+
   useEffect(() => {
     setQToAsk(contextValue[questionsType]);
   }, [questionsType]);
 
   // console.log(
   //   "----------------",
-  //   questionsType,
-  //   useContext(QuestionsContext)[questionsType],
-  //   questionNum,
+  //   // "type:",
+  //   // questionsType,
+  //   // "qNum:",
+  //   // questionNum,
+  //   'qToAsk:"',
   //   qToAsk,
   //   qToAsk[questionNum],
+  //   "qurrentQ:",
+  //   qToAsk?.[questionNum]?.questions,
   //   // qToAsk[questionNum].key,
   //   "----------------"
-  //question num fails to reset to 0 so || are added in key and currenctQ (idunno it works)
   // );
+  // question num fails to reset to 0 so || are added in key and currenctQ (idunno it works)
 
   const key = qToAsk[questionNum]?.key || qToAsk[0].key;
   // const currentQ = qToAsk[questionNum].questions;
@@ -41,11 +47,12 @@ function MediaForm({ questionsType }) {
   const label = currentQ.questionText;
   const options = currentQ.options;
 
+  console.log(qToAsk[questionNum]);
   const { register, handleSubmit } = useForm();
 
-  const contextValue = useContext(QuestionsContext);
-
   async function onSubmit() {
+    console.log("sub");
+    console.log(questionNum, qToAsk.length);
     navigate(
       `/recomendations/${questionsType === "movieQuestions" ? "movies" : "animes"}` //good so far
     );
@@ -60,14 +67,16 @@ function MediaForm({ questionsType }) {
     }
     const selectedOptionObj = currentQ.options[optionIndex];
 
-    setQuestionNum((p) => (p + 1 !== qToAsk.length ? (p += 1) : p));
-
     if (selectedOptionObj.followUps.length) {
       setQToAsk((p) => [
         ...p.slice(0, questionNum + 1),
         ...selectedOptionObj.followUps,
         ...p.slice(questionNum + 1),
       ]);
+
+      setQuestionNum((p) => (p += 1));
+    } else {
+      setQuestionNum((p) => (p + 1 !== qToAsk.length ? (p += 1) : p));
     }
   }
 
@@ -85,21 +94,34 @@ function MediaForm({ questionsType }) {
       </label>
 
       <div className="flex flex-col md:flex-row gap-6 w-full">
-        {options.map((el, i) => (
-          <button
-            key={i}
-            type={questionNum + 1 === qToAsk.length ? "submit" : "button"}
-            onClick={(e) => {
-              if (questionNum + 1 !== qToAsk.length) {
-                e.preventDefault();
+        {options.map((el, i) => {
+          return (
+            <button
+              key={i}
+              type={
+                questionNum === qToAsk.length - 1 &&
+                (!el.followUps || el.followUps.length === 0)
+                  ? "submit"
+                  : "button"
               }
-              onSelect(el.value, i);
-            }}
-            className="flex-1 px-10 py-6 text-2xl md:text-2xl font-semibold bg-light-blue text-dark-blue rounded-2xl shadow-lg hover:bg-default-blue hover:text-white transition duration-300 ease-in-out transform hover:scale-105"
-          >
-            {el.text}
-          </button>
-        ))}
+              onClick={(e) => {
+                if (
+                  !(
+                    questionNum === qToAsk.length - 1 &&
+                    (!el.followUps || el.followUps.length === 0)
+                  )
+                ) {
+                  // not final, prevent default form submit
+                  e.preventDefault();
+                }
+                onSelect(el.value, i);
+              }}
+              className="flex-1 px-10 py-6 text-2xl md:text-2xl font-semibold bg-light-blue text-dark-blue rounded-2xl shadow-lg hover:bg-default-blue hover:text-white transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              {el.text}
+            </button>
+          );
+        })}
       </div>
 
       <input type="hidden" {...register(key)} />

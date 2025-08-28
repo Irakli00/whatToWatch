@@ -52,14 +52,16 @@ function AnimeDetails() {
   return (
     <main className="overflow-hidden bg-white-red-tint ">
       <section>
-        <div className="">
-          {/* <div className="h-[240px] overflow-clip bg-dark-blue"> */}
-          <img
-            className="w-full mask-x-from-91% "
-            src={coverImage?.large}
-            alt={`${titles.en} cover`}
-          />
-        </div>
+        {coverImage?.large && (
+          <div className="">
+            {/* <div className="h-[240px] overflow-clip bg-dark-blue"> */}
+            <img
+              className="w-full mask-x-from-91% "
+              src={coverImage.large}
+              alt={`${titles.en} cover`}
+            />
+          </div>
+        )}
         <div className="container">
           <article className="mt-12">
             <div className="flex gap-3.5">
