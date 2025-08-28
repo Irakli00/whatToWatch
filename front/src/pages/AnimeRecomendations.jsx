@@ -11,6 +11,7 @@ import {
 } from "../ui/DraggableCard.jsx";
 import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
 import Page from "../ui/Page.jsx";
+import { data } from "react-router";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -24,6 +25,8 @@ function AnimeRecomendations() {
     retry: 0,
     queryFn: () => getAnimeRecomendations(clientAnimePreferences),
   });
+
+  queryClient.setQueryData(["animeRecomendations"], animesData);
 
   if (isLoading) return <Spinner></Spinner>;
 

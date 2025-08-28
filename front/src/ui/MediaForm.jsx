@@ -47,12 +47,9 @@ function MediaForm({ questionsType }) {
   const label = currentQ.questionText;
   const options = currentQ.options;
 
-  console.log(qToAsk[questionNum]);
   const { register, handleSubmit } = useForm();
 
   async function onSubmit() {
-    console.log("sub");
-    console.log(questionNum, qToAsk.length);
     navigate(
       `/recomendations/${questionsType === "movieQuestions" ? "movies" : "animes"}` //good so far
     );

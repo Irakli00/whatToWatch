@@ -13,8 +13,14 @@ function AppProvider({ children }) {
   });
 
   const [clientAnimePreferences, setClientAnimePreferences] = useState({
-    mediaType: null,
-    genres: null,
+    mediaType: "anime",
+    genres: ["1", "2"],
+    rating: "7",
+    releaseDate: "2000..",
+    season: null,
+    status: null,
+    subtype: "TV",
+    sort: null,
   });
 
   return (

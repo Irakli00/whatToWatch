@@ -21,7 +21,7 @@ function Carousel() {
   return (
     <div className="overflow-x-hidden overflow-y-visible h-[120%]">
       <Swiper
-        spaceBetween={20}
+        // spaceBetween={20}
         slidesPerView={10}
         centeredSlides={true}
         modules={[Autoplay]}
@@ -31,7 +31,7 @@ function Carousel() {
           pauseOnMouseEnter: true,
         }}
         loop={true}
-        speed={5000}
+        speed={6000}
       >
         {data.map((movie) => {
           return (

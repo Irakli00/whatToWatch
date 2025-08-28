@@ -11,22 +11,57 @@ const animeQuestions = [
     "What type of media do you prefer?"
   )
     .addOption("Anime", "anime", [
-      new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
-        .addOption("No", null)
-        .addOption("Yeah", null, [
-          new MediaQuestion(
-            "anime-subtype",
-            "subtype",
-            "What anime format do you prefer?"
-          )
-            .addOption("TV Series", "TV")
-            .addOption("Movies", "movie")
-            .addOption("OVA (Original Video Animation)", "OVA")
-            .addOption("ONA (Original Net Animation)", "ONA")
-            .addOption("Specials", "special")
-            .addOption("Music Videos", "music"),
-        ]),
+      new MediaQuestion("release-date", "releaseDate", "Released when?")
+        .addOption("Before 2000", "..2000", [
+          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+            .addOption("No", null)
+            .addOption("Yeah", null, [
+              new MediaQuestion(
+                "anime-subtype",
+                "subtype",
+                "What anime format do you prefer?"
+              )
+                .addOption("TV Series", "TV", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("Either", null),
+                ])
+                .addOption("Movies", "movie")
+                .addOption("OVA (Original Video Animation)", "OVA")
+                .addOption("ONA (Original Net Animation)", "ONA")
+                .addOption("Specials", "special")
+                .addOption("Music Videos", "music"),
+            ]),
+        ])
+        .addOption("After 2000", "2000..", [
+          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+            .addOption("No", null)
+            .addOption("Yeah", null, [
+              new MediaQuestion(
+                "anime-subtype",
+                "subtype",
+                "What anime format do you prefer?"
+              )
+                .addOption("TV Series", "TV", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("To Be Announced", "tba")
+                    .addOption("Not Yet Released", "unreleased")
+                    .addOption("Scheduled for Future", "upcoming")
+                    .addOption("Surprise Me", null),
+                ])
+                .addOption("Movies", "movie")
+                .addOption("OVA (Original Video Animation)", "OVA")
+                .addOption("ONA (Original Net Animation)", "ONA")
+                .addOption("Specials", "special")
+                .addOption("Music Videos", "music"),
+            ]),
+        ])
+        .addOption("Doesn't matter", null),
 
+      //season filter is not allowed in manga apparently
       new MediaQuestion("season", "season", "Any concrete release season?")
         .addOption("Spring", "spring")
         .addOption("Summer", "summer")
@@ -35,21 +70,106 @@ const animeQuestions = [
         .addOption("No", null),
     ])
     .addOption("Manga", "manga", [
-      new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
-        .addOption("No", null)
-        .addOption("Yeah", null, [
-          new MediaQuestion(
-            "manga-subtype",
-            "subtype",
-            "What Manga format do you prefer?"
-          )
-            .addOption("Traditional Manga", "manga")
-            .addOption("Light Novel", "novel")
-            .addOption("Manhwa", "manhwa")
-            .addOption("Manhua ", "manhua")
-            .addOption("Self-Published", "doujin")
-            .addOption("One-shot", "oneshot"),
-        ]),
+      new MediaQuestion("release-date", "releaseDate", "Released when?")
+        .addOption("Before 2000", "..2000", [
+          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+            .addOption("No", null)
+            .addOption("Yeah", null, [
+              new MediaQuestion(
+                "manga-subtype",
+                "subtype",
+                "What Manga format do you prefer?"
+              )
+                .addOption("Traditional Manga", "manga", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("Either", null),
+                ])
+                .addOption("Light Novel", "novel", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished"),
+                ])
+                .addOption("Manhwa", "manhwa", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("Either", null),
+                ])
+                .addOption("Manhua ", "manhua", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("Either", null),
+                ])
+                .addOption("Self-Published", "doujin", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("Either", null),
+                ])
+                .addOption("One-shot", "oneshot"),
+            ]),
+        ])
+        .addOption("After 2000", "2000..", [
+          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+            .addOption("No", null)
+            .addOption("Yeah", null, [
+              new MediaQuestion(
+                "manga-subtype",
+                "subtype",
+                "What Manga format do you prefer?"
+              )
+                .addOption("Traditional Manga", "manga", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("To Be Announced", "tba")
+                    .addOption("Not Yet Released", "unreleased")
+                    .addOption("Scheduled for Future", "upcoming")
+                    .addOption("Surprise Me", null),
+                ])
+                .addOption("Light Novel", "novel", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("To Be Announced", "tba")
+                    .addOption("Not Yet Released", "unreleased")
+                    .addOption("Scheduled for Future", "upcoming")
+                    .addOption("Surprise Me", null),
+                ])
+                .addOption("Manhwa", "manhwa", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("To Be Announced", "tba")
+                    .addOption("Not Yet Released", "unreleased")
+                    .addOption("Scheduled for Future", "upcoming")
+                    .addOption("Surprise Me", null),
+                ])
+                .addOption("Manhua ", "manhua", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("To Be Announced", "tba")
+                    .addOption("Not Yet Released", "unreleased")
+                    .addOption("Scheduled for Future", "upcoming")
+                    .addOption("Surprise Me", null),
+                ])
+                .addOption("Self-Published", "doujin", [
+                  new MediaQuestion("status", "status", "Any Status?")
+                    .addOption("Ongoing", "current")
+                    .addOption("Finished", "finished")
+                    .addOption("To Be Announced", "tba")
+                    .addOption("Not Yet Released", "unreleased")
+                    .addOption("Scheduled for Future", "upcoming")
+                    .addOption("Surprise Me", null),
+                ])
+                .addOption("One-shot", "oneshot"),
+            ]),
+        ])
+        .addOption("Doesn't matter", null),
     ]),
 
   new MediaQuestion("genres", "genres", "Preferred genres?")
@@ -63,18 +183,11 @@ const animeQuestions = [
     .addOption("5+", "5")
     .addOption("Doesn't matter", null),
 
-  new MediaQuestion("release-date", "releaseDate", "When was it released?")
-    .addOption("Before 2000", "..2000")
-    .addOption("After 2000", "2000..", [
-      new MediaQuestion("status", "status", "Any Status?")
-        .addOption("Ongoing", "current")
-        .addOption("Finished", "finished")
-        .addOption("To Be Announced", "tba")
-        .addOption("Not Yet Released", "unreleased")
-        .addOption("Scheduled for Future", "upcoming")
-        .addOption("Surprise Me", null),
-    ])
-    .addOption("Doesn't matter", null),
+  new MediaQuestion("sort", "sort", "Sort by?")
+    .addOption("Populars first", "popularityRank")
+    .addOption("Less known first", "-popularityRank")
+    .addOption("Higher rated first", "averageRating")
+    .addOption("Lower rated first", "-averageRating"),
 ];
 
 const movieQuestions = [

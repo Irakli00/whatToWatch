@@ -1,47 +1,21 @@
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
-import { getAnimeGenres } from "../services/kistuApi";
-import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
 
-import { parseGenres } from "../helpers/formaters";
+import { formatRating, parseGenres } from "../helpers/formaters";
 import { KITSU_GENRES } from "../services/kistuApi";
-import { AppContext } from "../contexts/AppContext";
 
 function AnimeCard({ anime, height = "100%", padding = "10px" }) {
-  const { clientAnimePreferences } = useContext(AppContext);
-
   const {
     type,
-    id,
     attributes: {
       titles,
       synopsis: overview,
+      averageRating: rating,
       posterImage: { large: largeImg },
     },
   } = anime;
 
-  const {
-    data: genreStrings = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["animeGenres", id],
-    queryFn: async () => {
-      const json = await getAnimeGenres(
-        id,
-        clientAnimePreferences.mediaType || "anime"
-      );
-
-      const genreIds = json.map((el) => el.id);
-
-      return parseGenres(genreIds, KITSU_GENRES);
-    },
-    enabled: !!id,
-  });
-
-  if (isLoading) return <p>Loading Recomendations...</p>;
-  if (error) return <p>Error loading genres</p>;
+  const genreIds = anime.relationships.genres.data.map((el) => el.id);
 
   return (
     <article style={{ height, padding }} className="card card--anime">
@@ -62,7 +36,7 @@ function AnimeCard({ anime, height = "100%", padding = "10px" }) {
         <h1>{type.toUpperCase()}</h1>
 
         <ul className="flex flex-wrap gap-1 leading-3">
-          {genreStrings.map((g, i) => (
+          {parseGenres(genreIds, KITSU_GENRES).map((g, i) => (
             <li key={i}>
               <i>{g}</i>
             </li>
@@ -76,7 +50,7 @@ function AnimeCard({ anime, height = "100%", padding = "10px" }) {
 
         <p className="flex items-center gap-0.5 text-center">
           <FaRegStar />
-          <span className="pt-0.5">{"rating"}</span>
+          <span className="pt-0.5">{formatRating(rating / 10)}</span>
         </p>
 
         <div className="overflow-scroll pt-1 border-t border-dark-blue h-full rounded-b-[5px]">

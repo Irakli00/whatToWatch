@@ -74,13 +74,24 @@ async function getAnimeRecomendations({
   season,
   status,
   subtype,
+  sort,
 }) {
+  // filter[ageRating] = PG;
+  const params = new URLSearchParams();
+
+  if (genres) params.append("filter[categories]", genres);
+  if (releaseDate) params.append("filter[year]", releaseDate);
+  if (season && mediaType === "anime") params.append("filter[season]", season);
+  if (status) params.append("filter[status]", status);
+  if (subtype) params.append("filter[subtype]", subtype);
+  if (sort) params.append("sort", sort);
+
   //NOTE:The categories filter in Kitsu is more of a “soft” filter — it tends to prioritize results that include that category, but it may still return manga that don’t have it, especially if they match other filters (year, status, subtype). probably gonna filter on the spot
 
-  //season filter is not allowed in manga apparently
-  const url = `https://kitsu.io/api/edge/${mediaType || "anime"}?filter[categories]=${genres || [1, 2]}&filter[year]=${releaseDate || "2000.."}${mediaType !== "manga" ? `&filter[season]=${season || "summer"}` : ""}&filter[status]=${status || "finished"}&filter[subtype]=${!subtype ? (mediaType === "manga" ? "manga" : "TV") : subtype}`;
+  // const url = `https://kitsu.io/api/edge/${mediaType}?filter[categories]=${genres}&filter[year]=${releaseDate}${season ? `&filter[season]=${season}` : ""}&filter[status]=${status}&filter[subtype]=${subtype}`;
+  const url = `https://kitsu.io/api/edge/${mediaType}?${params}&include=genres`;
 
-  //filter[ageRating]=PG&sort=-averageRating&page[limit]=20&page[offset]=0&fields[anime]=id,canonicalTitle,synopsis,averageRating,startDate,endDate,episodeCount,subtype,status,posterImage&include=categories,mappings,reviews`;
+  //&&fields[anime]=id,canonicalTitle,synopsis,averageRating,startDate,endDate,episodeCount,subtype,status,posterImage&include=categories,mappings,reviews`;
 
   // https://kitsu.io/api/edge/${mediaType || "anime"}?filter[text]=your-search-term&filter[categories]=action,adventure&filter[year]=2023&filter[season]=spring&filter[streamers]=crunchyroll,funimation&filter[status]=current&filter[subtype]=TV&filter[ageRating]=PG&sort=-averageRating&page[limit]=20&page[offset]=0&fields[anime]=id,canonicalTitle,synopsis,averageRating,startDate,endDate,episodeCount,subtype,status,posterImage&include=categories,mappings,reviews`;
 
@@ -97,35 +108,13 @@ async function getAnimeRecomendations({
 }
 export { getAnimeRecomendations };
 
-async function getAnimeDetails(mediaType, id) {
-  const res = await fetch(`https://kitsu.io/api/edge/${mediaType}/${id}`);
-
-  return await res.json();
-}
-
-export { getAnimeDetails };
-
-async function getAnimeGenres(animeId, mediaType) {
-  const url = `https://kitsu.io/api/edge/${mediaType}/${animeId}/relationships/genres`;
-
-  const res = await fetch(url);
-  const json = await res.json();
-
-  return json.data;
-}
-
-export { getAnimeGenres };
-
 // 1. JSON:API Query Parameters
 
 // While these are not specific "filters" by attribute, they control what and how data is fetched:
 
 // fields[anime]=… – Sparse fieldsets: request only specific attributes or relationships in the response
-
 // include=… – Includes related resources: e.g. characters, staff.person, etc. Multiple can be specified with comma-separated or nested dot syntax
-
 // page[limit]=… and page[offset]=… – Pagination controls for limiting and offsetting results
-
 // sort=… – Sorting: specify one or more attributes to sort by (prefix with - for descending)
 
 // 2. Resource-Specific Filters (filter[...])
@@ -143,3 +132,23 @@ export { getAnimeGenres };
 
 // filter[subtype] – e.g., tv, movie, special, ova (widely used though not directly cited above).
 // filter[status] – e.g., current, finished, upcoming, tba (also widely used in examples).
+
+// --------redundant now--------
+// async function getAnimeDetails(mediaType, id) {
+//   const res = await fetch(
+//     `https://kitsu.io/api/edge/${mediaType}/${id}?include=genres`
+//   );
+
+//   return await res.json();
+// }
+// export { getAnimeDetails };
+
+// async function getAnimeGenres(animeId, mediaType) {
+//   const url = `https://kitsu.io/api/edge/${mediaType}/${animeId}/relationships/genres`;
+
+//   const res = await fetch(url);
+//   const json = await res.json();
+
+//   return json.data;
+// }
+// export { getAnimeGenres };
