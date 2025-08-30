@@ -11,7 +11,6 @@ import {
 } from "../ui/DraggableCard.jsx";
 import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
 import Page from "../ui/Page.jsx";
-import { data } from "react-router";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -26,9 +25,12 @@ function AnimeRecomendations() {
     queryFn: () => getAnimeRecomendations(clientAnimePreferences),
   });
 
-  queryClient.setQueryData(["animeRecomendations"], animesData);
-
   if (isLoading) return <Spinner></Spinner>;
+
+  animesData.forEach((anime) => {
+    const img = new Image();
+    img.src = anime?.attributes?.coverImage?.large;
+  }); //prefetch imgs
 
   return (
     <Page className="overflow-hidden bg-main-red-tint text-white">
@@ -49,12 +51,12 @@ function AnimeRecomendations() {
                   </button>
 
                   <DraggableCardBody
-                    key={`k-${i}`}
+                    key={`k-${i || Math.random() * Math.random()}`}
                     className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                     paramId={anime.id}
                   >
                     <AnimeCard
-                      key={`kiii-${anime.id}`}
+                      key={`kiii-${anime.id || Math.random() * Math.random()}`} //good enough so far
                       anime={anime}
                       height="full"
                       // coverImgMaxW={"300px"}
@@ -67,11 +69,11 @@ function AnimeRecomendations() {
             return (
               <DraggableCardBody
                 paramId={anime.id}
-                key={`kk-${anime.id}`}
+                key={`kk-${anime.id || Math.random() * Math.random()}`}
                 className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
               >
                 <AnimeCard
-                  key={anime.id}
+                  key={anime.id || Math.random() * Math.random()}
                   anime={anime}
                   height="full"
                   // coverImgMaxW={"300px"}

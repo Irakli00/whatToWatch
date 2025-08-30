@@ -3,21 +3,23 @@ import { useParams } from "react-router";
 
 import { KITSU_GENRES } from "../services/kistuApi";
 // import Spinner from "../ui/Spinner";
-import { formatRating, parseGenres } from "../helpers/formaters";
+import { formatDate, formatRating, parseGenres } from "../helpers/formaters";
 import Page from "../ui/Page";
 
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
+
 function AnimeDetails() {
+  const { clientAnimePreferences } = useContext(AppContext);
+
   const { id } = useParams();
 
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["animeRecomendations", clientAnimePreferences],
-  //   // queryFn: () => getAnimeDetails(clientAnimePreferences.mediaType, id),
-  // });
+  const clientQuery = useQueryClient();
 
-  // const anime = data.filter((anime) => anime.id === id)[0];
-  const anime = useQueryClient()
-    .getQueryData(["animeRecomendations"])
-    .filter((anime) => anime.id === id)[0];
+  const anime = clientQuery
+    .getQueryData(["animeRecomendations", clientAnimePreferences])
+    ?.find((anime) => anime.id === id);
+
   // if (isLoading) return <Spinner></Spinner>;
 
   const {
@@ -53,12 +55,13 @@ function AnimeDetails() {
       <main className="overflow-hidden bg-white-red-tint ">
         <section>
           {coverImage?.large && (
-            <div className="">
+            <div>
               {/* <div className="h-[240px] overflow-clip bg-dark-blue"> */}
               <img
-                className="w-full mask-x-from-91% "
+                draggable={false}
+                className="w-full h-full mask-x-from-91% "
                 src={coverImage.large}
-                alt={`${titles.en} cover`}
+                alt={``} //often covers are not there alt just makes them invisible
               />
             </div>
           )}
@@ -90,14 +93,17 @@ function AnimeDetails() {
             <h3>Details</h3>
 
             <p>
-              <strong>Average Rating:</strong> {formatRating(averageRating)}
+              <strong>Average Rating:</strong>{" "}
+              {formatRating(averageRating / 10)}
             </p>
             <p>
-              <strong>Start Date:</strong> {startDate}
+              <strong>Start Date:</strong> {formatDate(startDate)}
             </p>
-            <p>
-              <strong>End Date:</strong> {endDate || "Ongoing"}
-            </p>
+            {!status === "current" && (
+              <p>
+                <strong>End Date:</strong> {endDate || "Ongoing"}
+              </p>
+            )}
             <p>
               <strong>Next Release:</strong> {nextRelease || "N/A"}
             </p>

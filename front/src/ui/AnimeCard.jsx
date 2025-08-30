@@ -11,10 +11,12 @@ function AnimeCard({ anime, height = "100%", padding = "10px" }) {
       titles,
       synopsis: overview,
       averageRating: rating,
-      posterImage: { large: largeImg },
+      // posterImage: { large: largeImg },
+      posterImage = {},
     },
   } = anime;
 
+  const largeImg = posterImage?.large || "imagenotfoundurl";
   const genreIds = anime.relationships.genres.data.map((el) => el.id);
 
   return (
