@@ -11,20 +11,14 @@ function formatDate(dateString) {
   });
 }
 
-export { formatDate };
-
 function formatRating(num) {
   if (num == null || num === 0) return "Not Rated Yet";
   return Math.round(num * 10) / 10;
 }
 
-export { formatRating };
-
 function parseGenres(genreIds, genresMap) {
   return genreIds.map((genreId) => genresMap[genreId]);
 }
-
-export { parseGenres };
 
 function formatPopularityNumber(num) {
   const properNumber = +new String(num).split(".").join(""); //num is a float wtf?
@@ -38,4 +32,4 @@ function formatPopularityNumber(num) {
   }
 }
 
-export { formatPopularityNumber };
+export { formatDate, formatRating, parseGenres, formatPopularityNumber };

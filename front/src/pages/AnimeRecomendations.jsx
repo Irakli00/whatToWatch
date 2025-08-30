@@ -38,10 +38,12 @@ function AnimeRecomendations() {
     <Page className="overflow-hidden bg-main-red-tint text-white">
       <section>
         <DraggableCardContainer
-          key={"key"}
+          key={Math.random() * Math.random()}
           className={"relative min-h-[600px]"}
         >
           {animesData.map((anime, i) => {
+            // console.log(anime.id);
+
             if (i === 0)
               return (
                 <>

@@ -82,12 +82,23 @@ async function getMovieRecomendations({
     .then((res) => res.json())
     .then((data) => data.results);
 
-  console.log(movieRecomendations);
-
   return movieRecomendations;
 }
 
-export { getTrending, getMovieRecomendations };
+async function getMovie(movieId) {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}`;
+  const movie = await fetch(url, {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${TMDB_KEY}`,
+    },
+  }).then((res) => res.json());
+
+  return movie;
+}
+
+export { getTrending, getMovieRecomendations, getMovie };
 
 // async function getTrending() {
 //   const res = await fetch(

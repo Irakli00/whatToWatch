@@ -8,6 +8,7 @@ import MediaSelection from "./pages/MediaSelection";
 import MovieRecomendations from "./pages/MovieRecomendations";
 import AnimeRecomendations from "./pages/AnimeRecomendations";
 import AnimeDetails from "./pages/AnimeDetails";
+import MovieDetails from "./pages/MovieDetails";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,24 +32,28 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/recomendations/movies",
+        element: <MovieRecomendations></MovieRecomendations>,
+      },
+      {
+        path: "/movie/:id",
+        element: <MovieDetails></MovieDetails>,
+      },
+      {
         path: "/selectAnimes",
         element: (
           <MediaSelection questionsType="animeQuestions"></MediaSelection>
         ),
       },
       {
-        path: "/anime/:id",
-        element: <AnimeDetails></AnimeDetails>,
-      },
-      { path: "/TVs", element: "" },
-      {
         path: "/recomendations/animes",
         element: <AnimeRecomendations></AnimeRecomendations>,
       },
       {
-        path: "/recomendations/movies",
-        element: <MovieRecomendations></MovieRecomendations>,
+        path: "/anime/:id",
+        element: <AnimeDetails></AnimeDetails>,
       },
+      { path: "/TVs", element: "" },
     ],
   },
 ]);
