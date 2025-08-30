@@ -30,7 +30,9 @@ function AnimeRecomendations() {
   animesData.forEach((anime) => {
     const img = new Image();
     img.src = anime?.attributes?.coverImage?.large;
-  }); //prefetch imgs
+
+    localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
+  }); //prefetch
 
   return (
     <Page className="overflow-hidden bg-main-red-tint text-white">

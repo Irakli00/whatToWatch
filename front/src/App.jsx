@@ -9,6 +9,15 @@ import MovieRecomendations from "./pages/MovieRecomendations";
 import AnimeRecomendations from "./pages/AnimeRecomendations";
 import AnimeDetails from "./pages/AnimeDetails";
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 9999 * 9999,
+      // staleTime: 10,
+    },
+  },
+});
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,15 +52,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 600 * 1000,
-      // staleTime: 10,
-    },
-  },
-});
 
 function App() {
   return (
