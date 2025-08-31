@@ -55,22 +55,32 @@ async function getTrending() {
 async function getMovieRecomendations({
   mediaType,
   genres,
-  language = "en-US",
+  language,
   region,
-  sort = "popularity.desc",
+  sort,
   releaseDate,
   rating,
-  // runtime,
+  page,
 }) {
-  // const { min: minRuntime, max: maxRuntime } = runtime;
-  const today = new Date().toISOString().split("T")[0];
-  const finalGenres = mediaType === "animation" ? [...genres, 16] : genres;
-  const baseLang = language.split("-")[0];
+  const params = new URLSearchParams();
+
+  if (genres) params.append("with_genres", genres);
+  if (language) params.append("language", language);
+  if (mediaType === "animation") {
+    params.append("with_genres", 16);
+  } else {
+    params.append("without_genres", 16);
+  }
+  if (region) params.append("region", region);
+  if (sort) params.append("sort", sort);
+  if (page) params.append("page", page);
+  // if (releaseDate) params.append("primary_release_date.gte", releaseDate);
+  // if (rating) params.append("vote_avarage.gte", rating);
+  if (language) params.append("with_original_langiage", language.split("-")[0]);
 
   //no error and null data handling
-  const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_original_language=${baseLang}&with_origin_country=${region}${mediaType !== "animation" ? "&without_genres=16" : ""}`;
-
-  // const url = `https://api.themoviedb.org/3/discover/movie?language=${language}&region=${region}&sort_by=${sort}&page=1&${releaseDate ? releaseDate : `primary_release_date.gte=1000&primary_release_date.lte=${today}`}&vote_count.gte=1&vote_average.gte=${rating || 1}&with_genres=${typeof finalGenres === "object" ? finalGenres.join(",") : finalGenres}&with_runtime.gte=${minRuntime}&with_runtime.lte=${maxRuntime}&with_original_language=${baseLang}&with_origin_country=${region}${mediaType !== "animation" ? "&without_genres=16" : ""}`;
+  const url = `https://api.themoviedb.org/3/discover/movie?${params}&vote_average.gte=${rating}&${releaseDate}`; //just because
+  // console.log(params, rating, releaseDate);
 
   const movieRecomendations = await fetch(url, {
     method: "GET",

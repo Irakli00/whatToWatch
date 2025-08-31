@@ -33,7 +33,7 @@ function formatPopularityNumber(num) {
 }
 
 function formatBudget(num) {
-  if (num == null || isNaN(num)) return "N/A";
+  if (!num || isNaN(num)) return "N/A";
 
   return new Intl.NumberFormat("en-US", {
     style: "currency",

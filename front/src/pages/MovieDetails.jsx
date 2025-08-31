@@ -73,15 +73,17 @@ function MovieDetails() {
                     </p>
                   </div>
                   <div>
-                    <p className="flex">
+                    <p className="flex text-2xl items-center justify-end gap-1">
                       <GoStar></GoStar>
                       {formatRating(rating)}
                     </p>
-                    <p>vote count:{votesNum}</p>
+                    <p>
+                      <i>{votesNum} votes</i>
+                    </p>
                   </div>
                 </div>
 
-                {/* <p className="w-[75%] leading-6">{synopsis}</p> */}
+                {/* <p className="w-[75%] leading-6">{}</p> */}
                 <ul className="flex items-center gap-3 mt-3">
                   {genres.map((g) => (
                     <li>
@@ -100,9 +102,9 @@ function MovieDetails() {
 
           <article className="flex flex-col">
             <p>Released at {formatDate(releaseDate)}</p>
+            <p>runtime:{runtime} min</p>
             <p>budget:{formatBudget(budget)}</p>
             <p>revenue:{formatBudget(revenue)}</p>
-            <p>runtime:{runtime} min</p>
 
             {homepageUrl && (
               <a target="_blank" href={homepageUrl}>

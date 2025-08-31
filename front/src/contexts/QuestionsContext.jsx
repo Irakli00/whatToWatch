@@ -60,14 +60,6 @@ const animeQuestions = [
             ]),
         ])
         .addOption("Doesn't matter", null),
-
-      //season filter is not allowed in manga apparently
-      new MediaQuestion("season", "season", "Any concrete release season?")
-        .addOption("Spring", "spring")
-        .addOption("Summer", "summer")
-        .addOption("Autumn", "autumn")
-        .addOption("Winter", "winter")
-        .addOption("No", null),
     ])
     .addOption("Manga", "manga", [
       new MediaQuestion("release-date", "releaseDate", "Released when?")

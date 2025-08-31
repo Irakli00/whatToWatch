@@ -71,7 +71,6 @@ async function getAnimeRecomendations({
   mediaType,
   genres,
   releaseDate,
-  season,
   status,
   subtype,
   sort,
@@ -81,7 +80,7 @@ async function getAnimeRecomendations({
 
   if (genres) params.append("filter[categories]", genres);
   if (releaseDate) params.append("filter[year]", releaseDate);
-  if (season && mediaType === "anime") params.append("filter[season]", season);
+
   if (status) params.append("filter[status]", status);
   if (subtype) params.append("filter[subtype]", subtype);
   if (sort) params.append("sort", sort);
@@ -89,6 +88,7 @@ async function getAnimeRecomendations({
   //NOTE:The categories filter in Kitsu is more of a “soft” filter — it tends to prioritize results that include that category, but it may still return manga that don’t have it, especially if they match other filters (year, status, subtype). probably gonna filter on the spot
 
   // const url = `https://kitsu.io/api/edge/${mediaType}?filter[categories]=${genres}&filter[year]=${releaseDate}${season ? `&filter[season]=${season}` : ""}&filter[status]=${status}&filter[subtype]=${subtype}`;
+
   const url = `https://kitsu.io/api/edge/${mediaType}?${params}&include=genres`;
 
   //&&fields[anime]=id,canonicalTitle,synopsis,averageRating,startDate,endDate,episodeCount,subtype,status,posterImage&include=categories,mappings,reviews`;

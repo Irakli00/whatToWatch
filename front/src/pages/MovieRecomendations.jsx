@@ -34,7 +34,7 @@ function MovieRecomendations() {
       <section>
         {movieData ? (
           <DraggableCardContainer
-            key={`d`}
+            key={Math.random() * Math.random()}
             className={"relative min-h-[600px]"}
           >
             {/* <DraggableCardContainer
