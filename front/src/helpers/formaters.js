@@ -32,4 +32,20 @@ function formatPopularityNumber(num) {
   }
 }
 
-export { formatDate, formatRating, parseGenres, formatPopularityNumber };
+function formatBudget(num) {
+  if (num == null || isNaN(num)) return "N/A";
+
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(num);
+}
+
+export {
+  formatDate,
+  formatRating,
+  parseGenres,
+  formatPopularityNumber,
+  formatBudget,
+};

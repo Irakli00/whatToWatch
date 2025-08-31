@@ -5,7 +5,7 @@ function Header() {
   return (
     //  bg-amber-300
     <header className="bg-dark-blue shadow-md">
-      <div className="container flex items-center justify-between">
+      <div className="cusom-container flex items-center justify-between">
         <NavLink to="/" className="flex gap-2 items-center py-3">
           <Logo height={80} width={80} type="light" />
           <h1 className="h-min font-bold text-white font-sans">

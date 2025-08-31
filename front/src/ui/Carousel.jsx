@@ -19,7 +19,7 @@ function Carousel() {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <div className="overflow-x-hidden overflow-y-visible h-[120%]">
+    <div className="overflow-x-hidden overflow-y-visible h-[95%]">
       <Swiper
         // spaceBetween={20}
         slidesPerView={10}

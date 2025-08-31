@@ -66,7 +66,7 @@ function AnimeDetails() {
             />
           </div>
         )}
-        <div className="container">
+        <div className="cusom-container">
           <article className="mt-12">
             <div className="flex gap-3.5">
               <img

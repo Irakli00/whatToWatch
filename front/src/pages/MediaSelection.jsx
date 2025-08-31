@@ -6,7 +6,7 @@ function MediaSelection({ questionsType }) {
   return (
     <Page>
       <main className={`overflow-hidden `}>
-        <section className="container ">
+        <section className="cusom-container ">
           {/* <QuestionsProvider> */}
           <MediaForm questionsType={questionsType}></MediaForm>
           {/* </QuestionsProvider> */}

@@ -38,7 +38,7 @@ function MovieRecomendations() {
             className={"relative min-h-[600px]"}
           >
             {/* <DraggableCardContainer
-          className={"container mt-12 flex flex-wrap justify-around gap-2"}
+          className={"cusom-container mt-12 flex flex-wrap justify-around gap-2"}
         > */}
             {movieData.map((movie, i) => {
               if (i === 0)

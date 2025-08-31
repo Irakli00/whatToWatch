@@ -61,8 +61,13 @@
     @apply cursor-pointer;
   }
 
-  .container {
-    @apply mx-auto max-w-[90%];
+  .cusom-container {
+    @apply mx-auto w-[70%]  overflow-hidden;
+    max-width: none;
+  }
+
+  .swiper-slide {
+    @apply max-h-1;
   }
 }
 
@@ -123,7 +128,7 @@ embla {
 .embla__viewport {
   overflow: hidden;
 }
-.embla__container {
+.embla__cusom-container {
   display: flex;
   touch-action: pan-y pinch-zoom;
   margin-left: calc(var(--slide-spacing) * -1);
