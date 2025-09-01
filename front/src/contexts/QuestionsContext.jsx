@@ -183,17 +183,25 @@ const animeQuestions = [
 ];
 
 const movieQuestions = [
+  // sort_by = popularity.desc;
+
+  // &certification=PG-13
+  // &certification.lte=R
+
+  // &primary_release_year=2023
+
+  // &with_release_type=3
+
+  //with_runtime.gte=90&with_runtime.lte=180
+
+  // &with_original_language=en
   new MediaQuestion(
     "media-type",
     "mediaType",
     "What type of media do you prefer?"
   )
     .addOption("Animation", "animation")
-    .addOption("Movie", "movie", [
-      new MediaQuestion("media-type-followup", "mediaType", "111111111111111")
-        .addOption("a", "animation")
-        .addOption("m", "movie"),
-    ]),
+    .addOption("Movie", "movie"),
 
   new MediaQuestion("genres", "genres", "Preferred genres?")
     .addOption("Action", ["28"])
@@ -201,9 +209,26 @@ const movieQuestions = [
     .addOption("Drama", ["18"])
     .addOption("Doesn't matter", null),
 
+  new MediaQuestion(
+    "certifications",
+    "certifications",
+    "Preferred Certification?"
+  )
+    .addOption("Yeah", "oki", [
+      new MediaQuestion("certifications", "certifications", "Which one?")
+        .addOption("G", "certification.G")
+        .addOption("GPG", "certification.GPG")
+        .addOption("PG-13", "certification.PG-13")
+        .addOption("R", "certification.R")
+        .addOption("NC-17", "certification.NC-17"),
+    ])
+    .addOption("Nah", null),
+
+  // &certification.lte=R
+
   new MediaQuestion("rating", "rating", "Minimum rating?")
-    .addOption("7+", "7")
-    .addOption("5+", "5")
+    .addOption("7+", "vote_average.gte=7")
+    .addOption("5+", "vote_average.gte=5")
     .addOption("Doesn't matter", null),
 
   // new MediaQuestion("runtime", "runtime", "Preferred runtime?")
@@ -217,11 +242,6 @@ const movieQuestions = [
     .addOption("French", "fr-FR")
     .addOption("Any language", null),
 
-  new MediaQuestion("region", "region", "Country of release?")
-    .addOption("US", "US")
-    .addOption("UK", "GB")
-    .addOption("Any country", null),
-
   new MediaQuestion("release-date", "releaseDate", "When was it released?")
     .addOption(
       "After 2000",
@@ -230,6 +250,12 @@ const movieQuestions = [
     )
     .addOption("Before 2000", "release_date.lte=2000-01-01")
     .addOption("Doesn't matter", null),
+
+  new MediaQuestion("sort", "sort", "Sort by?")
+    .addOption("Populars first", "popularity.desc")
+    .addOption("Less known first", "popularity.asc")
+    .addOption("Higher rated first", "vote_average.asc")
+    .addOption("Lower rated first", "vote_average.desc"),
 ];
 
 const movieFilterOptions = {

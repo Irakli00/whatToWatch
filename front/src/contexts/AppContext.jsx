@@ -8,8 +8,13 @@ function AppProvider({ children }) {
     genres: null,
     language: null,
     rating: 0,
-    region: null,
     releaseDate: null,
+    certifications: null,
+    // genres,
+    // language
+    region: null,
+    sort: null,
+    page: 0,
   });
 
   const [clientAnimePreferences, setClientAnimePreferences] = useState({

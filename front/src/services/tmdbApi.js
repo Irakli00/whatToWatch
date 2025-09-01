@@ -61,10 +61,14 @@ async function getMovieRecomendations({
   releaseDate,
   rating,
   page,
+  certification,
 }) {
   const params = new URLSearchParams();
+  //api.themoviedb.org/3/discover/movie?api_key=YOUR_API_KEY&language=en-US&region=US&sort_by=popularity.desc&certification_country=US&certification=PG-13&certification.lte=R&include_adult=false&include_video=false&page=1&primary_release_year=2023&primary_release_date.gte=2023-01-01&primary_release_date.lte=2023-12-31&release_date.gte=2023-01-01&release_date.lte=2023-12-31&with_release_type=3&year=2023&vote_count.gte=100&vote_count.lte=10000&vote_average.gte=7.0&vote_average.lte=10.0&with_cast=500,6193&with_crew=525&with_people=1&with_companies=1,2&with_genres=28,12&without_genres=27,53&with_keywords=1721,9715&without_keywords=210024&with_runtime.gte=90&with_runtime.lte=180&with_original_language=en&with_watch_providers=8,9&watch_region=US&with_watch_monetization_types=flatrate
 
-  // console.log(genres, genres.includes("16"), mediaType);
+  // &primary_release_year=2023
+
+  // &with_runtime.gte=90&with_runtime.lte=180
 
   if (genres) params.append("with_genres", genres);
   if (language) params.append("language", language);
@@ -74,15 +78,16 @@ async function getMovieRecomendations({
     params.append("without_genres", 16);
   }
   if (region) params.append("region", region);
-  if (sort) params.append("sort", sort);
+  if (sort) params.append("sort_by", sort);
   if (page) params.append("page", page);
   // if (releaseDate) params.append("primary_release_date.gte", releaseDate);
   // if (rating) params.append("vote_avarage.gte", rating);
-  if (language) params.append("with_original_langiage", language.split("-")[0]);
+  if (language) params.append("with_original_language", language.split("-")[0]);
 
+  // &include_adult=false
   //no error and null data handling
-  const url = `https://api.themoviedb.org/3/discover/movie?${params}&vote_average.gte=${rating}&${releaseDate}`; //just because
-  // console.log(params);
+  const url = `https://api.themoviedb.org/3/discover/movie?${params}${rating ? `&${rating}` : ""}${releaseDate ? `&${releaseDate}` : ""}${certification ? `&${certification}` : ""}&vote_count.gte=10`; //just because
+  console.log(url);
 
   const movieRecomendations = await fetch(url, {
     method: "GET",
@@ -98,7 +103,7 @@ async function getMovieRecomendations({
 }
 
 async function getMovie(movieId) {
-  // https://api.themoviedb.org/3/movie/1136867/videos  event his not bad
+  // https://api.themoviedb.org/3/movie/1136867/videos  event this not bad
   const responses = await Promise.all([
     fetch(`https://api.themoviedb.org/3/movie/${movieId}`, {
       headers: {
