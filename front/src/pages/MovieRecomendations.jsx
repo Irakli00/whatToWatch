@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getMovieRecomendations } from "../services/tmdbApi.js";
 import Spinner from "../ui/Spinner.jsx";
 import MovieCard from "../ui/MovieCard.jsx";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../contexts/AppContext.jsx";
 import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
 
@@ -43,7 +43,7 @@ function MovieRecomendations() {
             {movieData.map((movie, i) => {
               if (i === 0)
                 return (
-                  <>
+                  <React.Fragment key={movie.id}>
                     <button
                       key={i}
                       className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
@@ -65,7 +65,7 @@ function MovieRecomendations() {
                         // coverImgMaxW={"300px"}
                       />
                     </DraggableCardBody>
-                  </>
+                  </React.Fragment>
                 );
 
               return (

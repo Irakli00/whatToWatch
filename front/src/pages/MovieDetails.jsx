@@ -1,16 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { GoStar } from "react-icons/go";
+import { useContext } from "react";
 
 import { getMovie } from "../services/tmdbApi";
 import Spinner from "../ui/Spinner";
 import Page from "../ui/Page";
 import { formatBudget, formatDate, formatRating } from "../helpers/formaters";
+import { AppContext } from "../contexts/AppContext";
 
 function MovieDetails() {
   const { id: movieId } = useParams();
 
-  // console.log()
+  const navigate = useNavigate();
+  const { clientMoviePreferences, setClientMoviePreferences } =
+    useContext(AppContext);
 
   const { data: movie, isLoading } = useQuery({
     queryKey: ["movie", movieId],
@@ -86,8 +90,19 @@ function MovieDetails() {
                 {/* <p className="w-[75%] leading-6">{}</p> */}
                 <ul className="flex items-center gap-3 mt-3">
                   {genres.map((g) => (
-                    <li>
-                      <button>{g.name}</button>
+                    <li key={g.id}>
+                      <button
+                        onClick={() => {
+                          setClientMoviePreferences({
+                            ...clientMoviePreferences,
+                            genres: [g.id],
+                          });
+
+                          navigate("/recomendations/movies");
+                        }}
+                      >
+                        {g.name}
+                      </button>
                       {/* gonna redirect to each genre
                       (setGenre in prefferences) */}
                     </li>
@@ -115,7 +130,7 @@ function MovieDetails() {
         </div>
         <ul className="flex items-center justify-around bg-yellow-200">
           {productions.map((p) => (
-            <li className="p-2">
+            <li key={p.name} className="p-2">
               <img
                 width={"130px"}
                 height={"100px"}

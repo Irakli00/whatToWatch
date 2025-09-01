@@ -1,12 +1,14 @@
+import { Link } from "react-router";
+
 import { IoCalendarClearOutline } from "react-icons/io5";
-
 import { FaRegStar } from "react-icons/fa";
+import { useContext } from "react";
 
-import { parseGenres, formatDate } from "../helpers/formaters.js";
+import { AppContext } from "../contexts/AppContext.jsx";
+
+import { parseGenres, formatDate, formatRating } from "../helpers/formaters.js";
 
 import { TMDB_GENRES } from "../services/tmdbApi.js";
-import { formatRating } from "../helpers/formaters.js";
-import { Link } from "react-router";
 
 function MovieCard({
   movie,
@@ -18,6 +20,9 @@ function MovieCard({
   type,
 }) {
   const genreStrings = parseGenres(movie.genre_ids, TMDB_GENRES);
+
+  const { clientMoviePreferences, setClientMoviePreferences } =
+    useContext(AppContext);
 
   return (
     <>
@@ -71,7 +76,20 @@ function MovieCard({
             </div>
           </>
         ) : (
-          <Link to={`movie/${movie.id}`}>
+          <Link
+            to={`movie/${movie.id}`}
+            onClick={() => {
+              movie.genre_ids.includes(16)
+                ? setClientMoviePreferences({
+                    ...clientMoviePreferences,
+                    mediaType: "animation",
+                  })
+                : setClientMoviePreferences({
+                    ...clientMoviePreferences,
+                    mediaType: "movie",
+                  });
+            }}
+          >
             <img
               draggable="false"
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

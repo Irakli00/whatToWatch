@@ -64,11 +64,13 @@ async function getMovieRecomendations({
 }) {
   const params = new URLSearchParams();
 
+  // console.log(genres, genres.includes("16"), mediaType);
+
   if (genres) params.append("with_genres", genres);
   if (language) params.append("language", language);
   if (mediaType === "animation") {
-    params.append("with_genres", 16);
-  } else {
+    params.append("with_genres", [...genres, 16]);
+  } else if (mediaType === "movie") {
     params.append("without_genres", 16);
   }
   if (region) params.append("region", region);
@@ -80,7 +82,7 @@ async function getMovieRecomendations({
 
   //no error and null data handling
   const url = `https://api.themoviedb.org/3/discover/movie?${params}&vote_average.gte=${rating}&${releaseDate}`; //just because
-  // console.log(params, rating, releaseDate);
+  // console.log(params);
 
   const movieRecomendations = await fetch(url, {
     method: "GET",
