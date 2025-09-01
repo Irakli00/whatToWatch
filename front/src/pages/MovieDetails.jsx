@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router";
 import { GoStar } from "react-icons/go";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { getMovie } from "../services/tmdbApi";
 import Spinner from "../ui/Spinner";
 import Page from "../ui/Page";
 import { formatBudget, formatDate, formatRating } from "../helpers/formaters";
 import { AppContext } from "../contexts/AppContext";
+import Carousel from "../ui/Carousel";
 
 function MovieDetails() {
   const { id: movieId } = useParams();
@@ -16,7 +17,7 @@ function MovieDetails() {
   const { clientMoviePreferences, setClientMoviePreferences } =
     useContext(AppContext);
 
-  const { data: movie, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["movie", movieId],
     staleTime: 60 * 1000,
     queryFn: () => getMovie(movieId),
@@ -24,6 +25,9 @@ function MovieDetails() {
 
   if (isLoading) return <Spinner></Spinner>;
 
+  const [movie, { cast, crew }, { results: similarMovies }] = data;
+
+  // console.log(cast[0], crew[0]);
   const {
     backdrop_path: backdropUrl,
     budget,
@@ -92,6 +96,7 @@ function MovieDetails() {
                   {genres.map((g) => (
                     <li key={g.id}>
                       <button
+                        className="py-1 px-2 rounded-sm border-1 font-bold text-dark-blue transition-all duration-00 ease-in hover:bg-bright-yellow"
                         onClick={() => {
                           setClientMoviePreferences({
                             ...clientMoviePreferences,
@@ -128,7 +133,29 @@ function MovieDetails() {
             )}
           </article>
         </div>
-        <ul className="flex items-center justify-around bg-yellow-200">
+
+        <ul className="container mx-auto flex items-center justify-around bg-yellow-200 mask-x-from-95% p-5">
+          {cast.slice(0, 5).map((p) => (
+            <li key={p.name} className=" flex gap-1 items-center">
+              <img
+                className=" max-w-[120px]  rounded-[50%] aspect-[1/1]"
+                draggable={false}
+                // const [notLoaded, setNotLoaded] = useState();
+                // onError={() => setNotLoaded(true)} //if not loaded display something else
+                src={`https://image.tmdb.org/t/p/w300/${p.profile_path}`}
+              />
+              <figcaption className="text-center">
+                <span className="font-bold">{p.name}</span>
+                <br />
+                <span>{p.character}</span>
+              </figcaption>
+            </li>
+          ))}
+        </ul>
+
+        {similarMovies.length && <Carousel data={similarMovies}></Carousel>}
+
+        {/* <ul className="flex items-center justify-around bg-yellow-200">
           {productions.map((p) => (
             <li key={p.name} className="p-2">
               <img
@@ -140,7 +167,7 @@ function MovieDetails() {
               />
             </li>
           ))}
-        </ul>
+        </ul> */}
       </section>
     </Page>
   );

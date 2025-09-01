@@ -65,10 +65,6 @@
     @apply mx-auto w-[70%]  overflow-hidden;
     max-width: none;
   }
-
-  .swiper-slide {
-    @apply max-h-1;
-  }
 }
 
 @layer components {
@@ -105,15 +101,21 @@
     z-index: 999;
     transform: translateY(10px);
   }
-  .card.card--movie:hover {
+  /* .card.card--movie:hover {
     @apply bg-light-orange text-dark-blue;
   }
 
   .card.card--anime:hover {
     @apply bg-main-red text-white;
-  }
+  } */
   .swiper {
-    height: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+  }
+
+  .swiper-slide {
   }
 }
 /* ---------------------- */

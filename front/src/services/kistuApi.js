@@ -65,6 +65,11 @@ const KITSU_GENRES = {
   65: "Isekai",
 };
 
+// -----------------------------------------
+// -----------------------------------------
+//may swithc to aniList
+// -----------------------------------------
+// -----------------------------------------
 export { KITSU_GENRES };
 
 async function getAnimeRecomendations({

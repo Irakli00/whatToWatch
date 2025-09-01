@@ -98,14 +98,29 @@ async function getMovieRecomendations({
 }
 
 async function getMovie(movieId) {
-  const url = `https://api.themoviedb.org/3/movie/${movieId}`;
-  const movie = await fetch(url, {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${TMDB_KEY}`,
-    },
-  }).then((res) => res.json());
+  // https://api.themoviedb.org/3/movie/1136867/videos  event his not bad
+  const responses = await Promise.all([
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${TMDB_KEY}`,
+      },
+    }),
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${TMDB_KEY}`,
+      },
+    }),
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${TMDB_KEY}`,
+      },
+    }),
+  ]);
+
+  const movie = await Promise.all(responses.map((r) => r.json()));
 
   return movie;
 }

@@ -1,6 +1,6 @@
 function Spinner() {
   return (
-    <div className="h-full flex items-center justify-center">
+    <div className="h-full min-h-[300px] flex items-center justify-center">
       <div
         className="w-24 h-24 rounded-full animate-spin"
         style={{

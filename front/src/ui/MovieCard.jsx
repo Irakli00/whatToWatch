@@ -77,7 +77,8 @@ function MovieCard({
           </>
         ) : (
           <Link
-            to={`movie/${movie.id}`}
+            to={`/movie/${movie.id}`}
+            relative="path"
             onClick={() => {
               movie.genre_ids.includes(16)
                 ? setClientMoviePreferences({
@@ -94,7 +95,7 @@ function MovieCard({
               draggable="false"
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
-              className={` max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full  rounded-[7px] select-none `}
+              className={`max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full  rounded-[7px] select-none `}
             />
           </Link>
         )}

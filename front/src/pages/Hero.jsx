@@ -3,19 +3,26 @@ import { IoIosTrendingUp } from "react-icons/io";
 import Carousel from "../ui/Carousel";
 import HeroLink from "../ui/HeroLink";
 import Page from "../ui/Page";
+import { getTrending } from "../services/tmdbApi";
+import { useQuery } from "@tanstack/react-query";
 
 function Hero() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["trending"],
+    queryFn: getTrending,
+    staleTime: 999999 * 999999,
+  });
+
   return (
     <Page className={"overflow-hidden bg-gray-200"}>
-      {/* <main className="overflow-hidden bg-gray-200"> */}
-      <section className="bg-light-blue min-h-[338px] overflow-hidden flex justify-center">
-        <div className="container py-4.5 bg-gradient-to-r from-light-blue via-[#22e5ff] to-light-blue">
+      <section className="bg-light-blue ">
+        <div className="container mx-auto pt-2 min-h-[340px]">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
             <h1 className="text-2xl">Trending movies right now:</h1>
           </div>
 
-          <Carousel />
+          <Carousel data={data} isLoading={isLoading} />
         </div>
       </section>
 
