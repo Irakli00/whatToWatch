@@ -11,7 +11,7 @@ import AnimeCard from "../ui/cards/AnimeCard.jsx";
 import Spinner from "../ui/primitives/Spinner.jsx";
 
 import { AppContext } from "../contexts/AppContext.jsx";
-import { getAnimeRecomendations } from "../services/kistuApi.js";
+
 import { getAnimeRecomendations2 } from "../services/aliListApi.js";
 
 function AnimeRecomendations() {
@@ -31,14 +31,13 @@ function AnimeRecomendations() {
   if (isLoading) return <Spinner></Spinner>;
 
   const animesData = data.data.Page.media;
-  console.log(animesData);
 
-  // animesData.forEach((anime) => {
-  //   const img = new Image();
-  //   img.src = anime?.attributes?.coverImage?.large;
+  animesData.forEach((anime) => {
+    const img = new Image();
+    img.src = anime.coverImage?.large;
 
-  //   localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
-  // }); //prefetch
+    localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
+  }); //prefetch
 
   return (
     <Page className="overflow-hidden bg-main-red-tint text-white">

@@ -5,9 +5,8 @@ import { useParams } from "react-router";
 import Page from "../ui/layout/Page";
 
 import { AppContext } from "../contexts/AppContext";
-import { KITSU_GENRES } from "../services/kistuApi";
 
-import { formatDate, formatRating, parseGenres } from "../helpers/formaters";
+import { formatDate, formatRating } from "../helpers/formaters";
 
 function AnimeDetails() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -19,38 +18,22 @@ function AnimeDetails() {
   const anime =
     clientQuery
       .getQueryData(["animeRecomendations", clientAnimePreferences])
-      ?.find((anime) => anime.id === id) ||
+      .data.Page.media.find((anime) => anime.id === id) ||
     JSON.parse(localStorage.getItem(id));
 
-  // if (isLoading) return <Spinner></Spinner>;
-
   const {
-    attributes: {
-      // slug,
-      // synopsis,
-      description,
-      titles,
-      // canonicalTitle,
-      averageRating,
-      ratingFrequencies,
-      startDate,
-      endDate,
-      nextRelease,
-      popularityRank,
-      ageRating,
-      ageRatingGuide,
-      subtype,
-      status,
-      posterImage,
-      coverImage,
-      episodeCount,
-      episodeLength,
-      showType,
-    },
-    relationships: { genres },
+    type,
+    popularity,
+    coverImage,
+    bannerImage,
+    genres,
+    title,
+    averageScore,
+    description,
+    startDate,
   } = anime;
 
-  const gerneIds = genres.data.map((g) => g.id);
+  // if (isLoading) return <Spinner></Spinner>;
 
   return (
     <Page className=" bg-white-red-tint">
@@ -61,7 +44,7 @@ function AnimeDetails() {
             <img
               draggable={false}
               className="w-full h-full mask-x-from-91% "
-              src={coverImage.large}
+              src={bannerImage}
               alt={``} //often covers are not there alt just makes them invisible
             />
           </div>
@@ -71,22 +54,19 @@ function AnimeDetails() {
             <div className="flex gap-3.5">
               <img
                 className="max-h-96 rounded-md"
-                src={posterImage.large}
-                alt={`${titles.en} poster`}
+                src={coverImage.large}
+                alt={`${title.en} poster`}
               />
               <article className="flex flex-col gap-7">
                 <h1 className="w-fit text-5xl text-balance flex gap-2 group">
-                  {titles.en || titles.en_jp}
+                  {title.english || title.romanji}
                   <span className="opacity-1  ease-in duration-75 group-hover:opacity-100">
-                    <i>({titles.ja_jp})</i>
+                    <i>({title.native})</i>
                   </span>
                 </h1>
                 {/* <p className="w-[75%] leading-6">{synopsis}</p> */}
                 <ul className="flex gap-2">
-                  {parseGenres(
-                    gerneIds.length ? gerneIds : clientAnimePreferences.genres,
-                    KITSU_GENRES
-                  ).map((genre) => (
+                  {genres.map((genre) => (
                     <li key={genre}>
                       <i>{genre}</i>
                     </li>
@@ -100,13 +80,13 @@ function AnimeDetails() {
             <div>
               <p>
                 <strong>Average Rating:</strong>{" "}
-                {formatRating(averageRating / 10)}
+                {formatRating(averageScore / 10)}
               </p>
               <p>
-                <strong>Popularity Rank:</strong> {popularityRank}
+                <strong>Popularity Rank:</strong> {popularity}
               </p>
 
-              <p>
+              {/* <p>
                 <strong>Subtype:</strong> {subtype}
               </p>
               <p>
@@ -118,7 +98,7 @@ function AnimeDetails() {
               </p>
               <p>
                 <strong>Age Rating Guide:</strong> {ageRatingGuide}
-              </p>
+              </p> */}
             </div>
 
             <div>
@@ -126,33 +106,25 @@ function AnimeDetails() {
                 <strong>Status:</strong> {status}
               </p>
               <p>
-                <strong>Start Date:</strong> {formatDate(startDate)}
+                <strong>Start Date:</strong> {formatDate(startDate.year)}
               </p>
-              {status !== "current" && (
+              {/* {status !== "current" && (
                 <p>
-                  <strong>End Date:</strong> {formatDate(endDate)}
+                  <strong>End Date:</strong> {formatDate(endDate.year)}
                 </p>
-              )}
-              {status === "current" ||
+              )} */}
+              {/* {status === "current" ||
                 (nextRelease && (
                   <p>
                     <strong>Next Release:</strong> {nextRelease || "N/A"}
                   </p>
-                ))}
-              <p>
+                ))} */}
+              {/* <p>
                 <strong>Episode Count:</strong> {episodeCount}
               </p>
               <p>
                 <strong>Episode Length:</strong> {episodeLength} minutes
-              </p>
-            </div>
-
-            <div>
-              {Object.entries(ratingFrequencies).map(([rating, count]) => (
-                <p key={rating}>
-                  <strong>{rating / 2} stars:</strong> {count} votes
-                </p>
-              ))}
+              </p> */}
             </div>
           </article>
         </div>
