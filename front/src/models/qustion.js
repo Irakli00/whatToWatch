@@ -14,7 +14,7 @@ class QuestionOption {
 
 class Question {
   constructor(questionText, options = []) {
-    this.questionText = questionText;
+    this.qText = questionText;
     this.options = options;
   }
 
@@ -25,9 +25,20 @@ class Question {
   }
 }
 
+function createQuestion(key, qText, options) {
+  const q = new MediaQuestion("id", key, qText);
+
+  options.forEach((el) => {
+    q.addOption(el.qText, el.value, el.followUps);
+  });
+
+  return q;
+}
+
+export { createQuestion };
+
 export class MediaQuestion {
-  constructor(id, key, questionText) {
-    this.id = id;
+  constructor(key, questionText) {
     this.key = key;
     this.questions = new Question(questionText);
   }

@@ -4,11 +4,15 @@ import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
 import { useContext } from "react";
 
-import { AppContext } from "../contexts/AppContext.jsx";
+import { AppContext } from "../../contexts/AppContext.jsx";
 
-import { parseGenres, formatDate, formatRating } from "../helpers/formaters.js";
+import {
+  parseGenres,
+  formatDate,
+  formatRating,
+} from "../../helpers/formaters.js";
 
-import { TMDB_GENRES } from "../services/tmdbApi.js";
+import { TMDB_GENRES } from "../../services/tmdbApi.js";
 
 function MovieCard({
   movie,

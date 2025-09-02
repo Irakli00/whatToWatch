@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { KITSU_GENRES } from "../services/kistuApi";
 // import Spinner from "../ui/Spinner";
 import { formatDate, formatRating, parseGenres } from "../helpers/formaters";
-import Page from "../ui/Page";
+import Page from "../ui/layout/Page";
 
 import { useContext } from "react";
 import { AppContext } from "../contexts/AppContext";

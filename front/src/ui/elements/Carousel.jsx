@@ -2,8 +2,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
-import MovieCard from "./MovieCard";
-import Spinner from "./Spinner";
+import MovieCard from "../cards/MovieCard";
+import Spinner from "../primitives/Spinner";
 
 function Carousel({
   data,
@@ -15,6 +15,7 @@ function Carousel({
   type = "movie",
 }) {
   if (isLoading) return <Spinner></Spinner>;
+
   return (
     <Swiper
       // spaceBetween={20}

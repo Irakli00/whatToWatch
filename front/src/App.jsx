@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import AppLayout from "./ui/AppLayout";
+import AppLayout from "./ui/layout/AppLayout";
 import Hero from "./pages/Hero";
 import MediaSelection from "./pages/MediaSelection";
 import MovieRecomendations from "./pages/MovieRecomendations";
@@ -27,9 +27,7 @@ const router = createBrowserRouter([
       { index: true, element: <Hero /> },
       {
         path: "/selectMovies",
-        element: (
-          <MediaSelection questionsType="movieQuestions"></MediaSelection>
-        ),
+        element: <MediaSelection questionsType="movieQs"></MediaSelection>,
       },
       {
         path: "/recomendations/movies",
@@ -41,9 +39,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/selectAnimes",
-        element: (
-          <MediaSelection questionsType="animeQuestions"></MediaSelection>
-        ),
+        element: <MediaSelection questionsType="animeQs"></MediaSelection>,
       },
       {
         path: "/recomendations/animes",

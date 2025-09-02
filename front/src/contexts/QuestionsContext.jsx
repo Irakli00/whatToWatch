@@ -4,25 +4,17 @@ import { MediaQuestion } from "../models/qustion";
 
 const QuestionsContext = createContext();
 
-const animeQuestions = [
-  new MediaQuestion(
-    "media-type",
-    "mediaType",
-    "What type of media do you prefer?"
-  )
+const animeQs = [
+  new MediaQuestion("mediaType", "What type of media do you prefer?")
     .addOption("Anime", "anime", [
-      new MediaQuestion("release-date", "releaseDate", "Released when?")
+      new MediaQuestion("releaseDate", "Released when?")
         .addOption("Before 2000", "..2000", [
-          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+          new MediaQuestion("subtype", "Subtype prefferences?")
             .addOption("No", null)
             .addOption("Yeah", null, [
-              new MediaQuestion(
-                "anime-subtype",
-                "subtype",
-                "What anime format do you prefer?"
-              )
+              new MediaQuestion("subtype", "What anime format do you prefer?")
                 .addOption("TV Series", "TV", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("Either", null),
@@ -35,16 +27,12 @@ const animeQuestions = [
             ]),
         ])
         .addOption("After 2000", "2000..", [
-          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+          new MediaQuestion("subtype", "Subtype prefferences?")
             .addOption("No", null)
             .addOption("Yeah", null, [
-              new MediaQuestion(
-                "anime-subtype",
-                "subtype",
-                "What anime format do you prefer?"
-              )
+              new MediaQuestion("subtype", "What anime format do you prefer?")
                 .addOption("TV Series", "TV", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("To Be Announced", "tba")
@@ -62,41 +50,37 @@ const animeQuestions = [
         .addOption("Doesn't matter", null),
     ])
     .addOption("Manga", "manga", [
-      new MediaQuestion("release-date", "releaseDate", "Released when?")
+      new MediaQuestion("releaseDate", "Released when?")
         .addOption("Before 2000", "..2000", [
-          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+          new MediaQuestion("subtype", "Subtype prefferences?")
             .addOption("No", null)
             .addOption("Yeah", null, [
-              new MediaQuestion(
-                "manga-subtype",
-                "subtype",
-                "What Manga format do you prefer?"
-              )
+              new MediaQuestion("subtype", "What Manga format do you prefer?")
                 .addOption("Traditional Manga", "manga", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("Either", null),
                 ])
                 .addOption("Light Novel", "novel", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished"),
                 ])
                 .addOption("Manhwa", "manhwa", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("Either", null),
                 ])
                 .addOption("Manhua ", "manhua", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("Either", null),
                 ])
                 .addOption("Self-Published", "doujin", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("Either", null),
@@ -105,16 +89,12 @@ const animeQuestions = [
             ]),
         ])
         .addOption("After 2000", "2000..", [
-          new MediaQuestion("subtype", "subtype", "Subtype prefferences?")
+          new MediaQuestion("subtype", "Subtype prefferences?")
             .addOption("No", null)
             .addOption("Yeah", null, [
-              new MediaQuestion(
-                "manga-subtype",
-                "subtype",
-                "What Manga format do you prefer?"
-              )
+              new MediaQuestion("subtype", "What Manga format do you prefer?")
                 .addOption("Traditional Manga", "manga", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("To Be Announced", "tba")
@@ -123,7 +103,7 @@ const animeQuestions = [
                     .addOption("Surprise Me", null),
                 ])
                 .addOption("Light Novel", "novel", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("To Be Announced", "tba")
@@ -132,7 +112,7 @@ const animeQuestions = [
                     .addOption("Surprise Me", null),
                 ])
                 .addOption("Manhwa", "manhwa", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("To Be Announced", "tba")
@@ -141,7 +121,7 @@ const animeQuestions = [
                     .addOption("Surprise Me", null),
                 ])
                 .addOption("Manhua ", "manhua", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("To Be Announced", "tba")
@@ -150,7 +130,7 @@ const animeQuestions = [
                     .addOption("Surprise Me", null),
                 ])
                 .addOption("Self-Published", "doujin", [
-                  new MediaQuestion("status", "status", "Any Status?")
+                  new MediaQuestion("status", "Any Status?")
                     .addOption("Ongoing", "current")
                     .addOption("Finished", "finished")
                     .addOption("To Be Announced", "tba")
@@ -164,25 +144,25 @@ const animeQuestions = [
         .addOption("Doesn't matter", null),
     ]),
 
-  new MediaQuestion("genres", "genres", "Preferred genres?")
+  new MediaQuestion("genres", "Preferred genres?")
     .addOption("Action", ["1"])
     .addOption("Comedy", ["3"])
     .addOption("Drama", ["4"])
     .addOption("Doesn't matter", null),
 
-  new MediaQuestion("rating", "rating", "Minimum rating?")
+  new MediaQuestion("rating", "Minimum rating?")
     .addOption("7+", "7")
     .addOption("5+", "5")
     .addOption("Doesn't matter", null),
 
-  new MediaQuestion("sort", "sort", "Sort by?")
+  new MediaQuestion("sort", "Sort by?")
     .addOption("Populars first", "popularityRank")
     .addOption("Less known first", "-popularityRank")
     .addOption("Higher rated first", "averageRating")
     .addOption("Lower rated first", "-averageRating"),
 ];
 
-const movieQuestions = [
+const movieQs = [
   // sort_by = popularity.desc;
 
   // &certification=PG-13
@@ -195,11 +175,7 @@ const movieQuestions = [
   //with_runtime.gte=90&with_runtime.lte=180
 
   // &with_original_language=en
-  new MediaQuestion(
-    "media-type",
-    "mediaType",
-    "What type of media do you prefer?"
-  )
+  new MediaQuestion("mediaType", "What type of media do you prefer?")
     .addOption("Animation", "animation")
     .addOption("Movie", "movie"),
 
@@ -209,13 +185,9 @@ const movieQuestions = [
     .addOption("Drama", ["18"])
     .addOption("Doesn't matter", null),
 
-  new MediaQuestion(
-    "certifications",
-    "certifications",
-    "Preferred Certification?"
-  )
+  new MediaQuestion("certifications", "Preferred Certification?")
     .addOption("Yeah", "oki", [
-      new MediaQuestion("certifications", "certifications", "Which one?")
+      new MediaQuestion("certifications", "Which one?")
         .addOption("G", "certification.G")
         .addOption("GPG", "certification.GPG")
         .addOption("PG-13", "certification.PG-13")
@@ -226,7 +198,7 @@ const movieQuestions = [
 
   // &certification.lte=R
 
-  new MediaQuestion("rating", "rating", "Minimum rating?")
+  new MediaQuestion("rating", "Minimum rating?")
     .addOption("7+", "vote_average.gte=7")
     .addOption("5+", "vote_average.gte=5")
     .addOption("Doesn't matter", null),
@@ -237,12 +209,12 @@ const movieQuestions = [
   //   .addOption("Long (>150 min)", { min: 150, max: 999 })
   //   .addOption("Doesn't matter", { min: 1, max: 999 }),
 
-  new MediaQuestion("language", "language", "Original language?")
+  new MediaQuestion("language", "Original language?")
     .addOption("English", "en-US")
     .addOption("French", "fr-FR")
     .addOption("Any language", null),
 
-  new MediaQuestion("release-date", "releaseDate", "When was it released?")
+  new MediaQuestion("releaseDate", "When was it released?")
     .addOption(
       "After 2000",
       `primary_release_date.gte=2000-01-01`
@@ -251,7 +223,7 @@ const movieQuestions = [
     .addOption("Before 2000", "release_date.lte=2000-01-01")
     .addOption("Doesn't matter", null),
 
-  new MediaQuestion("sort", "sort", "Sort by?")
+  new MediaQuestion("sort", "Sort by?")
     .addOption("Populars first", "popularity.desc")
     .addOption("Less known first", "popularity.asc")
     .addOption("Higher rated first", "vote_average.asc")
@@ -375,8 +347,8 @@ export function QuestionsProvider({ children }) {
   return (
     <QuestionsContext.Provider
       value={{
-        animeQuestions,
-        movieQuestions,
+        animeQs,
+        movieQs,
         movieFilterOptions,
         animeFilterOptions,
         questionNum,

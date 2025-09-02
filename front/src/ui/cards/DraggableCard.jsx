@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "../lib/utils";
+import { cn } from "../../lib/utils";
 import React, { useRef, useState, useEffect } from "react";
 import {
   // eslint-disable-next-line no-unused-vars
@@ -14,6 +14,12 @@ import {
 import { Link } from "react-router";
 
 export const DraggableCardBody = ({ className, children, type, paramId }) => {
+  // to={type === "movie" ? `/movie/${paramId}` : `/anime/${paramId}`}
+  const lookUpObj = {
+    movie: { toUrl: `/movie/${paramId}`, bg: `bg-light-orange` },
+    anime: { toUrl: `/anime/${paramId}`, bg: "bg-red-500" },
+  };
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const cardRef = useRef(null);
@@ -159,12 +165,12 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        `relative flex items-center justify-center w-[30%] overflow-hidden rounded-md ${type === "movie" ? "bg-light-orange" : "bg-red-500"} shadow-2xl transform-3d dark:color-orange`,
+        `relative flex items-center justify-center w-[30%] overflow-hidden rounded-md ${lookUpObj[type].bg} shadow-2xl transform-3d dark:color-orange`,
         className
       )}
     >
       <Link
-        to={type === "movie" ? `/movie/${paramId}` : `/anime/${paramId}`}
+        to={lookUpObj[type].toUrl}
         draggable={false}
         onClick={(e) => {
           if (document.body.style.cursor === "grabbing") {

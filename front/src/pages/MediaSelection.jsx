@@ -1,6 +1,6 @@
 import { QuestionsProvider } from "../contexts/QuestionsContext";
-import MediaForm from "../ui/MediaForm";
-import Page from "../ui/Page";
+import MediaForm from "../ui/elements/MediaForm";
+import Page from "../ui/layout/Page";
 
 function MediaSelection({ questionsType }) {
   return (

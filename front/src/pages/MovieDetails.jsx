@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router";
 import { GoStar } from "react-icons/go";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import { getMovie } from "../services/tmdbApi";
-import Spinner from "../ui/Spinner";
-import Page from "../ui/Page";
+import Spinner from "../ui/primitives/Spinner";
+import Page from "../ui/layout/Page";
 import { formatBudget, formatDate, formatRating } from "../helpers/formaters";
 import { AppContext } from "../contexts/AppContext";
-import Carousel from "../ui/Carousel";
+import Carousel from "../ui/elements/Carousel";
 
 function MovieDetails() {
   const { id: movieId } = useParams();

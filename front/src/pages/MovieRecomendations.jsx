@@ -1,17 +1,17 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { getMovieRecomendations } from "../services/tmdbApi.js";
-import Spinner from "../ui/Spinner.jsx";
-import MovieCard from "../ui/MovieCard.jsx";
+import Spinner from "../ui/primitives/Spinner.jsx";
+import MovieCard from "../ui/cards/MovieCard.jsx";
 import React, { useContext } from "react";
 import { AppContext } from "../contexts/AppContext.jsx";
-import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
+import RecomendationsFilter from "../ui/elements/RecomendationsFilter.jsx";
 
 import {
   DraggableCardBody,
   DraggableCardContainer,
-} from "../ui/DraggableCard.jsx";
-import Page from "../ui/Page.jsx";
+} from "../ui/cards/DraggableCard.jsx";
+import Page from "../ui/layout/Page.jsx";
 
 function MovieRecomendations() {
   const { clientMoviePreferences } = useContext(AppContext);

@@ -1,16 +1,16 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import { AppContext } from "../contexts/AppContext.jsx";
 import { getAnimeRecomendations } from "../services/kistuApi.js";
-import Spinner from "../ui/Spinner.jsx";
-import AnimeCard from "../ui/AnimeCard.jsx";
+import Spinner from "../ui/primitives/Spinner.jsx";
+import AnimeCard from "../ui/cards/AnimeCard.jsx";
 import {
   DraggableCardContainer,
   DraggableCardBody,
-} from "../ui/DraggableCard.jsx";
-import RecomendationsFilter from "../ui/RecomendationsFilter.jsx";
-import Page from "../ui/Page.jsx";
+} from "../ui/cards/DraggableCard.jsx";
+import RecomendationsFilter from "../ui/elements/RecomendationsFilter.jsx";
+import Page from "../ui/layout/Page.jsx";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -43,10 +43,9 @@ function AnimeRecomendations() {
         >
           {animesData.map((anime, i) => {
             // console.log(anime.id);
-
             if (i === 0)
               return (
-                <>
+                <React.Fragment key={i}>
                   <button
                     draggable="false"
                     className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
@@ -67,7 +66,7 @@ function AnimeRecomendations() {
                       coverImgMinW={"full"}
                     />
                   </DraggableCardBody>
-                </>
+                </React.Fragment>
               );
 
             return (

@@ -1,8 +1,8 @@
 import { IoIosTrendingUp } from "react-icons/io";
 
-import Carousel from "../ui/Carousel";
-import HeroLink from "../ui/HeroLink";
-import Page from "../ui/Page";
+import Carousel from "../ui/elements/Carousel";
+import HeroLink from "../ui/primitives/HeroLink";
+import Page from "../ui/layout/Page";
 import { getTrending } from "../services/tmdbApi";
 import { useQuery } from "@tanstack/react-query";
 

@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext } from "../../contexts/AppContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { QuestionsContext } from "../contexts/QuestionsContext";
+import { QuestionsContext } from "../../contexts/QuestionsContext";
 
 function MediaForm({ questionsType }) {
   const { questionNum, setQuestionNum } = useContext(QuestionsContext);
@@ -44,22 +44,23 @@ function MediaForm({ questionsType }) {
   const key = qToAsk[questionNum]?.key || qToAsk[0].key;
   // const currentQ = qToAsk[questionNum].questions;
   const currentQ = qToAsk?.[questionNum]?.questions || qToAsk[0].questions;
-  const label = currentQ.questionText;
+  // const label = currentQ.questionText;
+  const label = currentQ.qText;
   const options = currentQ.options;
 
   const { register, handleSubmit } = useForm();
 
   async function onSubmit() {
     navigate(
-      `/recomendations/${questionsType === "movieQuestions" ? "movies" : "animes"}` //good so far
+      `/recomendations/${questionsType === "movieQs" ? "movies" : "animes"}` //good so far
     );
   }
 
   function onSelect(selectedOption, optionIndex) {
-    if (questionsType === "movieQuestions") {
+    if (questionsType === "movieQs") {
       setClientMoviePreferences((p) => ({ ...p, [key]: selectedOption }));
     }
-    if (questionsType === "animeQuestions") {
+    if (questionsType === "animeQs") {
       setClientAnimePreferences((p) => ({ ...p, [key]: selectedOption }));
     }
     const selectedOptionObj = currentQ.options[optionIndex];
@@ -80,7 +81,7 @@ function MediaForm({ questionsType }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`flex flex-col mt-[20dvh] items-center gap-10 p-12  rounded-3xl shadow-xl  mx-auto ${questionsType === "movieQuestions" ? "bg-bright-yellow-tint" : "bg-main-red "}`}
+      className={`flex flex-col mt-[20dvh] items-center gap-10 p-12  rounded-3xl shadow-xl  mx-auto ${questionsType === "movieQs" ? "bg-bright-yellow-tint" : "bg-main-red "}`}
     >
       {/* Question Label */}
       <label
