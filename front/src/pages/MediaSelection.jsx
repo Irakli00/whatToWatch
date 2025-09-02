@@ -5,13 +5,11 @@ import MediaForm from "../ui/elements/MediaForm";
 function MediaSelection({ questionsType, type }) {
   return (
     <Page className={"bg-gray-200"}>
-      <main className={`overflow-hidden `}>
-        <section className="cusom-container ">
-          {/* <QuestionsProvider> */}
-          <MediaForm type={type} questionsType={questionsType}></MediaForm>
-          {/* </QuestionsProvider> */}
-        </section>
-      </main>
+      <section className="cusom-container ">
+        {/* <QuestionsProvider> */}
+        <MediaForm type={type} questionsType={questionsType}></MediaForm>
+        {/* </QuestionsProvider> */}
+      </section>
     </Page>
   );
 }

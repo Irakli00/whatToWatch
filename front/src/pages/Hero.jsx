@@ -32,7 +32,7 @@ function Hero() {
         </div>
       </section>
 
-      <section className="cusom-container pt-5 text-center text-dark-blue">
+      <section className="cusom-container mt-8 text-center text-dark-blue">
         <h1 className="text-6xl font-bold">
           Can't decide what to watch tonight?
         </h1>

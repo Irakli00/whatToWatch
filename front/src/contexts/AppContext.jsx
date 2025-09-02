@@ -22,7 +22,7 @@ function AppProvider({ children }) {
     genres: ["1", "2"],
     rating: "7",
     releaseDate: "2000..",
-    season: null,
+    // season: null,
     status: null,
     subtype: "TV",
     sort: null,

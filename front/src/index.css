@@ -12,6 +12,7 @@
   --color-light-orange: #ffb703;
   --color-orange: #fb8500;
   --color-main-red: #ec0800;
+  --color-bright-red: rgb(255, 81, 81);
   --color-main-red-tint: #da1711;
   /* --color-white-red-tint: rgba(255, 0, 0, 0.212); */
   --color-white-red-tint: rgb(255, 217, 217);
@@ -21,8 +22,9 @@
 }
 
 /* main {
-  background-color: rgb(275, 255, 217);
+  background-color: rgb(255, 81, 81);
 } */
+
 @layer base {
   body {
     @apply leading-none font-sans;

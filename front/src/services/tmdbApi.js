@@ -87,7 +87,7 @@ async function getMovieRecomendations({
   // &include_adult=false
   //no error and null data handling
   const url = `https://api.themoviedb.org/3/discover/movie?${params}${rating ? `&${rating}` : ""}${releaseDate ? `&${releaseDate}` : ""}${certification ? `&${certification}` : ""}&vote_count.gte=10`; //just because
-  console.log(url);
+  // console.log(url);
 
   const movieRecomendations = await fetch(url, {
     method: "GET",

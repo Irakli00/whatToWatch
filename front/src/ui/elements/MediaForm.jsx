@@ -30,6 +30,8 @@ function MediaForm({ questionsType }) {
     },
   };
 
+  const soultrack = lookUpObj[questionsType]; //idunno what to name it
+
   const { questionNum, setQuestionNum } = useContext(QuestionsContext);
   const { setClientMoviePreferences, setClientAnimePreferences } =
     useContext(AppContext);
@@ -76,11 +78,11 @@ function MediaForm({ questionsType }) {
   const { register, handleSubmit } = useForm();
 
   async function onSubmit() {
-    navigate(lookUpObj[questionsType].navigateUrl);
+    navigate(soultrack.navigateUrl);
   }
 
   function onSelect(selectedOption, optionIndex) {
-    lookUpObj[questionsType].updatePreferences(selectedOption);
+    soultrack.updatePreferences(selectedOption);
 
     const selectedOptionObj = currentQ.options[optionIndex];
 
@@ -100,11 +102,11 @@ function MediaForm({ questionsType }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`flex flex-col mt-[20dvh] items-center gap-10 p-12  rounded-3xl shadow-xl  mx-auto ${lookUpObj[questionsType].bg}`}
+      className={`flex flex-col mt-[20dvh] items-center gap-10 p-12  rounded-3xl shadow-xl  mx-auto ${soultrack.bg}`}
     >
       <label
         htmlFor="selectedOption"
-        className={`text-4xl font-extrabold ${lookUpObj[questionsType].label} text-center`}
+        className={`text-4xl font-extrabold ${soultrack.label} text-center`}
       >
         {label}
       </label>
@@ -127,7 +129,7 @@ function MediaForm({ questionsType }) {
                 }
                 onSelect(el.value, i);
               }}
-              className={`flex-1 px-10 py-6 text-2xl rounded-2xl shadow-lg md:text-2xl font-semibold ${lookUpObj[questionsType].btn} transition duration-300 ease-in-out transform hover:scale-105`}
+              className={`flex-1 px-10 py-6 text-2xl rounded-2xl shadow-lg md:text-2xl font-semibold ${soultrack.btn} transition duration-300 ease-in-out transform hover:scale-105`}
             >
               {el.text}
             </button>

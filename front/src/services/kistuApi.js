@@ -83,7 +83,11 @@ async function getAnimeRecomendations({
   // filter[ageRating] = PG;
   const params = new URLSearchParams();
 
-  if (genres) params.append("filter[categories]", genres);
+  if (genres) {
+    params.append("filter[categories]", genres);
+  } else {
+    params.append("filter[categories]", [1]);
+  } //quick fix
   if (releaseDate) params.append("filter[year]", releaseDate);
 
   if (status) params.append("filter[status]", status);
