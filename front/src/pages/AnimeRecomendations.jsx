@@ -12,6 +12,7 @@ import Spinner from "../ui/primitives/Spinner.jsx";
 
 import { AppContext } from "../contexts/AppContext.jsx";
 import { getAnimeRecomendations } from "../services/kistuApi.js";
+import { getAnimeRecomendations2 } from "../services/aliListApi.js";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -19,21 +20,25 @@ function AnimeRecomendations() {
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
-  const { data: animesData, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["animeRecomendations", clientAnimePreferences],
     enabled: !!clientAnimePreferences,
     retry: 0,
-    queryFn: () => getAnimeRecomendations(clientAnimePreferences),
+    queryFn: () => getAnimeRecomendations2(clientAnimePreferences),
+    // queryFn: () => getAnimeRecomendations2(clientAnimePreferences),
   });
 
   if (isLoading) return <Spinner></Spinner>;
 
-  animesData.forEach((anime) => {
-    const img = new Image();
-    img.src = anime?.attributes?.coverImage?.large;
+  const animesData = data.data.Page.media;
+  console.log(animesData);
 
-    localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
-  }); //prefetch
+  // animesData.forEach((anime) => {
+  //   const img = new Image();
+  //   img.src = anime?.attributes?.coverImage?.large;
+
+  //   localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
+  // }); //prefetch
 
   return (
     <Page className="overflow-hidden bg-main-red-tint text-white">
