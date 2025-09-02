@@ -1,5 +1,6 @@
-import Logo from "../primitives/Logo";
 import { NavLink } from "react-router";
+
+import Logo from "../primitives/Logo";
 
 function Header() {
   return (

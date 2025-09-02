@@ -3,12 +3,14 @@ import { useNavigate, useParams } from "react-router";
 import { GoStar } from "react-icons/go";
 import { useContext } from "react";
 
-import { getMovie } from "../services/tmdbApi";
-import Spinner from "../ui/primitives/Spinner";
 import Page from "../ui/layout/Page";
-import { formatBudget, formatDate, formatRating } from "../helpers/formaters";
-import { AppContext } from "../contexts/AppContext";
 import Carousel from "../ui/elements/Carousel";
+import Spinner from "../ui/primitives/Spinner";
+
+import { AppContext } from "../contexts/AppContext";
+
+import { getMovie } from "../services/tmdbApi";
+import { formatBudget, formatDate, formatRating } from "../helpers/formaters";
 
 function MovieDetails() {
   const { id: movieId } = useParams();

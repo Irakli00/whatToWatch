@@ -1,8 +1,8 @@
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
 
-import { formatRating, parseGenres } from "../../helpers/formaters";
 import { KITSU_GENRES } from "../../services/kistuApi";
+import { formatRating, parseGenres } from "../../helpers/formaters";
 
 function AnimeCard({ anime, height = "100%", padding = "10px" }) {
   const {

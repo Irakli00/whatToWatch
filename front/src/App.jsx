@@ -27,7 +27,12 @@ const router = createBrowserRouter([
       { index: true, element: <Hero /> },
       {
         path: "/selectMovies",
-        element: <MediaSelection questionsType="movieQs"></MediaSelection>,
+        element: (
+          <MediaSelection
+            type={"movie"}
+            questionsType="movieQs"
+          ></MediaSelection>
+        ),
       },
       {
         path: "/recomendations/movies",
@@ -39,7 +44,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/selectAnimes",
-        element: <MediaSelection questionsType="animeQs"></MediaSelection>,
+        element: (
+          <MediaSelection
+            type={"anime"}
+            questionsType="animeQs"
+          ></MediaSelection>
+        ),
       },
       {
         path: "/recomendations/animes",

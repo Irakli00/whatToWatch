@@ -1,10 +1,12 @@
+import { useQuery } from "@tanstack/react-query";
 import { IoIosTrendingUp } from "react-icons/io";
+
+import Page from "../ui/layout/Page";
 
 import Carousel from "../ui/elements/Carousel";
 import HeroLink from "../ui/primitives/HeroLink";
-import Page from "../ui/layout/Page";
+
 import { getTrending } from "../services/tmdbApi";
-import { useQuery } from "@tanstack/react-query";
 
 function Hero() {
   const { data, isLoading } = useQuery({

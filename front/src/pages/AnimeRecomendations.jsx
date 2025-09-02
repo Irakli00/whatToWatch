@@ -1,16 +1,17 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useContext } from "react";
 
-import { AppContext } from "../contexts/AppContext.jsx";
-import { getAnimeRecomendations } from "../services/kistuApi.js";
-import Spinner from "../ui/primitives/Spinner.jsx";
-import AnimeCard from "../ui/cards/AnimeCard.jsx";
+import Page from "../ui/layout/Page.jsx";
 import {
   DraggableCardContainer,
   DraggableCardBody,
 } from "../ui/cards/DraggableCard.jsx";
 import RecomendationsFilter from "../ui/elements/RecomendationsFilter.jsx";
-import Page from "../ui/layout/Page.jsx";
+import AnimeCard from "../ui/cards/AnimeCard.jsx";
+import Spinner from "../ui/primitives/Spinner.jsx";
+
+import { AppContext } from "../contexts/AppContext.jsx";
+import { getAnimeRecomendations } from "../services/kistuApi.js";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -54,6 +55,7 @@ function AnimeRecomendations() {
                   </button>
 
                   <DraggableCardBody
+                    type={"anime"}
                     key={`k-${i || Math.random() * Math.random()}`}
                     className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                     paramId={anime.id}
@@ -71,6 +73,7 @@ function AnimeRecomendations() {
 
             return (
               <DraggableCardBody
+                type={"anime"}
                 paramId={anime.id}
                 key={`kk-${anime.id || Math.random() * Math.random()}`}
                 className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}

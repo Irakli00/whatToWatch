@@ -1,6 +1,6 @@
 "use client";
-import { cn } from "../../lib/utils";
 import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router";
 import {
   // eslint-disable-next-line no-unused-vars
   motion,
@@ -11,13 +11,13 @@ import {
   useVelocity,
   useAnimationControls,
 } from "motion/react";
-import { Link } from "react-router";
+import { cn } from "../../lib/utils";
 
 export const DraggableCardBody = ({ className, children, type, paramId }) => {
   // to={type === "movie" ? `/movie/${paramId}` : `/anime/${paramId}`}
   const lookUpObj = {
     movie: { toUrl: `/movie/${paramId}`, bg: `bg-light-orange` },
-    anime: { toUrl: `/anime/${paramId}`, bg: "bg-red-500" },
+    anime: { toUrl: `/anime/${paramId}`, bg: `bg-red-500` },
   };
 
   const mouseX = useMotionValue(0);

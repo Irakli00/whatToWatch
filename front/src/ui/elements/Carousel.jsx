@@ -48,10 +48,6 @@ function Carousel({
               </figcaption>
             </article>
           </SwiperSlide>
-
-          //           {cast.slice(0, 5).map((p) => (
-
-          // ))}
         );
       })}
     </Swiper>
