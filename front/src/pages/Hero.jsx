@@ -16,13 +16,17 @@ function Hero() {
   return (
     <Page className={"overflow-hidden bg-gray-200"}>
       <section className="bg-light-blue ">
-        <div className="container mx-auto pt-2 min-h-[340px]">
+        <div className="container overflow-x-hidden mx-auto pt-2 min-h-[340px]">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
             <h1 className="text-2xl">Trending movies right now:</h1>
           </div>
 
-          <Carousel data={data} isLoading={isLoading} />
+          <Carousel
+            data={data}
+            isLoading={isLoading}
+            className={"overflow-visible!"}
+          />
         </div>
       </section>
 

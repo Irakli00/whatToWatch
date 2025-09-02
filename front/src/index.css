@@ -112,10 +112,8 @@
     display: flex !important;
     justify-content: center;
     align-items: center;
-    min-height: 300px;
-  }
-
-  .swiper-slide {
+    /* min-height: 300px; */
+    /* overflow: unset !important; */
   }
 }
 /* ---------------------- */
