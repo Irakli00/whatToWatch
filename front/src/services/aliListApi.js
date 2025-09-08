@@ -1,4 +1,4 @@
-function getAnimeRecomendations2({
+async function getAnimeRecomendations2({
   mediaType, //uppercase
   genres, //genre_in
   releaseDate,
@@ -20,7 +20,6 @@ function getAnimeRecomendations2({
     // startDate_greater: "20000403",
     startDate_greater: "20000403",
   };
-  console.log(variables);
 
   const query = `query(
     $genre_in: [String] 
@@ -143,7 +142,9 @@ function getAnimeRecomendations2({
         variables: variables,
       }),
     };
-  const x = fetch(url, options).then((res) => res.json());
+  const x = await fetch(url, options)
+    .then((res) => res.json())
+    .then((data) => data.data.Page.media);
   return x;
 }
 

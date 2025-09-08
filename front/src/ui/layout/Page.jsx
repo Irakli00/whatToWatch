@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function Page({ children, className }) {
+function Page({ children, className, bgColor = "" }) {
   return (
     <motion.main
       className={className}
@@ -10,6 +10,7 @@ function Page({ children, className }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
+      style={{ backgroundColor: bgColor }}
     >
       {children}
     </motion.main>

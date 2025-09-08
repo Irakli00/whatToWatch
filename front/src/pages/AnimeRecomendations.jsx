@@ -30,7 +30,7 @@ function AnimeRecomendations() {
 
   if (isLoading) return <Spinner></Spinner>;
 
-  const animesData = data.data.Page.media;
+  const animesData = data;
 
   animesData.forEach((anime) => {
     const img = new Image();
