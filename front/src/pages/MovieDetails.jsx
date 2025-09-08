@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router";
-import { GoStar } from "react-icons/go";
-import { useContext } from "react";
+import { useParams } from "react-router";
 
 import Page from "../ui/layout/Page";
 import Carousel from "../ui/elements/Carousel";
@@ -10,14 +8,13 @@ import Spinner from "../ui/primitives/Spinner";
 import { AppContext } from "../contexts/AppContext";
 
 import { getMovie } from "../services/tmdbApi";
-import { formatBudget, formatDate, formatRating } from "../helpers/formaters";
+import { formatBudget, formatDate } from "../helpers/formaters";
+import GenreLink from "../ui/elements/GenreLink";
+import MediaHeader from "../ui/elements/MediaHeader";
+import CoverImage from "../ui/elements/CoverImg";
 
 function MovieDetails() {
   const { id: movieId } = useParams();
-
-  const navigate = useNavigate();
-  const { clientMoviePreferences, setClientMoviePreferences } =
-    useContext(AppContext);
 
   const { data, isLoading } = useQuery({
     queryKey: ["movie", movieId],
@@ -58,60 +55,25 @@ function MovieDetails() {
         <div className="cusom-container">
           <article className="mt-12">
             <div className="flex gap-3.5">
-              <div className="">
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${posterUrl}`}
-                  alt={title}
-                  // width="500px"
-                  className="max-w-[300px] rounded-xl"
-                />
-              </div>
+              <CoverImage
+                src={`https://image.tmdb.org/t/p/w500/${posterUrl}`}
+                alt={title}
+              ></CoverImage>
 
               <article className="flex flex-col ">
-                <div className="flex justify-between items-center">
-                  <div className="max-w-[70%]">
-                    <h1 className="text-5xl text-balance ">
-                      {title}
-                      {title !== originalTitle && (
-                        <span className="text-2xl ">
-                          <br />({originalTitle})
-                        </span>
-                      )}
-                    </h1>
-                    <p className="mt-1.5 opacity-60 text-pretty">
-                      <i>{tagline}</i>
-                    </p>
-                  </div>
-                  <div>
-                    <p className="flex text-2xl items-center justify-end gap-1">
-                      <GoStar></GoStar>
-                      {formatRating(rating)}
-                    </p>
-                    <p>
-                      <i>{votesNum} votes</i>
-                    </p>
-                  </div>
-                </div>
+                <MediaHeader
+                  title={title}
+                  originalTitle={originalTitle}
+                  tagline={tagline}
+                  rating={rating}
+                  votesCount={votesNum}
+                ></MediaHeader>
 
                 {/* <p className="w-[75%] leading-6">{}</p> */}
                 <ul className="flex items-center gap-3 mt-3">
                   {genres.map((g) => (
                     <li key={g.id}>
-                      <button
-                        className="py-1 px-2 rounded-sm border-1 font-bold text-dark-blue transition-all duration-00 ease-in hover:bg-bright-yellow"
-                        onClick={() => {
-                          setClientMoviePreferences({
-                            ...clientMoviePreferences,
-                            genres: [g.id],
-                          });
-
-                          navigate("/recomendations/movies");
-                        }}
-                      >
-                        {g.name}
-                      </button>
-                      {/* gonna redirect to each genre
-                      (setGenre in prefferences) */}
+                      <GenreLink type="movie" genre={g} key={g.id}></GenreLink>
                     </li>
                   ))}
                 </ul>
@@ -173,20 +135,5 @@ function MovieDetails() {
       </section>
     </Page>
   );
-}
-{
-  /* <img
-                  draggable={false}
-                  className="blur-xs absolute top-0 left-0"
-                  src={`https://image.tmdb.org/t/p/w500/${backdropUrl}`}
-                  alt={title}
-                /> */
-}
-{
-  /* <img
-                  draggable={false}
-                  src={`https://image.tmdb.org/t/p/w500//ivMGO3rmLRYgNaY5Yw0cwkeS07O.jpg`}
-                  alt={title}
-                /> */
 }
 export default MovieDetails;

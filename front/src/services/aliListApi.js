@@ -1,4 +1,4 @@
-async function getAnimeRecomendations2({
+async function getAnimeRecomendations({
   mediaType, //uppercase
   genres, //genre_in
   releaseDate,
@@ -20,6 +20,15 @@ async function getAnimeRecomendations2({
     // startDate_greater: "20000403",
     startDate_greater: "20000403",
   };
+
+  // excluded:
+  // season
+  // thumbnail(from trailer { })
+  // coverImage{extraLarge, medium}
+  // tags {id, name, description, category, rank, isGeneralSpoiler, isMediaSpoiler. isAdult}
+  // meanScore
+  // popularity
+  // synonyms
 
   const query = `query(
     $genre_in: [String] 
@@ -51,38 +60,22 @@ async function getAnimeRecomendations2({
         description
         startDate { year month day }
         endDate { year month day }
-        season
         episodes
         duration
         source
         trailer {
           id
-          site
-          thumbnail
+          site        
         }
         coverImage {
-          extraLarge
           large
-          medium
           color
+          extraLarge
         }
         bannerImage
         genres
-        synonyms
         averageScore
-        meanScore
-        popularity
         favourites
-        tags {
-          id
-          name
-          description
-          category
-          rank
-          isGeneralSpoiler
-          isMediaSpoiler
-          isAdult
-        }
         studios(isMain: true) {
           edges {
             isMain
@@ -148,4 +141,4 @@ async function getAnimeRecomendations2({
   return x;
 }
 
-export { getAnimeRecomendations2 };
+export { getAnimeRecomendations };

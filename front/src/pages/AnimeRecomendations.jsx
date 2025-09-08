@@ -12,7 +12,7 @@ import Spinner from "../ui/primitives/Spinner.jsx";
 
 import { AppContext } from "../contexts/AppContext.jsx";
 
-import { getAnimeRecomendations2 } from "../services/aliListApi.js";
+import { getAnimeRecomendations } from "../services/aliListApi.js";
 
 function AnimeRecomendations() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -24,8 +24,7 @@ function AnimeRecomendations() {
     queryKey: ["animeRecomendations", clientAnimePreferences],
     enabled: !!clientAnimePreferences,
     retry: 0,
-    queryFn: () => getAnimeRecomendations2(clientAnimePreferences),
-    // queryFn: () => getAnimeRecomendations2(clientAnimePreferences),
+    queryFn: () => getAnimeRecomendations(clientAnimePreferences),
   });
 
   if (isLoading) return <Spinner></Spinner>;

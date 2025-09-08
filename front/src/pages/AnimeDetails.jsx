@@ -7,6 +7,9 @@ import Page from "../ui/layout/Page";
 import { AppContext } from "../contexts/AppContext";
 
 import { formatDate, formatRating } from "../helpers/formaters";
+import GenreLink from "../ui/elements/GenreLink";
+import MediaHeader from "../ui/elements/MediaHeader";
+import CoverImage from "../ui/elements/CoverImg";
 
 function AnimeDetails() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -23,7 +26,6 @@ function AnimeDetails() {
   const {
     type,
     status,
-    popularity,
     coverImage,
     bannerImage,
     genres,
@@ -60,24 +62,21 @@ function AnimeDetails() {
           <div className="cusom-container">
             <article className="mt-12">
               <div className="flex gap-3.5">
-                <img
-                  className="max-h-96 rounded-md"
-                  src={coverImage.large}
+                <CoverImage
+                  src={coverImage.extraLarge}
                   alt={`${title.en} poster`}
-                />
+                ></CoverImage>
                 <article className="flex flex-col gap-7">
-                  <h1 className="w-fit text-5xl text-balance flex gap-2 group">
-                    {title.english || title.romanji}
-                    <span className="opacity-1  ease-in duration-75 group-hover:opacity-100">
-                      <i>({title.native})</i>
-                    </span>
-                  </h1>
-                  {/* <p className="w-[75%] leading-6">{synopsis}</p> */}
+                  <MediaHeader
+                    title={title.english}
+                    originalTitle={title.native}
+                    rating={averageScore}
+                    votesCount={null}
+                  ></MediaHeader>
+
                   <ul className="flex gap-2">
                     {genres.map((genre) => (
-                      <li key={genre}>
-                        <i>{genre}</i>
-                      </li>
+                      <GenreLink type="anime" genre={genre}></GenreLink>
                     ))}
                   </ul>
                   <p className="w-[75%] leading-6 text-balance">
@@ -92,9 +91,6 @@ function AnimeDetails() {
                   <strong>Average Rating:</strong>{" "}
                   {formatRating(averageScore / 10)}
                   favorite by ({favourites})
-                </p>
-                <p>
-                  <strong>Popularity Rank:</strong> {popularity}
                 </p>
 
                 <p>
@@ -126,21 +122,18 @@ function AnimeDetails() {
                 </p>
                 <p>
                   <strong>Start Date:</strong>
-                  {`${startDate.day} ${startDate.month},${startDate.year}`}
+                  {formatDate(
+                    `${startDate.year}-${startDate.month}-${startDate.day}`
+                  )}
                 </p>
                 {status === "FINISHED" && (
                   <p>
-                    <strong>End Date:</strong>{" "}
-                    {`${endDate.day} ${endDate.month},${endDate.year}`}
+                    <strong>End Date:</strong>
+                    {formatDate(
+                      `${endDate.year}- ${endDate.month}-${endDate.day}`
+                    )}
                   </p>
                 )}
-
-                {/* <p>
-                <strong>Episode Count:</strong> {episodeCount}
-              </p>
-              <p>
-                <strong>Episode Length:</strong> {episodeLength} minutes
-              </p> */}
               </div>
             </article>
           </div>
