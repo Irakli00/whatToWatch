@@ -2,9 +2,14 @@ import { useContext } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
 
+import DOMPurify from "dompurify";
+
 import Page from "../ui/layout/Page";
 
 import { AppContext } from "../contexts/AppContext";
+
+import { getSimilarAnimes } from "../services/aliListApi";
+// console.log(getSimilarAnimes(id));
 
 import { formatDate, formatRating } from "../helpers/formaters";
 import GenreLink from "../ui/elements/GenreLink";
@@ -49,7 +54,7 @@ function AnimeDetails() {
   return (
     <Page bgColor={coverImage.color} className="bg-white-red-tint">
       <section>
-        {coverImage?.medium && (
+        {bannerImage && (
           <div
             className="h-[300px] w-full mask-x-from-40% bg-center"
             style={{
@@ -70,8 +75,7 @@ function AnimeDetails() {
                   <MediaHeader
                     title={title.english}
                     originalTitle={title.native}
-                    rating={averageScore}
-                    votesCount={null}
+                    rating={averageScore / 10}
                   ></MediaHeader>
 
                   <ul className="flex gap-2">
@@ -79,8 +83,13 @@ function AnimeDetails() {
                       <GenreLink type="anime" genre={genre}></GenreLink>
                     ))}
                   </ul>
-                  <p className="w-[75%] leading-6 text-balance">
-                    {description}
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(description),
+                    }}
+                    className="w-[75%] leading-6 text-balance"
+                  >
+                    {/* {description} */}
                   </p>
                 </article>
               </div>

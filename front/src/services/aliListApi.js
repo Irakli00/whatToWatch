@@ -30,6 +30,12 @@ async function getAnimeRecomendations({
   // popularity
   // synonyms
 
+  // ------------------
+  // isLicensed; // Licensed for streaming
+  // volumes; // For manga
+  // chapters; // For manga
+  // ------------------
+
   const query = `query(
     $genre_in: [String] 
     $type: MediaType 
@@ -44,7 +50,7 @@ async function getAnimeRecomendations({
         type: $type,
         status: $status,
         format: $format,
-        sort: $sort
+        sort: $sort,
         startDate_greater:$startDate_greater
       ) {
         id
@@ -76,7 +82,7 @@ async function getAnimeRecomendations({
         genres
         averageScore
         favourites
-        studios(isMain: true) {
+        studios{
           edges {
             isMain
             node {
@@ -85,11 +91,29 @@ async function getAnimeRecomendations({
             }
           }
         }
+        externalLinks {
+          id
+          url
+          site
+          type
+          language
+        }
+        relations {
+          edges {
+            id
+            relationType  
+            node {
+              id
+              title { romaji english }
+              type
+              format
+            }
+          }
+        }
         characters(perPage: 5) {
           edges {
             id
             role
-            name
             voiceActors(language: JAPANESE) {
               id
               name { full native }
@@ -135,10 +159,89 @@ async function getAnimeRecomendations({
         variables: variables,
       }),
     };
-  const x = await fetch(url, options)
-    .then((res) => res.json())
-    .then((data) => data.data.Page.media);
-  return x;
+
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("HTTP Error:", response.status, errorText);
+      return;
+    }
+
+    const data = await response.json();
+
+    if (data.errors) {
+      console.error("GraphQL Errors:", data.errors);
+      return;
+    }
+
+    return data.data.Page.recommendations;
+  } catch (error) {
+    console.error("Network Error:", error);
+  }
 }
 
-export { getAnimeRecomendations };
+async function getSimilarAnimes(mediaId) {
+  const query = `
+    query($mediaId: Int!) {
+      Page(perPage: 10) {
+        recommendations(mediaId: $mediaId, sort: RATING_DESC) {
+          id
+          rating
+          userRating
+          mediaRecommendation {
+            id
+            title {
+              romaji
+              english
+            }
+            type
+            format
+            coverImage {
+              medium
+              large
+            }
+            averageScore
+            genres
+          }
+        }
+      }
+    }`;
+  const url = "https://graphql.anilist.co";
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: query,
+      variables: { mediaId: mediaId },
+    }),
+  };
+
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("HTTP Error:", response.status, errorText);
+      return;
+    }
+
+    const data = await response.json();
+
+    if (data.errors) {
+      console.error("GraphQL Errors:", data.errors);
+      return;
+    }
+
+    return data.data.Page.recommendations;
+  } catch (error) {
+    console.error("Network Error:", error);
+  }
+}
+
+export { getSimilarAnimes, getAnimeRecomendations };

@@ -25,9 +25,11 @@ function MediaHeader({ title, originalTitle, tagline, rating, votesCount }) {
           <GoStar></GoStar>
           {formatRating(rating)}
         </p>
-        <p>
-          <i>{votesCount} votes</i>
-        </p>
+        {votesCount && (
+          <p>
+            <i>{votesCount} votes</i>
+          </p>
+        )}
       </div>
     </div>
   );
