@@ -8,7 +8,7 @@ import Page from "../ui/layout/Page";
 
 import { AppContext } from "../contexts/AppContext";
 
-import { getSimilarAnimes } from "../services/aliListApi";
+import { getAnime, getSimilarAnimes } from "../services/aliListApi";
 // console.log(getSimilarAnimes(id));
 
 import { formatDate, formatRating } from "../helpers/formaters";
@@ -16,6 +16,7 @@ import GenreLink from "../ui/elements/GenreLink";
 import MediaHeader from "../ui/elements/MediaHeader";
 import CoverImage from "../ui/elements/CoverImg";
 import Carousel from "../ui/elements/Carousel";
+import Spinner from "../ui/primitives/Spinner";
 
 function AnimeDetails() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -24,8 +25,8 @@ function AnimeDetails() {
 
   const {
     data: similarAnimes,
-    isLoading,
-    isFetched,
+    isLoading: similarLoading,
+    isFetched: similarFetched,
   } = useQuery({
     queryKey: ["similarAnimes", id],
     queryFn: () => getSimilarAnimes(id),
@@ -33,10 +34,21 @@ function AnimeDetails() {
 
   const clientQuery = useQueryClient();
 
-  const anime =
-    clientQuery
-      .getQueryData(["animeRecomendations", clientAnimePreferences])
-      .find((anime) => anime.id === id) || JSON.parse(localStorage.getItem(id));
+  const cachedAnime = clientQuery
+    .getQueryData(["animeRecomendations", clientAnimePreferences])
+    ?.find((anime) => anime.id == id);
+  // || JSON.parse(localStorage.getItem(id));
+
+  const { data, isLoading: y } = useQuery({
+    queryKey: ["anime", id],
+    queryFn: () => getAnime(id),
+    enabled: !cachedAnime,
+    initialData: cachedAnime,
+  });
+
+  if (y) return <Spinner></Spinner>;
+
+  if (!data) return;
 
   const {
     type,
@@ -57,7 +69,7 @@ function AnimeDetails() {
     studios,
     characters,
     staff,
-  } = anime;
+  } = data;
 
   // if (isFetched) console.log(similarAnimes);
 
@@ -142,14 +154,14 @@ function AnimeDetails() {
                 <p>
                   <strong>Start Date:</strong>
                   {formatDate(
-                    `${startDate.year}-${startDate.month}-${startDate.day}`
+                    `${startDate?.year}-${startDate?.month}-${startDate?.day}`
                   )}
                 </p>
                 {status === "FINISHED" && (
                   <p>
                     <strong>End Date:</strong>
                     {formatDate(
-                      `${endDate.year}- ${endDate.month}-${endDate.day}`
+                      `${endDate?.year}- ${endDate?.month}-${endDate?.day}`
                     )}
                   </p>
                 )}
@@ -158,13 +170,13 @@ function AnimeDetails() {
           </div>
         </div>
         <aside className="container  mx-auto pt-2 min-h-[340px]">
-          {/* {isLoading && <Spinner></Spinner>} */}
-          {isFetched && (
+          {similarLoading && <Spinner></Spinner>}
+          {similarFetched && (
             <Carousel
               slidesPerView={7}
               type="anime"
               data={similarAnimes.map((an) => an.mediaRecommendation)}
-              isLoading={isLoading}
+              isLoading={similarLoading}
             />
           )}
           {/* {isFetched &&

@@ -12,13 +12,6 @@ function GenreLink({ type = "movie", genre }) {
     setClientAnimePreferences,
   } = useContext(AppContext);
 
-  if (typeof genre === "string") {
-    genre = {
-      id: Math.random(), //good for now
-      name: genre,
-    };
-  }
-
   const lookUpObj = {
     movie: {
       bg: `bright-yellow`,
@@ -53,7 +46,7 @@ function GenreLink({ type = "movie", genre }) {
         navigate(`/recomendations/${type}s`);
       }}
     >
-      {genre.name}
+      {type === "movie" ? genre.name : genre}
     </button>
   );
 }

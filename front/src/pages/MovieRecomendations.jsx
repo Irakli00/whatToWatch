@@ -23,7 +23,7 @@ function MovieRecomendations() {
     queryKey: ["movieRecomendations", clientMoviePreferences],
 
     enabled: !!clientMoviePreferences,
-    retry: 0,
+    retry: 2,
     queryFn: () => getMovieRecomendations(clientMoviePreferences),
   });
 

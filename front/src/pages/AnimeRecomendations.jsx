@@ -20,22 +20,20 @@ function AnimeRecomendations() {
   // eslint-disable-next-line no-unused-vars
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data: animesData, isLoading } = useQuery({
     queryKey: ["animeRecomendations", clientAnimePreferences],
     enabled: !!clientAnimePreferences,
-    retry: 0,
+    retry: 2,
     queryFn: () => getAnimeRecomendations(clientAnimePreferences),
   });
 
   if (isLoading) return <Spinner></Spinner>;
 
-  const animesData = data;
-
   animesData.forEach((anime) => {
     const img = new Image();
     img.src = anime.coverImage?.large;
 
-    localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
+    // localStorage.setItem(anime.id, JSON.stringify(anime)); //make this on hover on cards?
   }); //prefetch
 
   return (

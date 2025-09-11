@@ -5,8 +5,6 @@ import Page from "../ui/layout/Page";
 import Carousel from "../ui/elements/Carousel";
 import Spinner from "../ui/primitives/Spinner";
 
-import { AppContext } from "../contexts/AppContext";
-
 import { getMovie } from "../services/tmdbApi";
 import { formatBudget, formatDate } from "../helpers/formaters";
 import GenreLink from "../ui/elements/GenreLink";

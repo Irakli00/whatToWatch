@@ -6,9 +6,8 @@ async function getAnimeRecomendations({
   subtype,
   sort, //Sorting options (POPULARITY_DESC, SCORE_DESC, etc.)
 }) {
-  console.log(status, subtype);
   const variables = {
-    genre_in: [genres || "Action", "Drama"],
+    genre_in: [...(genres || "Action"), "Drama"],
     type: mediaType.toUpperCase() || "ANIME",
     status: !status ? "FINISHED" : status,
     format: !subtype ? (mediaType === "anime" ? "TV" : "MANGA") : subtype,
@@ -143,6 +142,8 @@ async function getAnimeRecomendations({
     }
   }`;
 
+  console.log(variables);
+
   const url = "https://graphql.anilist.co",
     options = {
       method: "POST",
@@ -181,7 +182,7 @@ async function getAnimeRecomendations({
 async function getSimilarAnimes(mediaId) {
   const query = `
     query($mediaId: Int!) {
-      Page(perPage: 10) {
+      Page(perPage: 15) {
         recommendations(mediaId: $mediaId, sort: RATING_DESC) {
           id
           rating
@@ -239,5 +240,64 @@ async function getSimilarAnimes(mediaId) {
     console.error("Network Error:", error);
   }
 }
+async function getAnime(animeId) {
+  const query = `
+    query ($id: Int!) {
+      Media(id: $id) {
+        id
+        title {
+          romaji
+          english
+          native
+        }
+        format
+        episodes
+        status
+        description
+        coverImage {
+          medium
+          large
+          extraLarge
+        }
+        averageScore
+        genres
+      }
+    }`;
 
-export { getSimilarAnimes, getAnimeRecomendations };
+  const url = "https://graphql.anilist.co";
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { id: animeId },
+    }),
+  };
+
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("HTTP Error:", response.status, errorText);
+      return;
+    }
+
+    const data = await response.json();
+
+    if (data.errors) {
+      console.error("GraphQL Errors:", data.errors);
+      return;
+    }
+
+    return data.data.Media;
+  } catch (error) {
+    console.error("Network Error:", error);
+  }
+}
+
+export { getSimilarAnimes, getAnimeRecomendations, getAnime };
