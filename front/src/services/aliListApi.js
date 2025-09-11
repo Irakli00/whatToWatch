@@ -6,17 +6,13 @@ async function getAnimeRecomendations({
   subtype,
   sort, //Sorting options (POPULARITY_DESC, SCORE_DESC, etc.)
 }) {
+  console.log(status, subtype);
   const variables = {
-    // genre_in: [genres],
-    genre_in: ["Action", "Drama"],
-    // type: mediaType.toUpperCase(),
-    type: "ANIME",
-    status: "FINISHED",
-    // status: status,
-    // format: subtype,
-    format: "TV",
-    // sort: sort,
-    sort: "POPULARITY_DESC",
+    genre_in: [genres || "Action", "Drama"],
+    type: mediaType.toUpperCase() || "ANIME",
+    status: !status ? "FINISHED" : status,
+    format: !subtype ? (mediaType === "anime" ? "TV" : "MANGA") : subtype,
+    sort: sort || "POPULARITY_DESC",
     // startDate_greater: "20000403",
     startDate_greater: "20000403",
   };
@@ -176,7 +172,7 @@ async function getAnimeRecomendations({
       return;
     }
 
-    return data.data.Page.recommendations;
+    return data.data.Page.media;
   } catch (error) {
     console.error("Network Error:", error);
   }

@@ -4,6 +4,7 @@ import "swiper/css";
 
 import MovieCard from "../cards/MovieCard";
 import Spinner from "../primitives/Spinner";
+import AnimeCard from "../cards/AnimeCard";
 
 function Carousel({
   data,
@@ -34,19 +35,7 @@ function Carousel({
           </SwiperSlide>
         ) : (
           <SwiperSlide key={el.name}>
-            <article className=" flex gap-1 max-w-[20%] items-center">
-              <img
-                className=" max-w-[120px]  rounded-[50%] aspect-[1/1]"
-                draggable={false}
-                // const [notLoaded, setNotLoaded] = useState();
-                // onError={() => setNotLoaded(true)} //if not loaded display something else
-                src={`https://image.tmdb.org/t/p/w300/${el.profile_path}`}
-              />
-              <figcaption className="text-center flex flex-col gap-1">
-                <span className="font-bold">{el.name}</span>
-                <span>{el.character}</span>
-              </figcaption>
-            </article>
+            <AnimeCard cardType="simple" anime={el}></AnimeCard>
           </SwiperSlide>
         );
       })}

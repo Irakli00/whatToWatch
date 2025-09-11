@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router";
 
 import DOMPurify from "dompurify";
@@ -15,11 +15,21 @@ import { formatDate, formatRating } from "../helpers/formaters";
 import GenreLink from "../ui/elements/GenreLink";
 import MediaHeader from "../ui/elements/MediaHeader";
 import CoverImage from "../ui/elements/CoverImg";
+import Carousel from "../ui/elements/Carousel";
 
 function AnimeDetails() {
   const { clientAnimePreferences } = useContext(AppContext);
 
   const { id } = useParams();
+
+  const {
+    data: similarAnimes,
+    isLoading,
+    isFetched,
+  } = useQuery({
+    queryKey: ["similarAnimes", id],
+    queryFn: () => getSimilarAnimes(id),
+  });
 
   const clientQuery = useQueryClient();
 
@@ -49,7 +59,7 @@ function AnimeDetails() {
     staff,
   } = anime;
 
-  // if (isLoading) return <Spinner></Spinner>;
+  // if (isFetched) console.log(similarAnimes);
 
   return (
     <Page bgColor={coverImage.color} className="bg-white-red-tint">
@@ -73,7 +83,7 @@ function AnimeDetails() {
                 ></CoverImage>
                 <article className="flex flex-col gap-7">
                   <MediaHeader
-                    title={title.english}
+                    title={title?.english}
                     originalTitle={title.native}
                     rating={averageScore / 10}
                   ></MediaHeader>
@@ -147,6 +157,21 @@ function AnimeDetails() {
             </article>
           </div>
         </div>
+        <aside className="container  mx-auto pt-2 min-h-[340px]">
+          {/* {isLoading && <Spinner></Spinner>} */}
+          {isFetched && (
+            <Carousel
+              slidesPerView={7}
+              type="anime"
+              data={similarAnimes.map((an) => an.mediaRecommendation)}
+              isLoading={isLoading}
+            />
+          )}
+          {/* {isFetched &&
+            similarAnimes
+              .map((an) => an.mediaRecommendation)
+              .map((anime) => <AnimeCard anime={anime}></AnimeCard>)} */}
+        </aside>
       </section>
     </Page>
   );
