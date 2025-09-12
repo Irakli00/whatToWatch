@@ -27,6 +27,7 @@ import Spinner from "../ui/primitives/Spinner";
 import ParticularInfo from "../ui/elements/ParticularInfo";
 
 function AnimeDetails() {
+  // source;
   const { clientAnimePreferences } = useContext(AppContext);
 
   const { id } = useParams();
@@ -80,6 +81,10 @@ function AnimeDetails() {
     externalLinks,
     relations: { edges: relatedMedia },
   } = data;
+
+  const adaptation = relatedMedia.filter(
+    (r) => r.relationType === "ADAPTATION"
+  )[0];
 
   const streamingLinks = externalLinks.filter((el) => el.type === "STREAMING");
   return (
@@ -137,28 +142,29 @@ function AnimeDetails() {
                 </ParticularInfo>
                 <ParticularInfo>
                   <p>
-                    {type.toLowerCase()} adaptation of{" "}
-                    <Link target="_blank" to={`/anime/101517`}>
-                      {source}
+                    {source === "ORIGINAL"
+                      ? `${type.toLowerCase()} is the source of`
+                      : `${type.toLowerCase()} adaptation of`}{" "}
+                    <Link
+                      className="underline"
+                      target="_blank"
+                      to={`/anime/${adaptation.node.id}`}
+                    >
+                      {adaptation.node.title.english}
                     </Link>
-                    {/* manga id: drom relationships */}
                   </p>
                 </ParticularInfo>
+
+                {episodes && (
+                  <ParticularInfo>
+                    <p>
+                      {episodes} episodes <i>({duration}min each)</i>
+                    </p>
+                  </ParticularInfo>
+                )}
                 <ParticularInfo>
                   <p>
-                    {episodes} episodes <i>({duration}min each)</i>
-                  </p>
-                </ParticularInfo>
-                {/* <p>
-                <strong>Age Rating:</strong> {ageRating}
-              </p> */}
-                {/* <p>
-                <strong>Age Rating Guide:</strong> {ageRatingGuide}
-              </p> */}
-                <ParticularInfo>
-                  {/* <p>is {status.toLowerCase()}</p> */}
-                  <p>
-                    Aired:
+                    {type === "ANIME" ? "Aired:" : "Released:"}
                     {formatDate(
                       `${startDate?.year}-${startDate?.month}-${startDate?.day}`
                     )}{" "}
@@ -243,3 +249,13 @@ function AnimeDetails() {
 }
 
 export default AnimeDetails;
+{
+  /* <p>
+<strong>Age Rating:</strong> {ageRating}
+</p> */
+}
+{
+  /* <p>
+<strong>Age Rating Guide:</strong> {ageRatingGuide}
+</p> */
+}
