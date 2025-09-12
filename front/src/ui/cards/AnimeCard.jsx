@@ -60,7 +60,7 @@ function AnimeCard({
           </div>
         </>
       ) : (
-        <Link to={`/anime/${anime.id}`} relative="path">
+        <Link key={anime.id} to={`/anime/${anime.id}`} relative="path">
           <img
             draggable="false"
             src={largeImg}

@@ -77,8 +77,11 @@ function AnimeDetails() {
     studios,
     characters,
     staff,
+    externalLinks,
+    relations: { edges: relatedMedia },
   } = data;
 
+  const streamingLinks = externalLinks.filter((el) => el.type === "STREAMING");
   return (
     <Page bgColor={coverImage.color} className="bg-white-red-tint">
       <section>
@@ -122,17 +125,6 @@ function AnimeDetails() {
             </article>
             <article className="mt-2 mb-5.5 flex flex-col justify-between">
               <div className="flex justify-between">
-                {/* <div className="bg-transparent-gray p-2 text-xl rounded-xl flex flex-col gap-2">
-                  <p className="flex gap-1 items-center">
-                    {formatRating(averageScore / 10)}
-                    <GoStar></GoStar>
-                  </p>
-                  <p className="flex gap-1 items-center">
-                    {formatPopularityNumber(favourites)}
-                    <FaRegHeart></FaRegHeart>
-                  </p>
-                </div> */}
-
                 <ParticularInfo borderColor={coverImage.color}>
                   <p className="flex gap-1 items-center">
                     {formatRating(averageScore / 10)}
@@ -199,6 +191,34 @@ function AnimeDetails() {
                   </a>
                 </div>
               )}
+            </article>
+
+            <article>
+              <h3>You can Watch Here:</h3>
+              <ul>
+                {streamingLinks.map((link) => (
+                  <li>
+                    <a target="_blank" href={link.url}>
+                      {link.site}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <article>
+              <p>-------------</p>
+              <h3>Related Media</h3>
+              <ul>
+                {relatedMedia.map((media) => (
+                  <li>
+                    {media.node.type}-
+                    {media.node.title.english ?? media.node.title.romaji}:
+                    {media.relationType}
+                  </li>
+                ))}
+                {/* + each's id */}
+              </ul>
             </article>
           </div>
         </div>
