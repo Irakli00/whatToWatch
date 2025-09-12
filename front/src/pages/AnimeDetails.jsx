@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 import DOMPurify from "dompurify";
 
@@ -10,12 +10,21 @@ import { AppContext } from "../contexts/AppContext";
 
 import { getAnime, getSimilarAnimes } from "../services/aliListApi";
 
-import { formatDate, formatRating } from "../helpers/formaters";
+import {
+  formatDate,
+  formatPopularityNumber,
+  formatRating,
+} from "../helpers/formaters";
+
+import { GoStar } from "react-icons/go";
+import { FaRegHeart } from "react-icons/fa";
+
 import GenreLink from "../ui/elements/GenreLink";
 import MediaHeader from "../ui/elements/MediaHeader";
 import CoverImage from "../ui/elements/CoverImg";
 import Carousel from "../ui/elements/Carousel";
 import Spinner from "../ui/primitives/Spinner";
+import ParticularInfo from "../ui/elements/ParticularInfo";
 
 function AnimeDetails() {
   const { clientAnimePreferences } = useContext(AppContext);
@@ -38,16 +47,16 @@ function AnimeDetails() {
     ?.find((anime) => anime.id == id);
   // || JSON.parse(localStorage.getItem(id));
 
-  const { data, isLoading: y } = useQuery({
+  const { data, isLoading: animeLoading } = useQuery({
     queryKey: ["anime", id],
     queryFn: () => getAnime(id),
     enabled: !cachedAnime,
     initialData: cachedAnime,
   });
 
-  if (y) return <Spinner></Spinner>;
+  if (animeLoading) return <Spinner></Spinner>;
 
-  if (!data) return;
+  if (!data) return; //gonna make proper error latter
 
   const {
     type,
@@ -70,8 +79,6 @@ function AnimeDetails() {
     staff,
   } = data;
 
-  // if (isFetched) console.log(similarAnimes);
-
   return (
     <Page bgColor={coverImage.color} className="bg-white-red-tint">
       <section>
@@ -84,10 +91,10 @@ function AnimeDetails() {
             }}
           ></div>
         )}
-        <div className="bg-[#ffffff75]">
+        <div className="bg-transparent-gray">
           <div className="cusom-container">
             <article className="mt-12">
-              <div className="flex gap-3.5">
+              <div className="flex max-h-[450px]  gap-3.5">
                 <CoverImage
                   src={coverImage.extraLarge}
                   alt={`${title.en} poster`}
@@ -108,63 +115,90 @@ function AnimeDetails() {
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(description),
                     }}
-                    className="w-[75%] leading-6 text-balance"
-                  >
-                    {/* {description} */}
-                  </p>
+                    className="w-full leading-6 overflow-scroll text-balance"
+                  ></p>
                 </article>
               </div>
             </article>
-            <article className="flex">
-              <div>
-                <p className="mix-blend-multiply">
-                  <strong>Average Rating:</strong>{" "}
-                  {formatRating(averageScore / 10)}
-                  favorite by ({favourites})
-                </p>
+            <article className="mt-2 mb-5.5 flex flex-col justify-between">
+              <div className="flex justify-between">
+                {/* <div className="bg-transparent-gray p-2 text-xl rounded-xl flex flex-col gap-2">
+                  <p className="flex gap-1 items-center">
+                    {formatRating(averageScore / 10)}
+                    <GoStar></GoStar>
+                  </p>
+                  <p className="flex gap-1 items-center">
+                    {formatPopularityNumber(favourites)}
+                    <FaRegHeart></FaRegHeart>
+                  </p>
+                </div> */}
 
-                <p>
-                  <strong>Subtype:</strong> {type}, original source: {source}
-                </p>
-
-                <p>
-                  {episodes} episodes, {duration}min
-                </p>
-
-                <a
-                  href={`https://www.youtube.com/watch?v=${trailer?.id}`}
-                  target="_blank"
-                >
-                  TRAILER
-                </a>
-
+                <ParticularInfo borderColor={coverImage.color}>
+                  <p className="flex gap-1 items-center">
+                    {formatRating(averageScore / 10)}
+                    <GoStar></GoStar>
+                  </p>
+                  <p className="flex gap-1 items-center">
+                    {formatPopularityNumber(favourites)}
+                    <FaRegHeart></FaRegHeart>
+                  </p>
+                </ParticularInfo>
+                <ParticularInfo>
+                  <p>
+                    {type.toLowerCase()} adaptation of{" "}
+                    <Link target="_blank" to={`/anime/101517`}>
+                      {source}
+                    </Link>
+                    {/* manga id: drom relationships */}
+                  </p>
+                </ParticularInfo>
+                <ParticularInfo>
+                  <p>
+                    {episodes} episodes <i>({duration}min each)</i>
+                  </p>
+                </ParticularInfo>
                 {/* <p>
                 <strong>Age Rating:</strong> {ageRating}
               </p> */}
                 {/* <p>
                 <strong>Age Rating Guide:</strong> {ageRatingGuide}
               </p> */}
-              </div>
-
-              <div>
-                <p>
-                  <strong>Status:</strong> {status}
-                </p>
-                <p>
-                  <strong>Start Date:</strong>
-                  {formatDate(
-                    `${startDate?.year}-${startDate?.month}-${startDate?.day}`
-                  )}
-                </p>
-                {status === "FINISHED" && (
+                <ParticularInfo>
+                  {/* <p>is {status.toLowerCase()}</p> */}
                   <p>
-                    <strong>End Date:</strong>
+                    Aired:
                     {formatDate(
-                      `${endDate?.year}- ${endDate?.month}-${endDate?.day}`
+                      `${startDate?.year}-${startDate?.month}-${startDate?.day}`
+                    )}{" "}
+                    {status === "FINISHED" && (
+                      <span>
+                        -{" "}
+                        {formatDate(
+                          `${endDate?.year}- ${endDate?.month}-${endDate?.day}`
+                        )}
+                      </span>
                     )}
                   </p>
-                )}
+                </ParticularInfo>
               </div>
+
+              {trailer && (
+                <div className="mt-5 flex justify-center">
+                  <a
+                    style={{ backgroundColor: coverImage.color }}
+                    href={`https://www.youtube.com/watch?v=${trailer?.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-radial px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300  hover:shadow-xl"
+                  >
+                    <span className="relative z-10">Watch Trailer</span>
+                    <span
+                      className="absolute inset-0 rounded-2xl bg-white/20 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100"
+                      aria-hidden="true"
+                    ></span>
+                  </a>
+                </div>
+              )}
             </article>
           </div>
         </div>

@@ -17,12 +17,13 @@
   /* --color-white-red-tint: rgba(255, 0, 0, 0.212); */
   --color-white-red-tint: rgb(255, 217, 217);
   --color-white-yellow-tint: rgb(275, 255, 217);
+  --color-transparent-gray: #ffffff70;
 
   --font-sans: "Rubik", sans-serif;
 }
 
 /* main {
-  background-color: rgba(255, 255, 255, 0.377);
+  background-color: #ffffff60;
 } */
 
 @layer base {
