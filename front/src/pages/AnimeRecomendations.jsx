@@ -29,6 +29,8 @@ function AnimeRecomendations() {
 
   if (isLoading) return <Spinner></Spinner>;
 
+  if (!animesData) return;
+
   animesData.forEach((anime) => {
     const img = new Image();
     img.src = anime.coverImage?.large;

@@ -9,7 +9,6 @@ import Page from "../ui/layout/Page";
 import { AppContext } from "../contexts/AppContext";
 
 import { getAnime, getSimilarAnimes } from "../services/aliListApi";
-// console.log(getSimilarAnimes(id));
 
 import { formatDate, formatRating } from "../helpers/formaters";
 import GenreLink from "../ui/elements/GenreLink";

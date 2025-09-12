@@ -5,16 +5,24 @@ async function getAnimeRecomendations({
   status, // FINISHED, RELEASING, NOT_YET_RELEASED, CANCELLED, HIATUS
   subtype,
   sort, //Sorting options (POPULARITY_DESC, SCORE_DESC, etc.)
+  rating,
 }) {
+  //sort and rating are iffy (expecially 5+ and lesser rated)
   const variables = {
-    genre_in: [...(genres || "Action"), "Drama"],
-    type: mediaType.toUpperCase() || "ANIME",
-    status: !status ? "FINISHED" : status,
-    format: !subtype ? (mediaType === "anime" ? "TV" : "MANGA") : subtype,
-    sort: sort || "POPULARITY_DESC",
-    // startDate_greater: "20000403",
-    startDate_greater: "20000403",
+    genre_in: [...(genres ?? "Action"), "Drama"],
+    type: mediaType ? mediaType.toUpperCase() : "ANIME",
+    status: status ?? "FINISHED",
+    format: subtype ?? (mediaType === "anime" ? "TV" : "MANGA"),
+    sort: sort ?? "POPULARITY_DESC",
+    averageScore_greater: rating ?? 4,
   };
+
+  if (!releaseDate) {
+    variables["startDate_greater"] = "20000000";
+  } else {
+    const [pivot, dateValue] = releaseDate;
+    variables[pivot] = dateValue;
+  }
 
   // excluded:
   // season
@@ -38,6 +46,8 @@ async function getAnimeRecomendations({
     $format: MediaFormat
     $sort: [MediaSort]
     $startDate_greater: FuzzyDateInt
+    $startDate_lesser: FuzzyDateInt
+    $averageScore_greater: Int
   ) {
     Page(perPage: 20) {
       media(
@@ -46,7 +56,9 @@ async function getAnimeRecomendations({
         status: $status,
         format: $format,
         sort: $sort,
-        startDate_greater:$startDate_greater
+        startDate_greater: $startDate_greater
+        averageScore_greater: $averageScore_greater
+        startDate_lesser: $startDate_lesser
       ) {
         id
         title {
@@ -141,8 +153,6 @@ async function getAnimeRecomendations({
       }
     }
   }`;
-
-  console.log(variables);
 
   const url = "https://graphql.anilist.co",
     options = {
@@ -249,18 +259,93 @@ async function getAnime(animeId) {
           romaji
           english
           native
+          native
+          userPreferred
         }
+        type
         format
         episodes
+        duration
         status
         description
+        startDate { year month day }
+        endDate { year month day }
+        bannerImage
         coverImage {
           medium
+          color
           large
           extraLarge
         }
         averageScore
+        favourites
         genres
+        source
+        trailer {
+          id
+          site        
+        }
+        studios{
+          edges {
+            isMain
+            node {
+              id
+              name
+            }
+          }
+        }
+        externalLinks {
+          id
+          url
+          site
+          type
+          language
+        }
+        relations {
+          edges {
+            id
+            relationType  
+            node {
+              id
+              title { romaji english }
+              type
+              format
+            }
+          }
+        }
+        characters(perPage: 5) {
+          edges {
+            id
+            role
+            voiceActors(language: JAPANESE) {
+              id
+              name { full native }
+              language
+              image { large medium }
+            }
+            node {
+              id
+              name { full native alternative }
+              image { large medium }
+              description
+              gender
+              dateOfBirth { year month day }
+              age
+            }
+          }
+        }
+        staff(perPage: 5) {
+          edges {
+            id
+            role
+            node {
+              id
+              name { full native }
+              language
+              image { large medium }
+            }
+          }
+        }
       }
     }`;
 
