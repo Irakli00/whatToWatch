@@ -1,6 +1,8 @@
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
 
+import DOMPurify from "dompurify";
+
 import { formatRating } from "../../helpers/formaters";
 import { Link } from "react-router";
 
@@ -53,8 +55,13 @@ function AnimeCard({
             </p>
 
             <div className="overflow-scroll pt-1 border-t border-dark-blue h-full rounded-b-[5px]">
-              <p className="select-none text-[14px] opacity-75">
-                {description}
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(description),
+                }}
+                className="select-none text-[14px] opacity-75"
+              >
+                {/* {description} */}
               </p>
             </div>
           </div>

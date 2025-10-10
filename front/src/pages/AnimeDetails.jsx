@@ -26,6 +26,8 @@ import Carousel from "../ui/elements/Carousel";
 import Spinner from "../ui/primitives/Spinner";
 import ParticularInfo from "../ui/elements/ParticularInfo";
 
+import StreamingLink from "../ui/elements/StreamingLink";
+
 function AnimeDetails() {
   // source;
   const { clientAnimePreferences } = useContext(AppContext);
@@ -75,9 +77,9 @@ function AnimeDetails() {
     source,
     trailer,
     favourites,
-    studios,
-    characters,
-    staff,
+    // studios,
+    // characters,
+    // staff,
     externalLinks,
     relations: { edges: relatedMedia },
   } = data;
@@ -87,6 +89,7 @@ function AnimeDetails() {
   )[0];
 
   const streamingLinks = externalLinks.filter((el) => el.type === "STREAMING");
+
   return (
     <Page bgColor={coverImage.color} className="bg-white-red-tint">
       <section>
@@ -140,25 +143,30 @@ function AnimeDetails() {
                     <FaRegHeart></FaRegHeart>
                   </p>
                 </ParticularInfo>
-                <ParticularInfo>
-                  <p>
-                    {source === "ORIGINAL"
-                      ? `${type.toLowerCase()} is the source of`
-                      : `${type.toLowerCase()} adaptation of`}{" "}
-                    <Link
-                      className="underline"
-                      target="_blank"
-                      to={`/anime/${adaptation.node.id}`}
-                    >
-                      {adaptation.node.title.english}
-                    </Link>
-                  </p>
-                </ParticularInfo>
+                {adaptation && (
+                  // all this shit is working meh
+                  <ParticularInfo>
+                    <p>
+                      {source === "ORIGINAL"
+                        ? `${type.toLowerCase()} is the source of`
+                        : `${type.toLowerCase()} adaptation of`}{" "}
+                      <Link
+                        className="underline"
+                        target="_blank"
+                        to={`/anime/${adaptation.node.id}`}
+                      >
+                        {adaptation.node.title.english ??
+                          adaptation.node.title.romaji}
+                      </Link>
+                    </p>
+                  </ParticularInfo>
+                )}
 
                 {episodes && (
                   <ParticularInfo>
                     <p>
-                      {episodes} episodes <i>({duration}min each)</i>
+                      {episodes} episodes <i>({duration}min)</i>
+                      {/* episode if only one */}
                     </p>
                   </ParticularInfo>
                 )}
@@ -183,31 +191,41 @@ function AnimeDetails() {
               {trailer && (
                 <div className="mt-5 flex justify-center">
                   <a
-                    style={{ backgroundColor: coverImage.color }}
+                    style={{ backgroundColor: coverImage.color ?? "#f125" }}
                     href={`https://www.youtube.com/watch?v=${trailer?.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-radial px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300  hover:shadow-xl"
+                    className="bg-black group relative inline-flex items-center gap-2 overflow-hidden rounded-2xl bg-radial px-6 py-3 text-lg font-semiboldshadow-lg transition-all duration-300  hover:shadow-xl"
                   >
-                    <span className="relative z-10">Watch Trailer</span>
                     <span
+                      style={{
+                        // color: invertHex(coverImage?.color),
+                        // mixBlendMode: "difference",
+                        mixBlendMode: "color-burn",
+                      }}
+                      className="relative z-10"
+                    >
+                      Watch Trailer
+                    </span>
+                    {/* <span
                       className="absolute inset-0 rounded-2xl bg-white/20 opacity-0 blur-lg transition-opacity duration-300 group-hover:opacity-100"
                       aria-hidden="true"
-                    ></span>
+                    ></span> */}
                   </a>
                 </div>
               )}
             </article>
 
-            <article>
-              <h3>You can Watch Here:</h3>
-              <ul>
-                {streamingLinks.map((link) => (
-                  <li>
-                    <a target="_blank" href={link.url}>
-                      {link.site}
-                    </a>
-                  </li>
+            <article
+              style={{ borderColor: coverImage?.color ?? "unset" }}
+              className="p-6 border-1 rounded-xl shadow-md mx-auto my-6"
+            >
+              <h3 className="text-xl text-center font-semibold  mb-4">
+                You can watch {title.english} here:
+              </h3>
+              <ul className="flex justify-around ">
+                {streamingLinks.map(({ id, site: siteTitle, url: linkUrl }) => (
+                  <StreamingLink key={id} site={siteTitle} url={linkUrl} />
                 ))}
               </ul>
             </article>
@@ -238,10 +256,6 @@ function AnimeDetails() {
               isLoading={similarLoading}
             />
           )}
-          {/* {isFetched &&
-            similarAnimes
-              .map((an) => an.mediaRecommendation)
-              .map((anime) => <AnimeCard anime={anime}></AnimeCard>)} */}
         </aside>
       </section>
     </Page>

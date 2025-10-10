@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-import { MediaQuestion } from "../models/qustion";
+import { MediaQuestion } from "../models/question";
 
 const QuestionsContext = createContext();
 
