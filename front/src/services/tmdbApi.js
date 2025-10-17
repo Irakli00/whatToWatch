@@ -25,7 +25,7 @@ const TMDB_GENRES = {
 
 export { TMDB_GENRES };
 
-async function getTrending() {
+async function getTrendingMovies() {
   const responses = await Promise.all([
     fetch(
       "https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=1",
@@ -130,7 +130,7 @@ async function getMovie(movieId) {
   return movie;
 }
 
-export { getTrending, getMovieRecomendations, getMovie };
+export { getTrendingMovies, getMovieRecomendations, getMovie };
 
 // async function getTrending() {
 //   const res = await fetch(

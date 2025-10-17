@@ -20,11 +20,12 @@
 // export default Spinner;
 
 "use client";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
 import React from "react";
 import { cn } from "../../lib/utils";
 
-function Spinner() {
+function Spinner({ bgColor = "" }) {
   const transition = (x) => {
     return {
       duration: 1,
@@ -35,37 +36,44 @@ function Spinner() {
     };
   };
   return (
-    <div className="flex min-h-[300px] items-center justify-center gap-2">
-      <motion.div
-        initial={{
-          y: 0,
-        }}
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={transition(0)}
-        className="h-7 w-7 rounded-full border border-bright-yellow bg-radial from-orange to-bright-yellow"
-      />
-      <motion.div
-        initial={{
-          y: 0,
-        }}
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={transition(1)}
-        className="h-7 w-7 rounded-full border border-bright-red bg-radial from-main-red to-bright-red"
-      />
-      <motion.div
-        initial={{
-          y: 0,
-        }}
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={transition(2)}
-        className="h-7 w-7 rounded-full border border-light-blue bg-radial from-dark-blue to-light-blue"
-      />
+    <div
+      className={cn(`flex flex-1 min-h-[300px] items-center justify-center`)}
+    >
+      <div
+        className="flex items-center justify-center gap-2 px-2 py-4 rounded-2xl"
+        style={{ backgroundColor: bgColor }}
+      >
+        <motion.div
+          initial={{
+            y: 0,
+          }}
+          animate={{
+            y: [-5, 5, -5],
+          }}
+          transition={transition(0)}
+          className="h-7 w-7 rounded-full border border-bright-yellow bg-radial from-orange to-bright-yellow"
+        />
+        <motion.div
+          initial={{
+            y: 0,
+          }}
+          animate={{
+            y: [-5, 5, -5],
+          }}
+          transition={transition(1)}
+          className="h-7 w-7 rounded-full border border-bright-red bg-radial from-main-red to-bright-red"
+        />
+        <motion.div
+          initial={{
+            y: 0,
+          }}
+          animate={{
+            y: [-5, 5, -5],
+          }}
+          transition={transition(2)}
+          className="h-7 w-7 rounded-full border border-light-blue bg-radial from-dark-blue to-light-blue"
+        />
+      </div>
     </div>
   );
 }

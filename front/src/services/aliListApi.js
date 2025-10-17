@@ -1,3 +1,58 @@
+async function getTrendingAnimes(perPage = 20) {
+  const query = `
+    query ($perPage: Int) {
+      Page(perPage: $perPage) {
+        media(sort: TRENDING_DESC, type: ANIME) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            medium
+            large
+          }
+        }
+      }
+    }`;
+
+  const url = "https://graphql.anilist.co";
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query,
+      variables: { perPage },
+    }),
+  };
+
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("HTTP Error:", response.status, errorText);
+      return;
+    }
+
+    const data = await response.json();
+
+    if (data.errors) {
+      console.error("GraphQL Errors:", data.errors);
+      return;
+    }
+
+    return data.data.Page.media;
+  } catch (error) {
+    console.error("Network Error:", error);
+  }
+}
+
 async function getAnimeRecomendations({
   mediaType, //uppercase
   genres, //genre_in
@@ -9,6 +64,7 @@ async function getAnimeRecomendations({
 }) {
   //sort and rating are iffy (expecially 5+ and lesser rated)
   const variables = {
+    // genre_in: [...(genres ?? "Action"), "Drama"],
     genre_in: [...(genres ?? "Action"), "Drama"],
     type: mediaType ? mediaType.toUpperCase() : "ANIME",
     status: status ?? "FINISHED",
@@ -188,7 +244,6 @@ async function getAnimeRecomendations({
     console.error("Network Error:", error);
   }
 }
-
 async function getSimilarAnimes(mediaId) {
   const query = `
     query($mediaId: Int!) {
@@ -385,4 +440,11 @@ async function getAnime(animeId) {
   }
 }
 
-export { getSimilarAnimes, getAnimeRecomendations, getAnime };
+export {
+  getTrendingAnimes,
+  getSimilarAnimes,
+  getAnimeRecomendations,
+  getAnime,
+};
+
+getTrendingAnimes();

@@ -17,11 +17,13 @@ export const sites = {
   "Peacock TV": "peacocktv.com",
   "Paramount Plus": "paramountplus.com",
   "HBO Max": "max.com", // formerly hbo.com/hbomax.com
+  Max: "max.com",
   "Discovery Plus": "discoveryplus.com",
   "Showtime Anytime": "showtime.com",
   "Pluto TV": "pluto.tv",
   "Rakuten Viki": "viki.com",
   Funimation: "funimation.com", // still exists for old links
+  Crackle: "crackle.com",
   VRV: "vrv.co",
   "CW Seed": "cwseed.com",
   "BBC iPlayer": "bbc.co.uk/iplayer",

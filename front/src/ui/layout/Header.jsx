@@ -4,8 +4,7 @@ import Logo from "../primitives/Logo";
 
 function Header() {
   return (
-    //  bg-amber-300
-    <header className="bg-dark-blue shadow-md">
+    <header className="bg-dark-blue shadow-md h-header-height fixed left-0 right-0 z-50">
       <div className="cusom-container flex items-center justify-between">
         <NavLink to="/" className="flex gap-2 items-center py-3">
           <Logo height={80} width={80} type="light" />

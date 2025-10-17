@@ -6,13 +6,15 @@ import Page from "../ui/layout/Page";
 import Carousel from "../ui/elements/Carousel";
 import HeroLink from "../ui/primitives/HeroLink";
 
-import { getTrending } from "../services/tmdbApi";
+// import { getTrendingMovies } from "../services/tmdbApi";
+import { getTrendingAnimes } from "../services/aliListApi";
 
 function Hero() {
   const { data, isLoading } = useQuery({
     queryKey: ["trending"],
-    queryFn: getTrending,
-    staleTime: 999999 * 999999,
+    // queryFn: getTrendingMovies,
+    queryFn: () => getTrendingAnimes(20),
+    staleTime: 60 * 60 * 1000,
   });
 
   return (
@@ -21,10 +23,11 @@ function Hero() {
         <div className="container overflow-x-hidden mx-auto pt-2 min-h-[340px]">
           <div className="flex gap-1.5 items-center">
             <IoIosTrendingUp className="h-[25px] w-[25px]" />
-            <h1 className="text-2xl">Trending movies right now:</h1>
+            <h1 className="text-2xl">Trending right now:</h1>
           </div>
 
           <Carousel
+            type="anime"
             data={data}
             isLoading={isLoading}
             className={"overflow-visible!"}
@@ -51,7 +54,6 @@ function Hero() {
           </HeroLink>
         </div>
       </section>
-      {/* </main> */}
     </Page>
   );
 }

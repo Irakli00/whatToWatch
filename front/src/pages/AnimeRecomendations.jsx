@@ -46,13 +46,12 @@ function AnimeRecomendations() {
           className={"relative min-h-[600px]"}
         >
           {animesData.map((anime, i) => {
-            // console.log(anime.id);
             if (i === 0)
               return (
                 <React.Fragment key={i}>
                   <button
                     draggable="false"
-                    className={`absolute z-[${i}] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`}
                   >
                     NEW PAGE
                   </button>
@@ -93,14 +92,14 @@ function AnimeRecomendations() {
           })}
         </DraggableCardContainer>
 
-        <aside>
+        {/* <aside>
           <RecomendationsFilter
             key={"adkjksldj"}
             type="anime"
             preferences={clientAnimePreferences}
             isLoading={isLoading}
           ></RecomendationsFilter>
-        </aside>
+        </aside> */}
       </section>
     </Page>
   );
