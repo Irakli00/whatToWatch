@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link } from "react-router";
 
 import { IoCalendarClearOutline } from "react-icons/io5";
 import { FaRegStar } from "react-icons/fa";
@@ -12,35 +11,46 @@ import {
   formatDate,
   formatRating,
 } from "../../helpers/formaters.js";
+import SimpleCard from "./SimpleCard.jsx";
 
 function MovieCard({
   movie,
   height = "270px",
-  coverImgMaxW = "180px",
-  coverImgMinW = "180px",
   padding = "10px",
   className,
-  type,
+  cardType = "extended",
 }) {
   const genreStrings = parseGenres(movie.genre_ids, TMDB_GENRES);
 
   const { clientMoviePreferences, setClientMoviePreferences } =
     useContext(AppContext);
 
+  function extendMoviePreferences() {
+    movie.genre_ids.includes(16)
+      ? setClientMoviePreferences({
+          ...clientMoviePreferences,
+          mediaType: "animation",
+        })
+      : setClientMoviePreferences({
+          ...clientMoviePreferences,
+          mediaType: "movie",
+        });
+  }
+
   return (
     <>
       <article
         key={movie.id}
-        style={type === "extended" ? { height, padding } : {}}
-        className={`card card--movie card--movie--${type} ${className ? className : ""}`}
+        style={cardType === "extended" ? { height, padding } : {}}
+        className={`card card--movie ${className ? className : ""}`}
       >
-        {type === "extended" ? (
+        {cardType === "extended" ? (
           <>
             <img
               draggable="false"
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
-              className={` max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full  rounded-[7px] select-none `}
+              // className={` max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full  rounded-[7px] select-none `}
             />
             <div className="flex flex-col gap-[5px]">
               <h2 className="text-2xl leading-[0.9] text-balance">
@@ -79,28 +89,12 @@ function MovieCard({
             </div>
           </>
         ) : (
-          <Link
-            to={`/movie/${movie.id}`}
-            relative="path"
-            onClick={() => {
-              movie.genre_ids.includes(16)
-                ? setClientMoviePreferences({
-                    ...clientMoviePreferences,
-                    mediaType: "animation",
-                  })
-                : setClientMoviePreferences({
-                    ...clientMoviePreferences,
-                    mediaType: "movie",
-                  });
-            }}
-          >
-            <img
-              draggable="false"
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt={movie.title}
-              className={`max-w-[${coverImgMaxW}] min-w-${coverImgMinW} h-full  rounded-[7px] select-none `}
-            />
-          </Link>
+          <SimpleCard
+            id={movie.id}
+            type={"movie"}
+            onClick={extendMoviePreferences}
+            img={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+          ></SimpleCard>
         )}
       </article>
     </>

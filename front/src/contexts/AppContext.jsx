@@ -28,6 +28,8 @@ function AppProvider({ children }) {
     sort: null,
   });
 
+  const clientPrefferedMedia = "anime";
+
   return (
     <AppContext.Provider
       value={{
@@ -35,6 +37,7 @@ function AppProvider({ children }) {
         setClientMoviePreferences,
         clientAnimePreferences,
         setClientAnimePreferences,
+        clientPrefferedMedia,
       }}
     >
       {children}

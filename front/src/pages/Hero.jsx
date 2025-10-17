@@ -1,19 +1,24 @@
+import { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { IoIosTrendingUp } from "react-icons/io";
 
+import { AppContext } from "../contexts/AppContext";
 import Page from "../ui/layout/Page";
 
 import Carousel from "../ui/elements/Carousel";
 import HeroLink from "../ui/primitives/HeroLink";
 
-// import { getTrendingMovies } from "../services/tmdbApi";
+import { IoIosTrendingUp } from "react-icons/io";
+
+import { getTrendingMovies } from "../services/tmdbApi";
 import { getTrendingAnimes } from "../services/aliListApi";
 
 function Hero() {
+  const { clientPrefferedMedia } = useContext(AppContext);
+  const x = { anime: () => getTrendingAnimes(40), movie: getTrendingMovies };
+
   const { data, isLoading } = useQuery({
     queryKey: ["trending"],
-    // queryFn: getTrendingMovies,
-    queryFn: () => getTrendingAnimes(20),
+    queryFn: x[clientPrefferedMedia],
     staleTime: 60 * 60 * 1000,
   });
 
@@ -27,7 +32,7 @@ function Hero() {
           </div>
 
           <Carousel
-            type="anime"
+            type={clientPrefferedMedia}
             data={data}
             isLoading={isLoading}
             className={"overflow-visible!"}

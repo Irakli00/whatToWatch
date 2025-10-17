@@ -4,20 +4,24 @@ import { FaRegStar } from "react-icons/fa";
 import DOMPurify from "dompurify";
 
 import { formatRating } from "../../helpers/formaters";
-import { Link } from "react-router";
+import SimpleCard from "./SimpleCard";
 
 function AnimeCard({
   anime,
-  height = "100%",
+  height = "275px",
   padding = "10px",
   cardType = "extended",
+  className,
 }) {
   const { type, coverImage, genres, title, averageScore, description } = anime;
 
   const largeImg = coverImage?.large || "imagenotfound";
 
   return (
-    <article style={{ height, padding }} className="card card--anime">
+    <article
+      style={{ height, padding }}
+      className={`card card--anime ${className ? className : ""}`}
+    >
       {cardType === "extended" ? (
         <>
           <div className="h-full">
@@ -67,14 +71,7 @@ function AnimeCard({
           </div>
         </>
       ) : (
-        <Link key={anime.id} to={`/anime/${anime.id}`} relative="path">
-          <img
-            draggable="false"
-            src={largeImg}
-            className={`h-[280px] rounded-[7px] select-none `}
-            // alt={movie.title}
-          />
-        </Link>
+        <SimpleCard id={anime.id} type={"anime"} img={largeImg}></SimpleCard>
       )}
     </article>
   );

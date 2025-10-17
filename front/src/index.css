@@ -92,15 +92,10 @@
   }
 
   .card {
-    @apply overflow-y-visible flex gap-1.5 cursor-pointer h-[270px] w-full rounded-[6px]  transition-all duration-200 ease-in-out relative;
+    @apply overflow-y-visible flex gap-1.5 cursor-pointer h-[270px] w-full rounded-[6px] transition-all duration-200 ease-in-out relative;
   }
-  /* .card:hover {
-    scale: 1.1;
-    z-index: 999;
-    transform: translateY(15px);
-    } */
 
-  .card.card--movie--simple:hover {
+  .card:has(.card--simple):hover {
     scale: 1.02;
     z-index: 999;
     transform: translateY(10px);
@@ -113,9 +108,9 @@
     @apply bg-main-red text-white;
   } */
   .swiper {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
+    /* display: flex !important; */
+    /* justify-content: center; */
+    /* align-items: center; */
     /* min-height: 300px; */
     /* overflow: unset !important; */
   }

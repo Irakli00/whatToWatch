@@ -31,7 +31,7 @@ function Carousel({
       {data.map((el) => {
         return type === "movie" ? (
           <SwiperSlide key={el.id} className="overflow-visible">
-            <MovieCard type="simple" movie={el}></MovieCard>
+            <MovieCard cardType="simple" movie={el}></MovieCard>
           </SwiperSlide>
         ) : (
           <SwiperSlide key={el.name}>
