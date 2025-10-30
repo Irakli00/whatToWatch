@@ -3,7 +3,7 @@ import { FaRegStar } from "react-icons/fa";
 
 import DOMPurify from "dompurify";
 
-import { formatRating } from "@/helpers/formaters";
+import { formatDate, formatRating } from "@/helpers/formaters";
 import SimpleCard from "./SimpleCard";
 
 function AnimeCard({
@@ -13,10 +13,17 @@ function AnimeCard({
   cardType = "extended",
   className,
 }) {
-  const { type, coverImage, genres, title, averageScore, description } = anime;
+  const {
+    type,
+    coverImage,
+    genres,
+    title,
+    averageScore,
+    description,
+    startDate,
+  } = anime;
 
   const largeImg = coverImage?.large || "imagenotfound";
-
   return (
     <article
       style={{ height, padding }}
@@ -50,7 +57,11 @@ function AnimeCard({
 
             <p className="flex items-center gap-0.5 text-center">
               <IoCalendarClearOutline />
-              <span className="pt-0.5">{"anime.startDate"}</span>
+              <span className="pt-0.5">
+                {formatDate(
+                  `${startDate?.year}-${startDate?.month}-${startDate?.day}`
+                )}
+              </span>
             </p>
 
             <p className="flex items-center gap-0.5 text-center">

@@ -1,8 +1,17 @@
-// src/data/sites.js
 export const sites = {
+  ///========================
+  undefined: "Mangas.io",
+  ///========================
   "Bilibili TV": "bilibili.com",
   Bilibili: "bilibili.com",
   Crunchyroll: "crunchyroll.com",
+  "Shonen Jump Plus": "shonenjumpplus.com",
+  Viz: "www.viz.com",
+  "MANGA Plus": "mangaplus.shueisha.co.jp",
+  "Mangas.io": "Mangas.io",
+  Lezhin: "lezhin.com",
+  "Naver Series": "series.naver.com",
+  "Flower Comics": "flowercomics.jp",
   iQ: "iq.com",
   Hoopla: "hoopladigital.com",
   YouTube: "youtube.com",

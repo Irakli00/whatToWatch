@@ -1,8 +1,8 @@
-function formatDate(dateString) {
-  if (!dateString) return ""; // handle null or undefined
+function formatDate(inputDate) {
+  if (!inputDate) return "";
 
-  const date = new Date(dateString);
-  if (isNaN(date)) return ""; // invalid date
+  const date = new Date(inputDate);
+  if (isNaN(date)) return "";
 
   return date.toLocaleDateString("en-US", {
     year: "numeric",
