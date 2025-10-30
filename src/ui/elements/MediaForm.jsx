@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../contexts/AppContext";
+import { AppContext } from "@/contexts/AppContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { QuestionsContext } from "../../contexts/QuestionsContext";
+import { QuestionsContext } from "@/contexts/QuestionsContext";
 
 function MediaForm({ questionsType }) {
   const lookUpObj = {

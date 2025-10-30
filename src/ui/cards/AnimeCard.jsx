@@ -3,7 +3,7 @@ import { FaRegStar } from "react-icons/fa";
 
 import DOMPurify from "dompurify";
 
-import { formatRating } from "../../helpers/formaters";
+import { formatRating } from "@/helpers/formaters";
 import SimpleCard from "./SimpleCard";
 
 function AnimeCard({

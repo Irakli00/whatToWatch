@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { AppContext } from "../../contexts/AppContext";
+import { AppContext } from "@/contexts/AppContext";
 import { useNavigate } from "react-router";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 function GenreLink({ type = "movie", genre }) {
   const {

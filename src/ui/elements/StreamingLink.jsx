@@ -1,4 +1,4 @@
-import { sites } from "../../data/sites";
+import { sites } from "@/data/sites";
 
 function StreamingLink({ site, url }) {
   return (

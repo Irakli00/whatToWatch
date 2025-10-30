@@ -1,6 +1,6 @@
 import { GoStar } from "react-icons/go";
 
-import { formatRating } from "../../helpers/formaters";
+import { formatRating } from "@/helpers/formaters";
 
 function MediaHeader({ title, originalTitle, tagline, rating, votesCount }) {
   return (

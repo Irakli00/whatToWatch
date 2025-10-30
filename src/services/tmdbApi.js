@@ -1,5 +1,5 @@
-import { TMDB_KEY } from "../../.env/i";
-// const TMDB_KEY = import.meta.env.VITE_TMDB_KEY;
+// import { TMDB_KEY } from "../../.env/i";
+const TMDB_KEY = import.meta.env.VITE_TMDB_KEY;
 
 const TMDB_GENRES = {
   28: "Action",
@@ -86,7 +86,11 @@ async function getMovieRecomendations({
 
   // &include_adult=false
   //no error and null data handling
-  const url = `https://api.themoviedb.org/3/discover/movie?${params}${rating ? `&${rating}` : ""}${releaseDate ? `&${releaseDate}` : ""}${certification ? `&${certification}` : ""}&vote_count.gte=10`; //just because
+  const url = `https://api.themoviedb.org/3/discover/movie?${params}${
+    rating ? `&${rating}` : ""
+  }${releaseDate ? `&${releaseDate}` : ""}${
+    certification ? `&${certification}` : ""
+  }&vote_count.gte=10`; //just because
   // console.log(url);
 
   const movieRecomendations = await fetch(url, {

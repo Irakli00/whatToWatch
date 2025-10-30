@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router";
 import {
   // eslint-disable-next-line no-unused-vars
@@ -11,7 +11,7 @@ import {
   useVelocity,
   useAnimationControls,
 } from "motion/react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 export const DraggableCardBody = ({ className, children, type, paramId }) => {
   // to={type === "movie" ? `/movie/${paramId}` : `/anime/${paramId}`}
@@ -164,10 +164,7 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
       whileHover={{ scale: 1.02 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={cn(
-        `relative flex items-center justify-center w-[30%] overflow-hidden rounded-md ${lookUpObj[type].bg} shadow-2xl transform-3d dark:color-orange`,
-        className
-      )}
+      className={`absolute flex items-center justify-center w-[30%] overflow-hidden rounded-md ${lookUpObj[type].bg} shadow-2xl transform-3d dark:color-orange ${className}`}
     >
       <Link
         to={lookUpObj[type].toUrl}
@@ -192,7 +189,7 @@ export const DraggableCardBody = ({ className, children, type, paramId }) => {
 
 export const DraggableCardContainer = ({ className, children }) => {
   return (
-    <div className={cn("[perspective:3000px]", className)}>{children}</div>
-    // <div className={cn(className)}>{children}</div>
+    // <div className={cn("[perspective:3000px]", className)}>{children}</div>
+    <div className={cn(className)}>{children}</div>
   );
 };

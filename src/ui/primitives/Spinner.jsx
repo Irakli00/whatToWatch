@@ -22,8 +22,8 @@
 "use client";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "motion/react";
-import React from "react";
-import { cn } from "../../lib/utils";
+
+import { cn } from "@/lib/utils";
 
 function Spinner({ bgColor = "" }) {
   const transition = (x) => {
