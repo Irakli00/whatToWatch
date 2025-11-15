@@ -14,11 +14,14 @@ import { getTrendingAnimes } from "../services/aliListApi";
 
 function Hero() {
   const { clientPrefferedMedia } = useContext(AppContext);
-  const x = { anime: () => getTrendingAnimes(40), movie: getTrendingMovies };
+  const recomendedMedia = {
+    anime: () => getTrendingAnimes(40),
+    movie: getTrendingMovies,
+  };
 
   const { data, isLoading } = useQuery({
     queryKey: ["trending"],
-    queryFn: x[clientPrefferedMedia],
+    queryFn: recomendedMedia[clientPrefferedMedia],
     staleTime: 60 * 60 * 1000,
   });
 

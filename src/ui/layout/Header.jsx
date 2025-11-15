@@ -18,7 +18,11 @@ function Header() {
             to="/selectMovies"
             className={({ isActive }) =>
               `header-link 
-           ${isActive ? "bg-bright-yellow text-dark-blue" : "hover:bg-bright-yellow hover:text-dark-blue"}`
+           ${
+             isActive
+               ? "bg-bright-yellow text-dark-blue"
+               : "hover:bg-bright-yellow hover:text-dark-blue"
+           }`
             }
           >
             Select a Movie
@@ -28,17 +32,25 @@ function Header() {
             to="/selectAnimes"
             className={({ isActive }) =>
               `header-link 
-           ${isActive ? "bg-main-red text-white" : "hover:bg-main-red hover:text-white"}`
+           ${
+             isActive
+               ? "bg-main-red text-white"
+               : "hover:bg-main-red hover:text-white"
+           }`
             }
           >
-            Seclect an Anime
+            Select an Anime
           </NavLink>
 
           <NavLink
             to="/TVs"
             className={({ isActive }) =>
               `header-link 
-           ${isActive ? "bg-light-blue text-dark-blue" : "hover:bg-light-blue hover:text-dark-blue"}`
+           ${
+             isActive
+               ? "bg-light-blue text-dark-blue"
+               : "hover:bg-light-blue hover:text-dark-blue"
+           }`
             }
           >
             Select a TV Show
